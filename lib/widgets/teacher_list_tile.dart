@@ -24,9 +24,16 @@ class TeacherListTile extends StatelessWidget {
       children: [
         SizedBox(
           width: 70,
+          height: 60,
           child: CircleAvatar(
+            // radius: 30,
             child: Image.asset(
               'assets/images/user.png',
+              //   width: 30,
+              //   height: 30,
+              cacheHeight: 60,
+              cacheWidth: 60,
+              fit: BoxFit.cover,
             ),
           ),
         ),
@@ -71,12 +78,15 @@ class TeacherListTile extends StatelessWidget {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.favorite_border,
-                        color:  Color(0xFF0071F0),
+                        color: Color(0xFF0071F0),
                         size: 30,
                       )),
                 ],
               ),
-              SpecialityBadgeList(specialityList: specialities),
+              SpecialityBadgeList(
+                specialityList: specialities,
+                readOnly: true,
+              ),
             ],
           ),
         ),

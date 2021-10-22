@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/large_button.dart';
 import '../widgets/logo_app.dart';
 import '../authentication/forgot_password.dart';
 import '../authentication/signup.dart';
@@ -104,19 +105,9 @@ class Login extends StatelessWidget {
                   },
                 ),
               ),
-              ElevatedButton(
-                onPressed: _saveForm,
-                child: const Text('Log In'),
-                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      minimumSize: MaterialStateProperty.all(
-                        const Size(double.infinity, 50),
-                      ),
-                      textStyle: MaterialStateProperty.all(
-                        const TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
+              LargeButton(
+                text: 'Login',
+                handler: _saveForm,
               ),
               const SizedBox(
                 height: 10,
@@ -130,7 +121,7 @@ class Login extends StatelessWidget {
                     imageURI: 'assets/images/facebook_icon.png',
                   ),
                   MyIconButton(
-                    imageURI: '/assets/images/google_icon.png',
+                    imageURI: 'assets/images/google_icon.png',
                   ),
                 ],
               ),

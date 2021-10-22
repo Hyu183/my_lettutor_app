@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/widgets/input_field.dart';
+
+import '../widgets/input_field.dart';
+import '../widgets/large_button.dart';
 
 class Signup extends StatelessWidget {
   static const routeName = '/sign-up';
@@ -125,20 +127,24 @@ class Signup extends StatelessWidget {
               const SizedBox(
                 height: 60,
               ),
-              ElevatedButton(
-                onPressed: _saveForm,
-                child: const Text('Register'),
-                style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-                      minimumSize: MaterialStateProperty.all(
-                        const Size(double.infinity, 50),
-                      ),
-                      textStyle: MaterialStateProperty.all(
-                        const TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
+              LargeButton(
+                text: 'Register',
+                handler: _saveForm,
               ),
+              //   ElevatedButton(
+              //     onPressed: _saveForm,
+              //     child: const Text('Register'),
+              //     style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
+              //           minimumSize: MaterialStateProperty.all(
+              //             const Size(double.infinity, 50),
+              //           ),
+              //           textStyle: MaterialStateProperty.all(
+              //             const TextStyle(
+              //               fontSize: 18,
+              //             ),
+              //           ),
+              //         ),
+              //   ),
             ],
           ),
         ),

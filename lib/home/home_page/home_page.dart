@@ -15,15 +15,16 @@ class HomePage extends StatelessWidget {
         title: Text(
           'Home',
           style: Theme.of(context).textTheme.headline1,
-          //   style: TextStyle(
-          //     fontWeight: FontWeight.bold,
-          //   ),
         ),
         actions: [
           IconButton(
               onPressed: () {},
               icon: CircleAvatar(
-                child: Image.asset('assets/images/user.png'),
+                child: Image.asset(
+                  'assets/images/user.png',
+                  cacheHeight: 32,
+                  cacheWidth: 32,
+                ),
               )),
         ],
       ),
@@ -34,7 +35,6 @@ class HomePage extends StatelessWidget {
               height: 200,
               width: double.infinity,
               color: const Color(0xFF0A31C9),
-              //   alignment: Alignment.center,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,

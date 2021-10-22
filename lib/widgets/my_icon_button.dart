@@ -25,6 +25,8 @@ class MyIconButton extends StatelessWidget {
         ),
         child: Image.asset(
           imageURI,
+          cacheHeight: 30,
+          cacheWidth: 30,
           fit: BoxFit.cover,
         ),
       ),
