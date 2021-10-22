@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:my_lettutor_app/home/teacher_list/tutors.dart';
 
-import 'package:my_lettutor_app/models/teacher.dart';
-import 'package:my_lettutor_app/widgets/teacher_card.dart';
+import '../teacher_list/tutors.dart';
+import '../../models/teacher.dart';
+import '../../widgets/teacher_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,9 +15,9 @@ class HomePage extends StatelessWidget {
         title: Text(
           'Home',
           style: Theme.of(context).textTheme.headline1,
-        //   style: TextStyle(
-        //     fontWeight: FontWeight.bold,
-        //   ),
+          //   style: TextStyle(
+          //     fontWeight: FontWeight.bold,
+          //   ),
         ),
         actions: [
           IconButton(
@@ -45,11 +44,16 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Book a lesson',
-                          style: TextStyle(color: Color(0xFF0E78EF))),
-                    //   style: Theme.of(context).elevatedButtonTheme.style!.copyWith(minimumSize: Size(5,5)), 
-                      ),
+                    onPressed: () {},
+                    child: const Text('Book a lesson',
+                        style: TextStyle(color: Color(0xFF0E78EF))),
+                    style: Theme.of(context)
+                        .elevatedButtonTheme
+                        .style!
+                        .copyWith(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white)),
+                  ),
                 ],
               ),
             ),

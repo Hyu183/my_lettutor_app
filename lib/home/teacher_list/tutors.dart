@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/widgets/search_bar.dart';
 import 'package:my_lettutor_app/widgets/speciality_badge_list.dart';
 
 class Tutors extends StatelessWidget {
@@ -34,20 +35,10 @@ class Tutors extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            Container(
-              decoration: BoxDecoration(color: Colors.grey),
-              child: Row(
-                children: const [
-                  Icon(Icons.search),
-                  Flexible(
-                      child: TextField(
-                          decoration: InputDecoration(hintText: 'search',),))
-                ],
-              ),
-            ),
+            SearchBar(),
             SpecialityBadgeList(specialityList: specialities),
           ],
         ),
