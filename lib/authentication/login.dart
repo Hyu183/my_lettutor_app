@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/logo_app.dart';
 import '../authentication/forgot_password.dart';
 import '../authentication/signup.dart';
 import '../widgets/my_icon_button.dart';
@@ -36,7 +37,7 @@ class Login extends StatelessWidget {
       if (password.isEmpty) {
         return 'Password can not be empty';
       } else if (password.length < 8) {
-        return 'Password length must be at least 8 characters';
+        return 'Password must be at least 8 characters';
       }
       return null;
     }
@@ -69,11 +70,7 @@ class Login extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 150,
-                width: 150,
-                child: Image.asset('assets/images/logo.png'),
-              ),
+              const LogoApp(),
               Form(
                 key: _formKey,
                 child: Column(
