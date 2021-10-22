@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class Signup extends StatelessWidget {
-  static const routeName = '/sign-up';
-  const Signup({Key? key}) : super(key: key);
+class ForgotPassWord extends StatelessWidget {
+  static const routeName = 'forgot-password';
+  const ForgotPassWord({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
         elevation: 0,
         title: Text(
-          'Sign up',
+          'Forgot Password',
           style: Theme.of(context).textTheme.headline1,
         ),
       ),
