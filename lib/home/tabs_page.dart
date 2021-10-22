@@ -18,12 +18,18 @@ class _TabsPageState extends State<TabsPage> {
   int _selectedIndex = 0;
 
   final List<Map<String, Object>> _pages = [
-    {'title': 'Home', 'page': const HomePage()},
-    {'title': 'Chats', 'page': const Messages()},
-    {'title': 'Upcoming', 'page': const Upcomming()},
-    {'title': 'Tutors', 'page': const Tutors()},
-    {'title': 'Settings', 'page': const Settings()},
+    {'title': 'Home', 'page': HomePage()},
+    {'title': 'Chats', 'page':  Messages()},
+    {'title': 'Upcoming', 'page':  Upcomming()},
+    {'title': 'Tutors', 'page': Tutors()},
+    {'title': 'Settings', 'page':  Settings()},
   ];
+
+  void _changeTab(index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +40,7 @@ class _TabsPageState extends State<TabsPage> {
         selectedItemColor: const Color(0xFF0071F0),
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
+        onTap: (index) => _changeTab(index),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(

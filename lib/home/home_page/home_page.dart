@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:my_lettutor_app/home/teacher_list/tutors.dart';
 
 import 'package:my_lettutor_app/models/teacher.dart';
 import 'package:my_lettutor_app/widgets/teacher_card.dart';
@@ -11,11 +13,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text(
+        title: Text(
           'Home',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(context).textTheme.headline1,
+        //   style: TextStyle(
+        //     fontWeight: FontWeight.bold,
+        //   ),
         ),
         actions: [
           IconButton(
@@ -41,13 +44,12 @@ class HomePage extends StatelessWidget {
                     'Welcome to LetTutor!',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: ElevatedButton(
+                  ElevatedButton(
                       onPressed: () {},
-                      child: const Text('Book a lesson'),
-                    ),
-                  ),
+                      child: const Text('Book a lesson',
+                          style: TextStyle(color: Color(0xFF0E78EF))),
+                    //   style: Theme.of(context).elevatedButtonTheme.style!.copyWith(minimumSize: Size(5,5)), 
+                      ),
                 ],
               ),
             ),
@@ -59,10 +61,25 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Recommended Tutors',
-                      style: TextStyle(fontSize: 20)),
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: Colors.grey, width: 2.0),
+                      ),
+                    ),
+                    child: const Text('Recommended Tutors',
+                        style: TextStyle(
+                          fontSize: 16,
+                        )),
+                  ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed(Tutors.routeName);
+                    },
+                    // style:
+                    //     TextButton.styleFrom(primary: const Color(0xFF0E78EF)),
                     child: Row(
                       children: const [
                         Text('See all'),
