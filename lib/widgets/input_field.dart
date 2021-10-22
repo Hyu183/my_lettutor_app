@@ -5,7 +5,7 @@ class InputField extends StatelessWidget {
   final String textHolder;
   final bool isPassword;
   final String? Function(String?) validator;
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   const InputField({
     Key? key,
@@ -13,7 +13,7 @@ class InputField extends StatelessWidget {
     required this.textHolder,
     required this.isPassword,
     required this.validator,
-    required this.controller,
+     this.controller,
   }) : super(key: key);
 
   @override

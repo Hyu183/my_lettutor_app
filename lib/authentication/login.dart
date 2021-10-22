@@ -23,7 +23,7 @@ class Login extends StatelessWidget {
   String? emailValidator(String? email) {
     if (email != null) {
       if (email.isEmpty) {
-        return 'Email can not be empty';
+        return 'Email cannot be empty';
       } else if (!email.contains('@')) {
         return 'Please enter a valid email';
       }
@@ -35,7 +35,7 @@ class Login extends StatelessWidget {
   String? passwordValidator(String? password) {
     if (password != null) {
       if (password.isEmpty) {
-        return 'Password can not be empty';
+        return 'Password cannot be empty';
       } else if (password.length < 8) {
         return 'Password must be at least 8 characters';
       }
