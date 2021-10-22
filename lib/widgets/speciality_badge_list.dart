@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'package:my_lettutor_app/widgets/speciality_badge.dart';
+import './speciality_badge.dart';
 
 class SpecialityBadgeList extends StatelessWidget {
   final List<String> specialityList;
-  const SpecialityBadgeList({Key? key, required this.specialityList})
-      : super(key: key);
+  final bool readOnly;
+  const SpecialityBadgeList({
+    Key? key,
+    required this.specialityList,
+    required this.readOnly,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +20,10 @@ class SpecialityBadgeList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: specialityList.length,
         itemBuilder: (_, index) {
-          return SpecialityBadge(speciality: specialityList[index]);
+          return SpecialityBadge(
+            speciality: specialityList[index],
+            isSelected: readOnly,
+          );
         },
       ),
     );

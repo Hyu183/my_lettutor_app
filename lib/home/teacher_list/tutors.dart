@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/widgets/search_bar.dart';
-import 'package:my_lettutor_app/widgets/speciality_badge_list.dart';
+import 'package:my_lettutor_app/widgets/teacher_card.dart';
+import '../../widgets/search_bar.dart';
+import '../../widgets/speciality_badge_list.dart';
 
-class Tutors extends StatelessWidget {
+import '../../models/teacher.dart';
+
+class Tutors extends StatefulWidget {
   static const routeName = '/tutors';
   Tutors({Key? key}) : super(key: key);
 
+  @override
+  State<Tutors> createState() => _TutorsState();
+}
+
+class _TutorsState extends State<Tutors> {
   List<String> specialities = [
     'All',
     'English for kids',
@@ -38,30 +46,34 @@ class Tutors extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            SearchBar(),
-            SpecialityBadgeList(specialityList: specialities),
+            const SearchBar(),
+            const SizedBox(
+              height: 10,
+            ),
+            SpecialityBadgeList(
+              specialityList: specialities,
+              readOnly: false,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: teacherList.length,
+                itemBuilder: (_, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                    child: TeacherCard(
+                      teacher: teacherList[index],
+                      version: 2,
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
-      //   body: SizedBox(
-      //     width: 500,
-      //     child: Column(
-      //       children: [
-      //         SizedBox(
-      //           width: 300,
-      //           child: Row(
-      //             children: [
-      //               const Icon(Icons.search),
-      //               TextField(
-      //                 decoration:
-      //                     InputDecoration(hintText: 'Enter a search term'),
-      //               ),
-      //             ],
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
     );
   }
 }

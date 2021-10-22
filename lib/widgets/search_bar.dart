@@ -24,6 +24,7 @@ class SearchBar extends StatelessWidget {
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Search Tutors',
+                border: InputBorder.none,
               ),
             ),
           ),

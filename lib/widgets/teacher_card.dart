@@ -5,13 +5,17 @@ import 'package:my_lettutor_app/widgets/teacher_list_tile.dart';
 
 class TeacherCard extends StatelessWidget {
   final Teacher teacher;
-
-  const TeacherCard({required this.teacher});
+  final int version;
+  const TeacherCard({
+    Key? key,
+    required this.teacher,
+    required this.version,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250,
+      height: 200,
       child: Card(
         elevation: 6,
         margin: const EdgeInsets.symmetric(vertical: 10),
@@ -24,13 +28,23 @@ class TeacherCard extends StatelessWidget {
                 rating: teacher.rating,
                 specialities: teacher.specialities,
                 description: teacher.description,
+                version: version,
               ),
-              const SizedBox(
-                height: 5,
+              SizedBox(
+                height: version == 1 ? 5 : 15,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(teacher.description),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    teacher.description, overflow: TextOverflow.ellipsis,
+                    maxLines: 4,
+                    // teacher.description.length <= 172
+                    //     ? teacher.description
+                    //     : teacher.description.substring(0, 173) + '...',
+                  ),
+                ),
               ),
             ],
           ),

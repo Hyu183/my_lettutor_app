@@ -36,7 +36,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int isLogin = 0;
+  int isLogin = 1;
 
   void loginCallback(int _isLogin) {
     setState(() {

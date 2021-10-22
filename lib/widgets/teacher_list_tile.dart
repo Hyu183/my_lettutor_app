@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:my_lettutor_app/widgets/speciality_badge_list.dart';
+// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+// import 'package:my_lettutor_app/widgets/speciality_badge_list.dart';
+import 'package:my_lettutor_app/widgets/teacher_tile_right_side.dart';
 
 class TeacherListTile extends StatelessWidget {
   final String id = '';
@@ -9,14 +10,16 @@ class TeacherListTile extends StatelessWidget {
   final List<String> specialities;
   final String description;
   final String imageUrl = '';
+  final int version;
 
-  const TeacherListTile(
-      {Key? key,
-      required this.name,
-      required this.rating,
-      required this.specialities,
-      required this.description})
-      : super(key: key);
+  const TeacherListTile({
+    Key? key,
+    required this.name,
+    required this.rating,
+    required this.specialities,
+    required this.description,
+    required this.version,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,56 +41,11 @@ class TeacherListTile extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        style: const TextStyle(
-                          //   fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      RatingBar.builder(
-                          itemSize: 20,
-                          ignoreGestures: true,
-                          initialRating: 5,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemPadding: const EdgeInsets.only(right: 2.0),
-                          itemBuilder: (ctx, _) {
-                            return const Icon(Icons.star,
-                                color: Colors.orangeAccent);
-                          },
-                          onRatingUpdate: (rating) {}),
-                    ],
-                  ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.favorite_border,
-                        color: Color(0xFF0071F0),
-                        size: 30,
-                      )),
-                ],
-              ),
-              SpecialityBadgeList(
-                specialityList: specialities,
-                readOnly: true,
-              ),
-            ],
+          child: TeacherTileRightSide(
+            name: name,
+            specialities: specialities,
+            rating: 5,
+            version: version,
           ),
         ),
       ],

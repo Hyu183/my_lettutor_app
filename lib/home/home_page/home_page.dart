@@ -82,8 +82,7 @@ class HomePage extends StatelessWidget {
                       Navigator.of(context)
                           .pushReplacementNamed(Tutors.routeName);
                     },
-                    // style:
-                    //     TextButton.styleFrom(primary: const Color(0xFF0E78EF)),
+                   
                     child: Row(
                       children: const [
                         Text('See all'),
@@ -98,7 +97,10 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
                 children: teacherList.map((teacher) {
-                  return TeacherCard(teacher: teacher);
+                  return TeacherCard(
+                    teacher: teacher,
+                    version: 1,
+                  );
                 }).toList(),
               ),
             ),
