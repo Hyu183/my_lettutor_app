@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import './speciality_badge.dart';
+import './my_badge.dart';
 
-class SpecialityBadgeList extends StatelessWidget {
-  final List<String> specialityList;
+class MyBadgeList extends StatelessWidget {
+  final List<String> myList;
   final bool readOnly;
-  const SpecialityBadgeList({
+  const MyBadgeList({
     Key? key,
-    required this.specialityList,
+    required this.myList,
     required this.readOnly,
   }) : super(key: key);
 
@@ -18,10 +18,10 @@ class SpecialityBadgeList extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 5),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: specialityList.length,
+        itemCount: myList.length,
         itemBuilder: (_, index) {
-          return SpecialityBadge(
-            speciality: specialityList[index],
+          return MyBadge(
+            data: myList[index],
             isSelected: readOnly,
           );
         },

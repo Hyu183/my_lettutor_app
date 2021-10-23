@@ -10,6 +10,7 @@ import '../widgets/input_field.dart';
 typedef LoginCallback = void Function(int);
 
 class Login extends StatelessWidget {
+  static const routeName = '/login';
   final LoginCallback callback;
 
   Login({

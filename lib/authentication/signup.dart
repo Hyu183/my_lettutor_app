@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/widgets/my_icon_button.dart';
 
 import '../widgets/input_field.dart';
 import '../widgets/large_button.dart';
+// import 'login.dart';
 
 class Signup extends StatelessWidget {
   static const routeName = '/sign-up';
@@ -131,20 +133,34 @@ class Signup extends StatelessWidget {
                 text: 'Register',
                 handler: _saveForm,
               ),
-              //   ElevatedButton(
-              //     onPressed: _saveForm,
-              //     child: const Text('Register'),
-              //     style: Theme.of(context).elevatedButtonTheme.style!.copyWith(
-              //           minimumSize: MaterialStateProperty.all(
-              //             const Size(double.infinity, 50),
-              //           ),
-              //           textStyle: MaterialStateProperty.all(
-              //             const TextStyle(
-              //               fontSize: 18,
-              //             ),
-              //           ),
-              //         ),
-              //   ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text('Or continue with',
+                  style: TextStyle(color: Colors.grey)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  MyIconButton(
+                    imageURI: 'assets/images/facebook_icon.png',
+                  ),
+                  MyIconButton(
+                    imageURI: 'assets/images/google_icon.png',
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Already have an account? '),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Log In'),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

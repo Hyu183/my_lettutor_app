@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/widgets/course_detail.dart';
+import 'package:my_lettutor_app/widgets/teacher_detail.dart';
 
 import './authentication/forgot_password.dart';
 import './authentication/signup.dart';
 import './home/tabs_page.dart';
-import './home/teacher_list/tutors.dart';
+// import './home/teacher_list/tutors.dart';
 import './authentication/login.dart';
+import 'models/course.dart';
+import 'models/teacher.dart';
 
 // import './pages/my_home_page.dart';
 
@@ -59,11 +63,27 @@ class _MyAppState extends State<MyApp> {
       title: 'LetTutor',
       theme: ThemeData(
         primarySwatch: white,
+        disabledColor: Colors.grey[50],
         textTheme: const TextTheme(
           headline1: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
             fontSize: 20,
+          ),
+          headline2: TextStyle(
+            color: Color(0XFF0071F0),
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+          bodyText1: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            fontSize: 18,
+          ),
+          subtitle1: TextStyle(
+            color: Colors.grey,
+            fontWeight: FontWeight.normal,
+            fontSize: 16,
           ),
         ),
         textButtonTheme: TextButtonThemeData(
@@ -87,9 +107,30 @@ class _MyAppState extends State<MyApp> {
       ),
       home: displayScreen(),
       routes: {
-        Tutors.routeName: (_) => Tutors(),
+        // Tutors.routeName: (_) => Tutors(),
         ForgotPassWord.routeName: (_) => ForgotPassWord(),
         Signup.routeName: (_) => Signup(),
+        // Login.routeName: (_) => Login(callback: loginCallback),
+        // TeacherDetail.routeName: (_) => TeacherDetail(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == TeacherDetail.routeName) {
+          var teacher = settings.arguments as Teacher;
+          return MaterialPageRoute(builder: (_) {
+            return TeacherDetail(
+              teacher: teacher,
+            );
+          });
+        } else if (settings.name == CourseDetail.routeName) {
+          var course = settings.arguments as Course;
+          return MaterialPageRoute(builder: (_) {
+            return CourseDetail(course: course);
+          });
+        }
+        
+            // return MaterialPageRoute(builder: (_){
+            //     return Unko
+            // });
       },
       debugShowCheckedModeBanner: false,
     );

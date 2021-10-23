@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_lettutor_app/widgets/teacher_card.dart';
 import '../../widgets/search_bar.dart';
-import '../../widgets/speciality_badge_list.dart';
+import '../../widgets/my_badge_list.dart';
 
 import '../../models/teacher.dart';
 
@@ -50,8 +50,8 @@ class _TutorsState extends State<Tutors> {
             const SizedBox(
               height: 10,
             ),
-            SpecialityBadgeList(
-              specialityList: specialities,
+            MyBadgeList(
+              myList: specialities,
               readOnly: false,
             ),
             const SizedBox(

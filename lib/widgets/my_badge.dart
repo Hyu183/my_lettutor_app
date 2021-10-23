@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SpecialityBadge extends StatelessWidget {
-  final String speciality;
+class MyBadge extends StatelessWidget {
+  final String data;
   final bool isSelected;
-  const SpecialityBadge({
+  const MyBadge({
     Key? key,
-    required this.speciality,
+    required this.data,
     required this.isSelected,
   }) : super(key: key);
 
@@ -24,7 +24,7 @@ class SpecialityBadge extends StatelessWidget {
                 width: 1),
             borderRadius: const BorderRadius.all(Radius.circular(20.0))),
         child: Text(
-          speciality,
+          data,
           style: TextStyle(
               color: isSelected ? const Color(0xFF0071F0) : Colors.grey),
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:my_lettutor_app/widgets/speciality_badge_list.dart';
+import 'package:my_lettutor_app/widgets/my_badge_list.dart';
+
+import 'my_rating_bar.dart';
 
 class TeacherTileRightSide extends StatelessWidget {
   final String name;
@@ -37,20 +39,12 @@ class TeacherTileRightSide extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      RatingBar.builder(
-                          itemSize: 20,
-                          ignoreGestures: true,
-                          initialRating: rating,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemPadding: const EdgeInsets.only(right: 2.0),
-                          itemBuilder: (ctx, _) {
-                            return const Icon(Icons.star,
-                                color: Colors.orangeAccent);
-                          },
-                          onRatingUpdate: (rating) {}),
+                      MyRatingBar(
+                        rating: rating,
+                        padding: 2,
+                        ignoreGestures: true,
+                        size: 20,
+                      ),
                     ],
                   ),
                   IconButton(
@@ -62,8 +56,8 @@ class TeacherTileRightSide extends StatelessWidget {
                       )),
                 ],
               ),
-              SpecialityBadgeList(
-                specialityList: specialities,
+              MyBadgeList(
+                myList: specialities,
                 readOnly: true,
               ),
             ],
@@ -95,8 +89,8 @@ class TeacherTileRightSide extends StatelessWidget {
                   ),
                 ],
               ),
-              SpecialityBadgeList(
-                specialityList: specialities,
+              MyBadgeList(
+                myList: specialities,
                 readOnly: true,
               ),
             ],
