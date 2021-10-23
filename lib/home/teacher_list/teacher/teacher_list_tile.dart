@@ -24,18 +24,17 @@ class TeacherListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
+        const SizedBox(
           width: 70,
           height: 60,
           child: CircleAvatar(
-            // radius: 30,
-            child: Image.asset(
-              'assets/images/user.png',
-              //   width: 30,
-              //   height: 30,
-              cacheHeight: 60,
-              cacheWidth: 60,
-              fit: BoxFit.cover,
+            radius: 30,
+            backgroundImage: ResizeImage(
+              AssetImage(
+                'assets/images/user.png',
+              ),
+              height: 60,
+              width: 60,
             ),
           ),
         ),

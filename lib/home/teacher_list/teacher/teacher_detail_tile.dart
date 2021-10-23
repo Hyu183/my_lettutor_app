@@ -23,25 +23,22 @@ class TeacherDetailTile extends StatelessWidget {
             width: 100,
             height: 100,
             margin: const EdgeInsets.only(right: 5),
-            child: CircleAvatar(
-              // radius: 30,
-              child: Image.asset(
-                'assets/images/user.png',
-                //   width: 30,
-                //   height: 30,
-                cacheHeight: 90,
-                cacheWidth: 90,
-                fit: BoxFit.cover,
+            child: const CircleAvatar(
+              radius: 30,
+              backgroundImage: ResizeImage(
+                AssetImage(
+                  'assets/images/user.png',
+                ),
+                height: 60,
+                width: 60,
               ),
             ),
           ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              //   mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: Text(
@@ -60,7 +57,7 @@ class TeacherDetailTile extends StatelessWidget {
                   ],
                 ),
                 Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  
                   children: [
                     const Expanded(
                       child: Text(
@@ -72,7 +69,7 @@ class TeacherDetailTile extends StatelessWidget {
                         onPressed: () {},
                         icon: const Icon(
                           Icons.favorite_border,
-                          color: Colors.pink, //Color(0xFF0071F0),
+                          color: Colors.pink, 
                           size: 30,
                         )),
                   ],

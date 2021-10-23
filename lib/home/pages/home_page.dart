@@ -4,7 +4,6 @@ import './tutors.dart';
 import '../teacher_list/teacher/teacher_card.dart';
 import '../../models/teacher.dart';
 
-
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -20,11 +19,14 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {},
-              icon: CircleAvatar(
-                child: Image.asset(
-                  'assets/images/user.png',
-                  cacheHeight: 32,
-                  cacheWidth: 32,
+              icon: const CircleAvatar(
+                radius: 16,
+                backgroundImage: ResizeImage(
+                  AssetImage(
+                    'assets/images/user.png',
+                  ),
+                  height: 32,
+                  width: 32,
                 ),
               )),
         ],
@@ -83,7 +85,6 @@ class HomePage extends StatelessWidget {
                       Navigator.of(context)
                           .pushReplacementNamed(Tutors.routeName);
                     },
-                   
                     child: Row(
                       children: const [
                         Text('See all'),
