@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/widgets/icon_text_button.dart';
+import 'package:my_lettutor_app/widgets/button/icon_text_button.dart';
 
 class RowButton extends StatelessWidget {
   const RowButton({Key? key}) : super(key: key);

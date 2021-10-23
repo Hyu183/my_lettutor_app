@@ -1,6 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/widgets/time_slot.dart';
+
+import './time_slot.dart';
+
+
 
 class TimeGrid extends StatelessWidget {
   TimeGrid({Key? key}) : super(key: key);

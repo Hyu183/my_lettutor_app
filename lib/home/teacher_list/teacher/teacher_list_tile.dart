@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-// import 'package:my_lettutor_app/widgets/speciality_badge_list.dart';
-import 'package:my_lettutor_app/widgets/teacher_tile_right_side.dart';
+
+import './teacher_tile_right_side.dart';
 
 class TeacherListTile extends StatelessWidget {
   final String id = '';

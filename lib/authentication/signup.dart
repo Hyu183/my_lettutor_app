@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/widgets/my_icon_button.dart';
+import 'package:my_lettutor_app/widgets/button/my_icon_button.dart';
 
-import '../widgets/input_field.dart';
-import '../widgets/large_button.dart';
+import '../widgets/utils/input_field.dart';
+import '../widgets/button/large_button.dart';
 // import 'login.dart';
 
 class Signup extends StatelessWidget {

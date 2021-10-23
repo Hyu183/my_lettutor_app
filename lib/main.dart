@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/widgets/course_detail.dart';
-import 'package:my_lettutor_app/widgets/teacher_detail.dart';
 
 import './authentication/forgot_password.dart';
 import './authentication/signup.dart';
-import './home/tabs_page.dart';
-// import './home/teacher_list/tutors.dart';
 import './authentication/login.dart';
-import 'models/course.dart';
-import 'models/teacher.dart';
+import './home/tabs_page.dart';
+import './home/teacher_list/teacher/teacher_detail.dart';
+import './home/course/course_detail.dart';
 
-// import './pages/my_home_page.dart';
+import './models/course.dart';
+import './models/teacher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -127,10 +125,10 @@ class _MyAppState extends State<MyApp> {
             return CourseDetail(course: course);
           });
         }
-        
-            // return MaterialPageRoute(builder: (_){
-            //     return Unko
-            // });
+
+        // return MaterialPageRoute(builder: (_){
+        //     return Unko
+        // });
       },
       debugShowCheckedModeBanner: false,
     );

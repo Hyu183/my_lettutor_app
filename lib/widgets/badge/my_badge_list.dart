@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './my_badge.dart';
+import 'my_badge.dart';
 
 class MyBadgeList extends StatelessWidget {
   final List<String> myList;

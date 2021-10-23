@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../teacher_list/tutors.dart';
+import './tutors.dart';
+import '../teacher_list/teacher/teacher_card.dart';
 import '../../models/teacher.dart';
-import '../../widgets/teacher_card.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

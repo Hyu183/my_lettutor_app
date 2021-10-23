@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/models/course.dart';
-import 'package:my_lettutor_app/widgets/course_card.dart';
+
+import './course_card.dart';
+import '../../models/course.dart';
+
 
 class CourseCardList extends StatelessWidget {
   final List<Course> courses;

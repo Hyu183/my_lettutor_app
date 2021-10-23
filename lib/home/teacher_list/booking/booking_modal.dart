@@ -1,8 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/widgets/booking_modal_layout.dart';
-import 'package:my_lettutor_app/widgets/large_button.dart';
-import 'package:my_lettutor_app/widgets/time_grid.dart';
+
+import './booking_modal_layout.dart';
+import './time_grid.dart';
+import '../../../widgets/button/large_button.dart';
+
+
 
 class BookingModal extends StatelessWidget {
   BookingModal({Key? key}) : super(key: key);

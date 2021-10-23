@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/widgets/teacher_card.dart';
-import '../../widgets/search_bar.dart';
-import '../../widgets/my_badge_list.dart';
 
+import '../teacher_list/teacher/teacher_card.dart';
 import '../../models/teacher.dart';
+import '../../widgets/utils/search_bar.dart';
+import '../../widgets/badge/my_badge_list.dart';
 
 class Tutors extends StatefulWidget {
   static const routeName = '/tutors';
-  Tutors({Key? key}) : super(key: key);
+  const Tutors({Key? key}) : super(key: key);
 
   @override
   State<Tutors> createState() => _TutorsState();
@@ -46,7 +46,9 @@ class _TutorsState extends State<Tutors> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            const SearchBar(),
+            const SearchBar(
+              text: 'Search Tutor',
+            ),
             const SizedBox(
               height: 10,
             ),

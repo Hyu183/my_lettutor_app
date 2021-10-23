@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/large_button.dart';
-import '../widgets/logo_app.dart';
-import '../authentication/forgot_password.dart';
-import '../authentication/signup.dart';
-import '../widgets/my_icon_button.dart';
-import '../widgets/input_field.dart';
+import './forgot_password.dart';
+import './signup.dart';
+import '../widgets/button/large_button.dart';
+import '../widgets/button/my_icon_button.dart';
+import '../widgets/utils/input_field.dart';
+import '../widgets/utils/logo_app.dart';
 
 typedef LoginCallback = void Function(int);
 

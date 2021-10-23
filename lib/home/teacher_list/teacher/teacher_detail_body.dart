@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/home/teacher_list/booking_modal.dart';
-import 'package:my_lettutor_app/widgets/comment_card.dart';
-import 'package:my_lettutor_app/widgets/course_card_list.dart';
-import 'package:my_lettutor_app/widgets/no_data.dart';
-import '../models/teacher.dart';
-import './large_button.dart';
-import './my_badge_list.dart';
-import './row_button.dart';
+
 import './teacher_detail_part.dart';
 import './teacher_detail_tile.dart';
+import '../booking/booking_modal.dart';
+import '../comment/comment_card.dart';
+import '../../course/course_card_list.dart';
+import '../../../models/teacher.dart';
+import '../../../widgets/badge/my_badge_list.dart';
+import '../../../widgets/button/large_button.dart';
+import '../../../widgets/button/row_button.dart';
+import '../../../widgets/utils/no_data.dart';
+
+
+
 
 class TeacherDetailBody extends StatelessWidget {
   final Teacher teacher;

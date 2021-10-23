@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:my_lettutor_app/models/course.dart';
-import 'package:my_lettutor_app/widgets/course_detail.dart';
+
+
+import './course_detail.dart';
+import '../../models/course.dart';
+
 
 class CourseCard extends StatelessWidget {
   final Course course;
