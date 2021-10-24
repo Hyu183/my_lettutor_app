@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+import '../upcoming/schedule_tile.dart';
+import '../../models/temp/upcoming_data.dart';
+
+class BookingHistoryCard extends StatelessWidget {
+  final UpcomingData data;
+  const BookingHistoryCard({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ScheduleTile(
+            name: data.name,
+            date: data.date,
+            startTime: data.startTime,
+            endTime: data.endTime),
+      ),
+    );
+  }
+}

@@ -43,7 +43,7 @@ class _TutorsState extends State<Tutors> {
       ),
       body: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             const SearchBar(

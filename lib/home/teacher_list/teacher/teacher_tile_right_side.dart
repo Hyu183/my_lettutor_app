@@ -82,8 +82,8 @@ class TeacherTileRightSide extends StatelessWidget {
                   ),
                   Image.asset(
                     'assets/images/star.png',
-                    cacheHeight: 50,
-                    cacheWidth: 50,
+                    cacheHeight: 20,
+                    cacheWidth: 20,
                     fit: BoxFit.cover,
                   ),
                 ],

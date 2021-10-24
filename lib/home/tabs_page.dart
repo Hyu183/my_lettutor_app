@@ -1,14 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:my_lettutor_app/home/pages/messages.dart';
-import 'package:my_lettutor_app/home/pages/home_page.dart';
-import 'package:my_lettutor_app/home/pages/settings.dart';
-import 'package:my_lettutor_app/home/pages/tutors.dart';
-import 'package:my_lettutor_app/home/pages/upcoming.dart';
+import './pages/messages.dart';
+import './pages/home_page.dart';
+import './pages/settings.dart';
+import './pages/tutors.dart';
+import './pages/upcoming.dart';
+
+typedef LoginCallback = void Function(int);
 
 class TabsPage extends StatefulWidget {
-  const TabsPage({Key? key}) : super(key: key);
+  final LoginCallback callback;
+  const TabsPage({
+    Key? key,
+    required this.callback,
+  }) : super(key: key);
 
   @override
   _TabsPageState createState() => _TabsPageState();
@@ -16,14 +21,25 @@ class TabsPage extends StatefulWidget {
 
 class _TabsPageState extends State<TabsPage> {
   int _selectedIndex = 0;
+  late List<Map<String, Object>> _pages;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _pages = [
+      {'title': 'Home', 'page': HomePage()},
+      {'title': 'Chats', 'page': Messages()},
+      {'title': 'Upcoming', 'page': Upcoming()},
+      {'title': 'Tutors', 'page': Tutors()},
+      {
+        'title': 'Settings',
+        'page': Settings(
+          callback: widget.callback,
+        )
+      },
+    ];
 
-  final List<Map<String, Object>> _pages = [
-    {'title': 'Home', 'page': HomePage()},
-    {'title': 'Chats', 'page':  Messages()},
-    {'title': 'Upcoming', 'page':  Upcoming()},
-    {'title': 'Tutors', 'page': Tutors()},
-    {'title': 'Settings', 'page':  Settings()},
-  ];
+    super.initState();
+  }
 
   void _changeTab(index) {
     setState(() {

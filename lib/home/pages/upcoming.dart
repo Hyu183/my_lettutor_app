@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_lettutor_app/home/upcoming/upcoming_class_card.dart';
 
-import '../../models/upcoming_data.dart';
+import '../../models/temp/upcoming_data.dart';
 
 class Upcoming extends StatelessWidget {
   const Upcoming({Key? key}) : super(key: key);
@@ -32,12 +32,7 @@ class Upcoming extends StatelessWidget {
           },
         ),
       ),
-      //   Column(
-      //     children: upcomings
-      //         .map((upcoming) => UpcomingClassCard(
-      //               upcomingData: upcoming,
-      //             ))
-      //         .toList(),
+     
     );
   }
 }

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 
+
 import './authentication/forgot_password.dart';
 import './authentication/signup.dart';
 import './authentication/login.dart';
+import './home/pages/profile.dart';
 import './home/tabs_page.dart';
 import './home/teacher_list/teacher/teacher_detail.dart';
 import './home/course/course_detail.dart';
+import './home/settings/booking_history.dart';
+import './home/settings/advanced_settings.dart';
+import './home/settings/session_history.dart';
+
 
 import './models/course.dart';
 import './models/teacher.dart';
+import 'home/settings/view_feedbacks.dart';
 
 void main() {
   runApp(const MyApp());
@@ -48,7 +55,7 @@ class _MyAppState extends State<MyApp> {
 
   Widget displayScreen() {
     if (isLogin == 1) {
-      return const TabsPage();
+      return  TabsPage(callback: loginCallback);
     } else if (isLogin == 0) {
       return Login(callback: loginCallback);
     }
@@ -108,6 +115,11 @@ class _MyAppState extends State<MyApp> {
         // Tutors.routeName: (_) => Tutors(),
         ForgotPassWord.routeName: (_) => ForgotPassWord(),
         Signup.routeName: (_) => Signup(),
+        AdvancedSettings.routeName: (_)=>AdvancedSettings(),
+        BookingHistory.routeName: (_) => BookingHistory(),
+        SessionHistory.routeName: (_)=>SessionHistory(),
+        ViewFeedbacks.routeName: (_)=>ViewFeedbacks(),
+        Profile.routeName: (_)=>Profile(),
         // Login.routeName: (_) => Login(callback: loginCallback),
         // TeacherDetail.routeName: (_) => TeacherDetail(),
       },
@@ -125,6 +137,12 @@ class _MyAppState extends State<MyApp> {
             return CourseDetail(course: course);
           });
         }
+        //  else if (settings.name == TopicPDFView.routeName) {
+        //   var topicName = settings.arguments as String;
+        //   return MaterialPageRoute(builder: (_) {
+        //     return TopicPDFView(topicName: topicName);
+        //   });
+        // }
 
         // return MaterialPageRoute(builder: (_){
         //     return Unko

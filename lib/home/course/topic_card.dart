@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/home/course/topic_pdf_view.dart';
 
 class TopicCard extends StatelessWidget {
   final int number;
@@ -12,7 +13,10 @@ class TopicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        // Navigator.of(context)
+        //     .pushNamed(TopicPDFView.routeName, arguments: text);
+      },
       customBorder: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),

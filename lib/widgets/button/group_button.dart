@@ -6,6 +6,7 @@ class GroupButton extends StatelessWidget {
 
   final Color colorBackgroudLeft;
   final Color colorTextLeft;
+  final Color colorTopBorder;
   final VoidCallback handlerLeft;
   final VoidCallback handlerRight;
 
@@ -16,16 +17,17 @@ class GroupButton extends StatelessWidget {
     required this.colorBackgroudLeft,
     required this.colorTextLeft,
     required this.handlerLeft,
-    required this.handlerRight,
+    required this.handlerRight, required this.colorTopBorder,
+
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 80,
-      decoration: BoxDecoration(   
+      decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: colorTextLeft),
+          top: BorderSide(color: colorTopBorder),
         ),
       ),
       child: Row(

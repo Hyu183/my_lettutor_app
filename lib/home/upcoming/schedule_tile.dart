@@ -75,8 +75,8 @@ class ScheduleTile extends StatelessWidget {
                 ),
                 TimeBadge(
                   time: endTime,
-                  textColor: Colors.orange,
-                  backgroundColor: Colors.orange[50]!,
+                  textColor: Colors.red,
+                  backgroundColor: Colors.red[50]!,
                 ),
               ],
             ),

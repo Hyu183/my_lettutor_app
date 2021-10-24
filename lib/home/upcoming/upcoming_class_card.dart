@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_lettutor_app/widgets/button/group_button.dart';
 
 import './schedule_tile.dart';
-import '../../models/upcoming_data.dart';
+import '../../models/temp/upcoming_data.dart';
 
 class UpcomingClassCard extends StatelessWidget {
   final UpcomingData upcomingData;
@@ -42,6 +42,7 @@ class UpcomingClassCard extends StatelessWidget {
                 textRight: 'Go to Meeting',
                 colorBackgroudLeft: Colors.white,
                 colorTextLeft: Colors.grey,
+                colorTopBorder: Colors.grey ,
                 handlerLeft: () {},
                 handlerRight: () {},
               ),
