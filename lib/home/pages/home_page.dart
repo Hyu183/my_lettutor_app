@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
-import './tutors.dart';
+import './profile.dart';
+// import './tutors.dart';
 import '../teacher_list/teacher/teacher_card.dart';
 import '../../models/teacher.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final void Function(int) navigatorFunc;
+  const HomePage({
+    Key? key,
+    required this.navigatorFunc,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,9 @@ class HomePage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(Profile.routeName);
+              },
               icon: const CircleAvatar(
                 radius: 16,
                 backgroundImage: ResizeImage(
@@ -47,7 +54,9 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      navigatorFunc(3); //Navigate to Tutors page: index 3
+                    },
                     child: const Text('Book a lesson',
                         style: TextStyle(color: Color(0xFF0E78EF))),
                     style: Theme.of(context)
@@ -82,8 +91,7 @@ class HomePage extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(Tutors.routeName);
+                      navigatorFunc(3); //Navigate to Tutors page: index 3
                     },
                     child: Row(
                       children: const [

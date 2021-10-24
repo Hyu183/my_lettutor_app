@@ -26,7 +26,12 @@ class _TabsPageState extends State<TabsPage> {
   void initState() {
     // TODO: implement initState
     _pages = [
-      {'title': 'Home', 'page': HomePage()},
+      {
+        'title': 'Home',
+        'page': HomePage(
+          navigatorFunc: _changeTab,
+        )
+      },
       {'title': 'Chats', 'page': Messages()},
       {'title': 'Upcoming', 'page': Upcoming()},
       {'title': 'Tutors', 'page': Tutors()},
