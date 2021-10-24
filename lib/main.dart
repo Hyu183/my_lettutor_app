@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import './authentication/forgot_password.dart';
 import './authentication/signup.dart';
 import './authentication/login.dart';
@@ -12,9 +11,9 @@ import './home/settings/booking_history.dart';
 import './home/settings/advanced_settings.dart';
 import './home/settings/session_history.dart';
 
-
 import './models/course.dart';
 import './models/teacher.dart';
+import 'home/meetings/meetings.dart';
 import 'home/settings/view_feedbacks.dart';
 
 void main() {
@@ -45,7 +44,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int isLogin = 1;
+  int isLogin = 0;
 
   void loginCallback(int _isLogin) {
     setState(() {
@@ -55,7 +54,7 @@ class _MyAppState extends State<MyApp> {
 
   Widget displayScreen() {
     if (isLogin == 1) {
-      return  TabsPage(callback: loginCallback);
+      return TabsPage(callback: loginCallback);
     } else if (isLogin == 0) {
       return Login(callback: loginCallback);
     }
@@ -112,16 +111,13 @@ class _MyAppState extends State<MyApp> {
       ),
       home: displayScreen(),
       routes: {
-        // Tutors.routeName: (_) => Tutors(),
         ForgotPassWord.routeName: (_) => ForgotPassWord(),
         Signup.routeName: (_) => Signup(),
-        AdvancedSettings.routeName: (_)=>AdvancedSettings(),
-        BookingHistory.routeName: (_) => BookingHistory(),
-        SessionHistory.routeName: (_)=>SessionHistory(),
-        ViewFeedbacks.routeName: (_)=>ViewFeedbacks(),
-        Profile.routeName: (_)=>Profile(),
-        // Login.routeName: (_) => Login(callback: loginCallback),
-        // TeacherDetail.routeName: (_) => TeacherDetail(),
+        AdvancedSettings.routeName: (_) => const AdvancedSettings(),
+        BookingHistory.routeName: (_) => const BookingHistory(),
+        SessionHistory.routeName: (_) => const SessionHistory(),
+        ViewFeedbacks.routeName: (_) => const ViewFeedbacks(),
+        Profile.routeName: (_) => const Profile(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == TeacherDetail.routeName) {
@@ -137,16 +133,6 @@ class _MyAppState extends State<MyApp> {
             return CourseDetail(course: course);
           });
         }
-        //  else if (settings.name == TopicPDFView.routeName) {
-        //   var topicName = settings.arguments as String;
-        //   return MaterialPageRoute(builder: (_) {
-        //     return TopicPDFView(topicName: topicName);
-        //   });
-        // }
-
-        // return MaterialPageRoute(builder: (_){
-        //     return Unko
-        // });
       },
       debugShowCheckedModeBanner: false,
     );

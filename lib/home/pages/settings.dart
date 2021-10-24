@@ -102,7 +102,7 @@ class Settings extends StatelessWidget {
                     icon: Icons.language_outlined,
                     text: 'Our Website',
                     routeName: '',
-                    url: 'https://app.lettutordsad.com/',
+                    url: 'https://app.lettutor.com/',
                   ),
                   const SettingCard(
                     icon: Icons.facebook_outlined,
