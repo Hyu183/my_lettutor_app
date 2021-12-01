@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/temp/feedback_data.dart';
+import 'package:my_lettutor_app/models/temp/mfeedback.dart';
 
 class FeedbackCard extends StatelessWidget {
-  final FeedbackData data;
+  final MFeedback data;
   const FeedbackCard({
     Key? key,
     required this.data,

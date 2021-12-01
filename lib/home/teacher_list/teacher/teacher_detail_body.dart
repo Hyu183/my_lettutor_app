@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
-import './teacher_detail_part.dart';
-import './teacher_detail_tile.dart';
-import '../booking/booking_modal.dart';
-import '../comment/comment_card.dart';
-import '../../course/course_card_list.dart';
-import '../../../models/teacher.dart';
-import '../../../widgets/badge/my_badge_list.dart';
-import '../../../widgets/button/large_button.dart';
-import '../../../widgets/button/row_button.dart';
-import '../../../widgets/utils/no_data.dart';
+import 'package:my_lettutor_app/home/course/course_card_list.dart';
+import 'package:my_lettutor_app/home/teacher_list/booking/booking_modal.dart';
+import 'package:my_lettutor_app/home/teacher_list/comment/comment_card.dart';
+import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_detail_part.dart';
+import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_detail_tile.dart';
+import 'package:my_lettutor_app/widgets/badge/my_badge_list.dart';
+import 'package:my_lettutor_app/widgets/button/large_button.dart';
+import 'package:my_lettutor_app/widgets/button/row_button.dart';
+import 'package:my_lettutor_app/widgets/utils/no_data.dart';
 
-
-
+import 'package:my_lettutor_app/models/teacher.dart';
 
 class TeacherDetailBody extends StatelessWidget {
   final Teacher teacher;
@@ -115,12 +113,14 @@ class TeacherDetailBody extends StatelessWidget {
           hasPadding: false,
         ),
         TeacherDetailPart(
-          title: 'Rating and Comment (${teacher.comments.length})',
-          child: Column(
-            children: teacher.comments
-                .map((comment) => CommentCard(comment: comment))
-                .toList(),
-          ),
+          title: 'Rating and Comment (${teacher.comments?.length})',
+          child: teacher.comments != null
+              ? Column(
+                  children: teacher.comments!
+                      .map((comment) => CommentCard(comment: comment))
+                      .toList(),
+                )
+              : Container(),
           hasPadding: false,
         ),
       ],

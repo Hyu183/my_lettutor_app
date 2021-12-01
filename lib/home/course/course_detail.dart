@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:my_lettutor_app/home/course/course_detail_body.dart';
+import 'package:my_lettutor_app/widgets/utils/number_above_text.dart';
 
-import './course_detail_body.dart';
-import '../../../models/course.dart';
-import '../../../widgets/utils/number_above_text.dart';
+import 'package:my_lettutor_app/models/course.dart';
+
+
+
 
 class CourseDetail extends StatelessWidget {
   static const routeName = '/course-detail';

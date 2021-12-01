@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 
-import './teacher_detail_body.dart';
+import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_detail_body.dart';
 
-import '../../../models/teacher.dart';
-
+import 'package:my_lettutor_app/models/teacher.dart';
 
 class TeacherDetail extends StatelessWidget {
   static const routeName = '/teacher-detail';

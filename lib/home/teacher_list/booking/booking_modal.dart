@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
 
-import './booking_modal_layout.dart';
-import './time_grid.dart';
-import '../../../widgets/button/large_button.dart';
+import 'package:my_lettutor_app/home/teacher_list/booking/booking_modal_layout.dart';
+import 'package:my_lettutor_app/home/teacher_list/booking/time_grid.dart';
+import 'package:my_lettutor_app/widgets/button/large_button.dart';
 
-
+import 'package:my_lettutor_app/data/data.dart';
 
 class BookingModal extends StatelessWidget {
   BookingModal({Key? key}) : super(key: key);
 
-  final List<String> _date = [
-    '2021-10-23',
-    '2021-10-24',
-    '2021-10-23',
-    '2021-10-25',
-    '2021-10-26',
-    '2021-10-27',
-  ];
+  
 
   void _startTimeGrid(BuildContext ctx) {
     showModalBottomSheet(
@@ -42,12 +35,12 @@ class BookingModal extends StatelessWidget {
           horizontal: 20,
           vertical: 10,
         ),
-        itemCount: _date.length,
+        itemCount: date.length,
         itemBuilder: (_, index) {
           return Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
             child: LargeButton(
-              text: _date[index],
+              text: date[index],
               handler: () => _startTimeGrid(context),
             ),
           );

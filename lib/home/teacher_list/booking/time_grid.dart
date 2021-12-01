@@ -1,38 +1,11 @@
 import 'package:flutter/material.dart';
 
-import './time_slot.dart';
+import 'package:my_lettutor_app/home/teacher_list/booking/time_slot.dart';
 
-
-
+import 'package:my_lettutor_app/data/data.dart';
 class TimeGrid extends StatelessWidget {
   TimeGrid({Key? key}) : super(key: key);
-  final List<Map<String, Object>> timeList = [
-    {
-      'startTime': '19:30',
-      'endTime': '19:55',
-      'isReserved': true,
-    },
-    {
-      'startTime': '19:30',
-      'endTime': '19:55',
-      'isReserved': false,
-    },
-    {
-      'startTime': '20:30',
-      'endTime': '20:55',
-      'isReserved': true,
-    },
-    {
-      'startTime': '20:30',
-      'endTime': '20:55',
-      'isReserved': false,
-    },
-    {
-      'startTime': '21:30',
-      'endTime': '21:55',
-      'isReserved': false,
-    },
-  ];
+  
   @override
   Widget build(BuildContext context) {
     return Padding(

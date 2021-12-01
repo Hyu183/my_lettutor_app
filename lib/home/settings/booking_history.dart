@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './booking_history_card.dart';
-import '../../models/temp/upcoming_data.dart';
+import 'package:my_lettutor_app/home/settings/booking_history_card.dart';
+
+import 'package:my_lettutor_app/data/data.dart';
 
 class BookingHistory extends StatelessWidget {
   static const routeName = 'booking-history';

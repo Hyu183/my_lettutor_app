@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:my_lettutor_app/home/upcoming/upcoming_class_card.dart';
 
-import '../../models/temp/upcoming_data.dart';
+import 'package:my_lettutor_app/data/data.dart';
 
-class Upcoming extends StatelessWidget {
-  const Upcoming({Key? key}) : super(key: key);
+
+class UpcomingPage extends StatelessWidget {
+  const UpcomingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

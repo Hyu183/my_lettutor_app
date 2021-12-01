@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-import './pages/messages.dart';
-import './pages/home_page.dart';
-import './pages/settings.dart';
-import './pages/tutors.dart';
-import './pages/upcoming.dart';
+import 'package:my_lettutor_app/home/pages/home_page.dart';
+import 'package:my_lettutor_app/home/pages/messages_page.dart';
+import 'package:my_lettutor_app/home/pages/settings_page.dart';
+import 'package:my_lettutor_app/home/pages/tutors_page.dart';
+import 'package:my_lettutor_app/home/pages/upcoming_page.dart';
+
+
 
 typedef LoginCallback = void Function(int);
 
@@ -32,12 +34,12 @@ class _TabsPageState extends State<TabsPage> {
           navigatorFunc: _changeTab,
         )
       },
-      {'title': 'Chats', 'page': Messages()},
-      {'title': 'Upcoming', 'page': Upcoming()},
-      {'title': 'Tutors', 'page': Tutors()},
+      {'title': 'Chats', 'page': MessagesPage()},
+      {'title': 'Upcoming', 'page': UpcomingPage()},
+      {'title': 'Tutors', 'page': TutorsPage()},
       {
         'title': 'Settings',
-        'page': Settings(
+        'page': SettingsPage(
           callback: widget.callback,
         )
       },

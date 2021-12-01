@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import './active_status_avatar.dart';
-import '../../models/temp/message.dart';
+import 'package:my_lettutor_app/home/messages/active_status_avatar.dart';
+
+import 'package:my_lettutor_app/models/temp/message.dart';
 
 class MessageListTile extends StatelessWidget {
   final Message message;

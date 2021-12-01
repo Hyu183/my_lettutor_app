@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
+
+import 'package:my_lettutor_app/home/profile/birthday_input.dart';
 import 'package:my_lettutor_app/home/profile/drop_down_input.dart';
-// import 'package:intl/intl.dart';
+import 'package:my_lettutor_app/home/profile/phone_input.dart';
+import 'package:my_lettutor_app/home/profile/profile_avatar.dart';
+import 'package:my_lettutor_app/widgets/button/large_button.dart';
 
-import '../profile/birthday_input.dart';
-import '../profile/phone_input.dart';
-import '../../models/temp/country_list.dart';
-import '../../widgets/button/large_button.dart';
-
-import '../profile/profile_avatar.dart';
-import '../../models/temp/user.dart';
+import 'package:my_lettutor_app/data/data.dart';
+import 'package:my_lettutor_app/models/temp/user.dart';
 
 final User user = User(name: 'Huy', email: 'Email@gmail.com');
 
-class Profile extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   static const routeName = '/profile';
-  const Profile({Key? key}) : super(key: key);
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<Profile> createState() => _ProfileState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfileState extends State<Profile> {
+class _ProfilePageState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController(text: user.name);
 

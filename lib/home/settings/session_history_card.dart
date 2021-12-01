@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import './session_tile.dart';
-import '../../models/temp/session.dart';
-import '../../widgets/button/group_button.dart';
+import 'package:my_lettutor_app/home/settings/session_tile.dart';
+import 'package:my_lettutor_app/widgets/button/group_button.dart';
+
+import 'package:my_lettutor_app/models/temp/session.dart';
+
 
 class SessionHistoryCard extends StatelessWidget {
   final Session session;

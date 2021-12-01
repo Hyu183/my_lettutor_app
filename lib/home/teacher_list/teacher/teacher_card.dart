@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-import './teacher_detail.dart';
-import './teacher_list_tile.dart';
-import '../../../models/teacher.dart';
+import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_detail.dart';
+import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_list_tile.dart';
+
+import 'package:my_lettutor_app/models/teacher.dart';
+
 
 
 class TeacherCard extends StatelessWidget {

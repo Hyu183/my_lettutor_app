@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import './profile.dart';
-// import './tutors.dart';
-import '../teacher_list/teacher/teacher_card.dart';
-import '../../models/teacher.dart';
+import 'package:my_lettutor_app/home/pages/profile_page.dart';
+import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_card.dart';
+
+import 'package:my_lettutor_app/data/data.dart';
 
 class HomePage extends StatelessWidget {
   final void Function(int) navigatorFunc;
@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(Profile.routeName);
+                Navigator.of(context).pushNamed(ProfilePage.routeName);
               },
               icon: const CircleAvatar(
                 radius: 16,

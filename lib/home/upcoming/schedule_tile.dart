@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'package:my_lettutor_app/widgets/badge/time_badge.dart';
 
 class ScheduleTile extends StatelessWidget {

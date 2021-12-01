@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-// import 'package:url_launcher/link.dart';
+
 
 class SettingCard extends StatelessWidget {
   final IconData icon;

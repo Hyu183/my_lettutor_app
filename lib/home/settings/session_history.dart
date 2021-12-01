@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './session_history_card.dart';
-import '../../models/temp/session.dart';
+import 'package:my_lettutor_app/home/settings/session_history_card.dart';
+
+import 'package:my_lettutor_app/data/data.dart';
 
 class SessionHistory extends StatelessWidget {
   static const String routeName = 'session-history';

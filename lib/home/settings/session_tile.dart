@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import '../../models/temp/session.dart';
+import 'package:my_lettutor_app/models/temp/session.dart';
+
+
 
 class SessionTile extends StatelessWidget {
   final Session session;

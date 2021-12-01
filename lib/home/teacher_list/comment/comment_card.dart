@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:my_lettutor_app/models/comment.dart';
 
-import '../../../widgets/utils/my_rating_bar.dart';
+import 'package:my_lettutor_app/widgets/utils/my_rating_bar.dart';
+
+import 'package:my_lettutor_app/models/comment.dart';
 
 class CommentCard extends StatelessWidget {
   final Comment comment;

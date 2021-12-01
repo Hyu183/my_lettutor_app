@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './feedback_card.dart';
-import '../../models/temp/feedback_data.dart';
+import 'package:my_lettutor_app/home/settings/feedback_card.dart';
+
+import 'package:my_lettutor_app/data/data.dart';
 
 const totalRating = 5.0;
 

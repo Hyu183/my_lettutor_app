@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './timer_clock.dart';
+import 'package:my_lettutor_app/home/meetings/timer_clock.dart';
 
 class Meetings extends StatelessWidget {
   const Meetings({Key? key}) : super(key: key);

@@ -1,33 +1,22 @@
 import 'package:flutter/material.dart';
 
-import '../teacher_list/teacher/teacher_card.dart';
-import '../../models/teacher.dart';
-import '../../widgets/utils/search_bar.dart';
-import '../../widgets/badge/my_badge_list.dart';
+import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_card.dart';
+import 'package:my_lettutor_app/widgets/badge/my_badge_list.dart';
+import 'package:my_lettutor_app/widgets/utils/search_bar.dart';
 
-class Tutors extends StatefulWidget {
+import 'package:my_lettutor_app/data/data.dart';
+
+
+class TutorsPage extends StatefulWidget {
   static const routeName = '/tutors';
-  const Tutors({Key? key}) : super(key: key);
+  const TutorsPage({Key? key}) : super(key: key);
 
   @override
-  State<Tutors> createState() => _TutorsState();
+  State<TutorsPage> createState() => _TutorsPageState();
 }
 
-class _TutorsState extends State<Tutors> {
-  List<String> specialities = [
-    'All',
-    'English for kids',
-    'English for Business',
-    'Conversational',
-    'STARTERS',
-    'MOVERS',
-    'FLYERS',
-    'KET',
-    'PET',
-    'IELTS',
-    'TOEFL',
-    'TOEIC',
-  ];
+class _TutorsPageState extends State<TutorsPage> {
+  
 
   @override
   Widget build(BuildContext context) {

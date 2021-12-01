@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 
-import './profile.dart';
-import '../settings/advanced_settings.dart';
-import '../settings/view_feedbacks.dart';
-import '../settings/booking_history.dart';
-import '../settings/session_history.dart';
-import '../settings/setting_card.dart';
+import 'package:my_lettutor_app/home/pages/profile_page.dart';
+import 'package:my_lettutor_app/home/settings/advanced_settings.dart';
+import 'package:my_lettutor_app/home/settings/booking_history.dart';
+import 'package:my_lettutor_app/home/settings/session_history.dart';
+import 'package:my_lettutor_app/home/settings/setting_card.dart';
+import 'package:my_lettutor_app/home/settings/view_feedbacks.dart';
+import 'package:my_lettutor_app/widgets/button/large_button.dart';
 
-import '../../widgets/button/large_button.dart';
+
 
 const String userName = 'Username';
 const String email = '18120183@student.hcmus.edu.vn';
 
 typedef LoginCallback = void Function(int);
 
-class Settings extends StatelessWidget {
+class SettingsPage extends StatelessWidget {
   final LoginCallback callback;
-  const Settings({
+  const SettingsPage({
     Key? key,
     required this.callback,
   }) : super(key: key);
@@ -38,7 +39,7 @@ class Settings extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                Navigator.of(context).pushNamed(Profile.routeName);
+                Navigator.of(context).pushNamed(ProfilePage.routeName);
               },
               child: const ListTile(
                 leading: SizedBox(

@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-import '../messages/message_list_tile.dart';
-import '../../widgets/utils/no_data.dart';
-import '../../models/temp/message.dart';
-import '../../widgets/utils/search_bar.dart';
+import 'package:my_lettutor_app/home/messages/message_list_tile.dart';
+import 'package:my_lettutor_app/widgets/utils/no_data.dart';
+import 'package:my_lettutor_app/widgets/utils/search_bar.dart';
 
-class Messages extends StatelessWidget {
+import 'package:my_lettutor_app/data/data.dart';
+
+
+class MessagesPage extends StatelessWidget {
 //   final List<Message> messages = '';
-  const Messages({Key? key}) : super(key: key);
+  const MessagesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

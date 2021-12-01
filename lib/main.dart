@@ -1,40 +1,24 @@
 import 'package:flutter/material.dart';
 
-import './authentication/forgot_password.dart';
-import './authentication/signup.dart';
-import './authentication/login.dart';
-import './home/pages/profile.dart';
-import './home/tabs_page.dart';
-import './home/teacher_list/teacher/teacher_detail.dart';
-import './home/course/course_detail.dart';
-import './home/settings/booking_history.dart';
-import './home/settings/advanced_settings.dart';
-import './home/settings/session_history.dart';
+import 'package:my_lettutor_app/authentication/forgot_password.dart';
+import 'package:my_lettutor_app/authentication/login.dart';
+import 'package:my_lettutor_app/authentication/signup.dart';
+import 'package:my_lettutor_app/config/palette.dart';
+import 'package:my_lettutor_app/home/course/course_detail.dart';
+import 'package:my_lettutor_app/home/pages/profile_page.dart';
+import 'package:my_lettutor_app/home/settings/advanced_settings.dart';
+import 'package:my_lettutor_app/home/settings/booking_history.dart';
+import 'package:my_lettutor_app/home/settings/session_history.dart';
+import 'package:my_lettutor_app/home/settings/view_feedbacks.dart';
+import 'package:my_lettutor_app/home/tabs_page.dart';
+import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_detail.dart';
 
-import './models/course.dart';
-import './models/teacher.dart';
-import 'home/meetings/meetings.dart';
-import 'home/settings/view_feedbacks.dart';
+import 'package:my_lettutor_app/models/course.dart';
+import 'package:my_lettutor_app/models/teacher.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
-const MaterialColor white = MaterialColor(
-  0xFFFFFFFF,
-  <int, Color>{
-    50: Color(0xFFFFFFFF),
-    100: Color(0xFFFFFFFF),
-    200: Color(0xFFFFFFFF),
-    300: Color(0xFFFFFFFF),
-    400: Color(0xFFFFFFFF),
-    500: Color(0xFFFFFFFF),
-    600: Color(0xFFFFFFFF),
-    700: Color(0xFFFFFFFF),
-    800: Color(0xFFFFFFFF),
-    900: Color(0xFFFFFFFF),
-  },
-);
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -66,7 +50,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'LetTutor',
       theme: ThemeData(
-        primarySwatch: white,
+        primarySwatch: Palette.white,
         disabledColor: Colors.grey[50],
         textTheme: const TextTheme(
           headline1: TextStyle(
@@ -117,7 +101,7 @@ class _MyAppState extends State<MyApp> {
         BookingHistory.routeName: (_) => const BookingHistory(),
         SessionHistory.routeName: (_) => const SessionHistory(),
         ViewFeedbacks.routeName: (_) => const ViewFeedbacks(),
-        Profile.routeName: (_) => const Profile(),
+        ProfilePage.routeName: (_) => const ProfilePage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == TeacherDetail.routeName) {
@@ -138,3 +122,14 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+
+// milestone 2 :
+// favorite teacher
+// booking to upcoming --save local
+// search
+// teacher list favorite first then rating
+// adjust theme, language
+
+// logout to login page
+// admin 123-> login

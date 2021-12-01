@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../widgets/badge/my_badge_list.dart';
-import '../../../widgets/utils/my_rating_bar.dart';
+import 'package:my_lettutor_app/widgets/badge/my_badge_list.dart';
+import 'package:my_lettutor_app/widgets/utils/my_rating_bar.dart';
+
 
 class TeacherTileRightSide extends StatelessWidget {
   final String name;

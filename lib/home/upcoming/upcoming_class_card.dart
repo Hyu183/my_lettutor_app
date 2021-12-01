@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+
+import 'package:my_lettutor_app/home/upcoming/schedule_tile.dart';
 import 'package:my_lettutor_app/widgets/button/group_button.dart';
 
-import './schedule_tile.dart';
-import '../../models/temp/upcoming_data.dart';
+import 'package:my_lettutor_app/models/temp/upcoming.dart';
+
+
 
 class UpcomingClassCard extends StatelessWidget {
-  final UpcomingData upcomingData;
+  final Upcoming upcomingData;
   const UpcomingClassCard({
     Key? key,
     required this.upcomingData,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../upcoming/schedule_tile.dart';
-import '../../models/temp/upcoming_data.dart';
 
+import 'package:my_lettutor_app/home/upcoming/schedule_tile.dart';
+
+import 'package:my_lettutor_app/models/temp/upcoming.dart';
 class BookingHistoryCard extends StatelessWidget {
-  final UpcomingData data;
+  final Upcoming data;
   const BookingHistoryCard({
     Key? key,
     required this.data,
