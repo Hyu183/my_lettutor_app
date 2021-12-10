@@ -5,8 +5,6 @@ import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_list_tile.dart
 
 import 'package:my_lettutor_app/models/teacher.dart';
 
-
-
 class TeacherCard extends StatelessWidget {
   final Teacher teacher;
   final int version;
@@ -20,18 +18,17 @@ class TeacherCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200,
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).pushNamed(
-            TeacherDetail.routeName,
-            arguments: teacher,
-          );
-        },
-        
-        splashColor: Theme.of(context).splashColor,
-        child: Card(
-          elevation: 6,
-          margin: const EdgeInsets.symmetric(vertical: 10),
+      child: Card(
+        elevation: 6,
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              TeacherDetail.routeName,
+              arguments: teacher,
+            );
+          },
+          splashColor: Theme.of(context).splashColor,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -52,10 +49,7 @@ class TeacherCard extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       teacher.description, overflow: TextOverflow.ellipsis,
-                      maxLines: 4,
-                      // teacher.description.length <= 172
-                      //     ? teacher.description
-                      //     : teacher.description.substring(0, 173) + '...',
+                      maxLines: 4,                      
                     ),
                   ),
                 ),

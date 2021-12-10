@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/button/large_button.dart';
-import '../widgets/utils/logo_app.dart';
+import 'package:my_lettutor_app/widgets/button/large_button.dart';
+import 'package:my_lettutor_app/widgets/utils/logo_app.dart';
 
 class ForgotPassWord extends StatelessWidget {
   static const routeName = 'forgot-password';

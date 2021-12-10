@@ -113,7 +113,8 @@ class TeacherDetailBody extends StatelessWidget {
           hasPadding: false,
         ),
         TeacherDetailPart(
-          title: 'Rating and Comment (${teacher.comments?.length})',
+          title:
+              'Rating and Comment (${teacher.comments == null ? 0 : teacher.comments!.length})',
           child: teacher.comments != null
               ? Column(
                   children: teacher.comments!

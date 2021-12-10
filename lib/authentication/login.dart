@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import './forgot_password.dart';
-import './signup.dart';
-import '../widgets/button/large_button.dart';
-import '../widgets/button/my_icon_button.dart';
-import '../widgets/utils/input_field.dart';
-import '../widgets/utils/logo_app.dart';
+import 'package:my_lettutor_app/authentication/forgot_password.dart';
+import 'package:my_lettutor_app/authentication/signup.dart';
+import 'package:my_lettutor_app/widgets/button/large_button.dart';
+import 'package:my_lettutor_app/widgets/button/my_icon_button.dart';
+import 'package:my_lettutor_app/widgets/utils/input_field.dart';
+import 'package:my_lettutor_app/widgets/utils/logo_app.dart';
 
 typedef LoginCallback = void Function(int);
 
@@ -23,6 +23,7 @@ class Login extends StatelessWidget {
   final _passwordController = TextEditingController();
 
   String? emailValidator(String? email) {
+    print(email);
     if (email != null) {
       if (email.isEmpty) {
         return 'Email cannot be empty';
@@ -35,6 +36,7 @@ class Login extends StatelessWidget {
   }
 
   String? passwordValidator(String? password) {
+    print(password);
     if (password != null) {
       if (password.isEmpty) {
         return 'Password cannot be empty';
@@ -51,8 +53,12 @@ class Login extends StatelessWidget {
     if (!isValid) {
       return;
     }
-    print(_emailController.text);
-    print(_passwordController.text);
+
+    if (_emailController.text != "admin@gmail.com" ||
+        _passwordController.text != "12345678") {
+      return;
+    }
+
     callback(1);
   }
 
@@ -83,6 +89,7 @@ class Login extends StatelessWidget {
                       isPassword: false,
                       controller: _emailController,
                       validator: emailValidator,
+                    
                     ),
                     const SizedBox(
                       height: 20,

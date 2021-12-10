@@ -125,11 +125,14 @@ class _MyAppState extends State<MyApp> {
 
 
 // milestone 2 :
+// search
 // favorite teacher
 // booking to upcoming --save local
-// search
 // teacher list favorite first then rating
 // adjust theme, language
 
-// logout to login page
+
+
+//done---------------------------------
+// logout to login page 
 // admin 123-> login

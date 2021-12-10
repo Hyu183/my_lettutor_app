@@ -13,7 +13,7 @@ class InputField extends StatelessWidget {
     required this.textHolder,
     required this.isPassword,
     required this.validator,
-     this.controller,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -31,6 +31,9 @@ class InputField extends StatelessWidget {
           height: 10,
         ),
         TextFormField(
+          onChanged: (value) {
+            print(value);
+          },
           obscureText: isPassword,
           validator: (val) => validator(val),
           controller: controller,

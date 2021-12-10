@@ -13,19 +13,19 @@ class TopicCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: InkWell(
+           onTap: () {
         // Navigator.of(context)
         //     .pushNamed(TopicPDFView.routeName, arguments: text);
       },
       customBorder: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Card(
-        elevation: 3,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
