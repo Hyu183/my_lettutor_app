@@ -20,7 +20,7 @@ class TeacherCard extends StatelessWidget {
       height: 200,
       child: Card(
         elevation: 6,
-        margin: const EdgeInsets.symmetric(vertical: 10),
+        margin: const EdgeInsets.symmetric(vertical: 8),
         child: InkWell(
           onTap: () {
             Navigator.of(context).pushNamed(
@@ -34,10 +34,7 @@ class TeacherCard extends StatelessWidget {
             child: Column(
               children: [
                 TeacherListTile(
-                  name: teacher.name,
-                  rating: teacher.rating,
-                  specialities: teacher.specialities,
-                  description: teacher.description,
+                  teacher: teacher,
                   version: version,
                 ),
                 SizedBox(
@@ -48,8 +45,9 @@ class TeacherCard extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: Text(
-                      teacher.description, overflow: TextOverflow.ellipsis,
-                      maxLines: 4,                      
+                      teacher.description,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 4,
                     ),
                   ),
                 ),

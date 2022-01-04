@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/providers/teachers.dart';
+import 'package:provider/provider.dart';
 
 import 'package:my_lettutor_app/home/pages/home_page.dart';
 import 'package:my_lettutor_app/home/pages/messages_page.dart';
@@ -6,7 +8,7 @@ import 'package:my_lettutor_app/home/pages/settings_page.dart';
 import 'package:my_lettutor_app/home/pages/tutors_page.dart';
 import 'package:my_lettutor_app/home/pages/upcoming_page.dart';
 
-
+import 'package:my_lettutor_app/data/data.dart' show teacherList;
 
 typedef LoginCallback = void Function(int);
 
@@ -56,6 +58,8 @@ class _TabsPageState extends State<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
+    //set data for teacher list;
+    Provider.of<Teachers>(context, listen: false).setTeachers(teacherList);
     return Scaffold(
       body: _pages[_selectedIndex]['page'] as Widget,
       bottomNavigationBar: BottomNavigationBar(

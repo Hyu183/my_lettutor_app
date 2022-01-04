@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/providers/favorite_teachers.dart';
+import 'package:provider/provider.dart';
 
 import 'package:my_lettutor_app/home/pages/profile_page.dart';
 import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_card.dart';
+import 'package:my_lettutor_app/providers/teachers.dart';
 
-import 'package:my_lettutor_app/data/data.dart';
+// import 'package:my_lettutor_app/data/data.dart';
 
 class HomePage extends StatelessWidget {
   final void Function(int) navigatorFunc;
@@ -14,6 +17,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final teachers = Provider.of<Teachers>(context).getTeachers();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -106,7 +110,7 @@ class HomePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Column(
-                children: teacherList.map((teacher) {
+                children: teachers.map((teacher) {
                   return TeacherCard(
                     teacher: teacher,
                     version: 1,

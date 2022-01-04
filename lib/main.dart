@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/providers/favorite_teachers.dart';
+import 'package:my_lettutor_app/providers/teachers.dart';
+import 'package:provider/provider.dart';
 
 import 'package:my_lettutor_app/authentication/forgot_password.dart';
 import 'package:my_lettutor_app/authentication/login.dart';
@@ -47,78 +50,84 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'LetTutor',
-      theme: ThemeData(
-        primarySwatch: Palette.white,
-        disabledColor: Colors.grey[50],
-        textTheme: const TextTheme(
-          headline1: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-          headline2: TextStyle(
-            color: Color(0XFF0071F0),
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-          bodyText1: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.normal,
-            fontSize: 18,
-          ),
-          subtitle1: TextStyle(
-            color: Colors.grey,
-            fontWeight: FontWeight.normal,
-            fontSize: 16,
-          ),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            primary: const Color(0xFF0E78EF),
-          ),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            primary: const Color(0XFF0071F0),
-            onPrimary: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
+    return MultiProvider(
+        providers: [
+            ChangeNotifierProvider(create: (_)=> Teachers()),
+            ChangeNotifierProvider(create: (_)=> FavoriteTeachers()),
+        ],       
+      child: MaterialApp(
+        title: 'LetTutor',
+        theme: ThemeData(
+          primarySwatch: Palette.white,
+          disabledColor: Colors.grey[50],
+          textTheme: const TextTheme(
+            headline1: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+            headline2: TextStyle(
+              color: Color(0XFF0071F0),
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+            bodyText1: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.normal,
+              fontSize: 18,
+            ),
+            subtitle1: TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.normal,
+              fontSize: 16,
             ),
           ),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              primary: const Color(0xFF0E78EF),
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              primary: const Color(0XFF0071F0),
+              onPrimary: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+            ),
+          ),
+          textSelectionTheme: const TextSelectionThemeData(
+            cursorColor: Colors.blue,
+            selectionHandleColor: Colors.blue,
+          ),
         ),
-        textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.blue,
-          selectionHandleColor: Colors.blue,
-        ),
+        home: displayScreen(),
+        routes: {
+          ForgotPassWord.routeName: (_) => ForgotPassWord(),
+          Signup.routeName: (_) => Signup(),
+          AdvancedSettings.routeName: (_) => const AdvancedSettings(),
+          BookingHistory.routeName: (_) => const BookingHistory(),
+          SessionHistory.routeName: (_) => const SessionHistory(),
+          ViewFeedbacks.routeName: (_) => const ViewFeedbacks(),
+          ProfilePage.routeName: (_) => const ProfilePage(),
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == TeacherDetail.routeName) {
+            var teacher = settings.arguments as Teacher;
+            return MaterialPageRoute(builder: (_) {
+              return TeacherDetail(
+                teacher: teacher,
+              );
+            });
+          } else if (settings.name == CourseDetail.routeName) {
+            var course = settings.arguments as Course;
+            return MaterialPageRoute(builder: (_) {
+              return CourseDetail(course: course);
+            });
+          }
+        },
+        debugShowCheckedModeBanner: false,
       ),
-      home: displayScreen(),
-      routes: {
-        ForgotPassWord.routeName: (_) => ForgotPassWord(),
-        Signup.routeName: (_) => Signup(),
-        AdvancedSettings.routeName: (_) => const AdvancedSettings(),
-        BookingHistory.routeName: (_) => const BookingHistory(),
-        SessionHistory.routeName: (_) => const SessionHistory(),
-        ViewFeedbacks.routeName: (_) => const ViewFeedbacks(),
-        ProfilePage.routeName: (_) => const ProfilePage(),
-      },
-      onGenerateRoute: (settings) {
-        if (settings.name == TeacherDetail.routeName) {
-          var teacher = settings.arguments as Teacher;
-          return MaterialPageRoute(builder: (_) {
-            return TeacherDetail(
-              teacher: teacher,
-            );
-          });
-        } else if (settings.name == CourseDetail.routeName) {
-          var course = settings.arguments as Course;
-          return MaterialPageRoute(builder: (_) {
-            return CourseDetail(course: course);
-          });
-        }
-      },
-      debugShowCheckedModeBanner: false,
     );
   }
 }

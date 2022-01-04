@@ -2,7 +2,7 @@ import 'package:my_lettutor_app/models/comment.dart';
 import 'package:my_lettutor_app/models/course.dart';
 
 class Teacher {
-  final String id = '';
+  final String id;
   final String name;
   final double rating;
   final List<String> specialities;
@@ -16,8 +16,10 @@ class Teacher {
   final String country;
   final List<Comment>? comments;
   List<Course>? courses;
+  bool isFavorite ;
 
   Teacher({
+    required this.id,
     required this.name,
     required this.rating,
     required this.specialities,
@@ -30,10 +32,6 @@ class Teacher {
     required this.country,
     this.comments,
     this.courses,
+    this.isFavorite = false,
   });
 }
-
-
-
-
-

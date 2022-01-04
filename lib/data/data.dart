@@ -9,6 +9,7 @@ import 'package:my_lettutor_app/models/temp/upcoming.dart';
 //teacher list: in tutors and home page
 List<Teacher> teacherList = [
   Teacher(
+      id: '1',
     name: 'Joseph C1',
     rating: 5,
     specialities: [
@@ -109,6 +110,7 @@ List<Teacher> teacherList = [
     ],
   ),
   Teacher(
+    id: '2',
     name: 'nhi lam',
     rating: 5,
     specialities: [
@@ -133,6 +135,7 @@ List<Teacher> teacherList = [
         'id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas sed tempus urna et pharetra pharetra massa massa ultricies mi quis hendrerit dolor magna eget est lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas integer eget aliquet nibh praesent tristique magna sit amet purus gravida quis blandit turpis cursus in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet',
   ),
   Teacher(
+       id: '3',
     name: 'nhi lam',
     rating: 5,
     specialities: [
@@ -157,6 +160,7 @@ List<Teacher> teacherList = [
         'id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas sed tempus urna et pharetra pharetra massa massa ultricies mi quis hendrerit dolor magna eget est lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas integer eget aliquet nibh praesent tristique magna sit amet purus gravida quis blandit turpis cursus in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet',
   ),
   Teacher(
+       id: '4',
     name: 'nhi lam',
     rating: 5,
     specialities: [
@@ -181,6 +185,7 @@ List<Teacher> teacherList = [
         'id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas sed tempus urna et pharetra pharetra massa massa ultricies mi quis hendrerit dolor magna eget est lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas integer eget aliquet nibh praesent tristique magna sit amet purus gravida quis blandit turpis cursus in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet',
   ),
   Teacher(
+       id: '5',
     name: 'nhi lam',
     rating: 5,
     specialities: [
@@ -205,6 +210,7 @@ List<Teacher> teacherList = [
         'id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas sed tempus urna et pharetra pharetra massa massa ultricies mi quis hendrerit dolor magna eget est lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas integer eget aliquet nibh praesent tristique magna sit amet purus gravida quis blandit turpis cursus in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet',
   ),
   Teacher(
+       id: '6',
     name: 'nhi lam',
     rating: 5,
     specialities: [
@@ -229,6 +235,7 @@ List<Teacher> teacherList = [
         'id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas sed tempus urna et pharetra pharetra massa massa ultricies mi quis hendrerit dolor magna eget est lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas integer eget aliquet nibh praesent tristique magna sit amet purus gravida quis blandit turpis cursus in hac habitasse platea dictumst quisque sagittis purus sit amet volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris a diam maecenas sed enim ut sem viverra aliquet',
   ),
   Teacher(
+       id: '7',
     name: 'nhi lam',
     rating: 5,
     specialities: [
