@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:my_lettutor_app/widgets/button/icon_text_button.dart';
 
@@ -12,12 +13,12 @@ class RowButton extends StatelessWidget {
       children: [
         IconTextButton(
           icon: Icons.message,
-          text: 'Message',
+          text: AppLocalizations.of(context)!.messageTextBtn,
           handler: () {},
         ),
         IconTextButton(
           icon: Icons.report,
-          text: 'Report',
+          text: AppLocalizations.of(context)!.reportTextBtn,
           handler: () {},
         ),
       ],

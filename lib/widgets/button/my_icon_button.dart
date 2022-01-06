@@ -21,7 +21,8 @@ class MyIconButton extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.blue, width: 2),
+          border: Border.all(
+              color: Theme.of(context).textTheme.headline2!.color!, width: 2),
         ),
         child: Image.asset(
           imageURI,

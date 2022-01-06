@@ -24,15 +24,15 @@ class IconTextButton extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: const Color(0XFF0071F0),
+              color: Theme.of(context).textTheme.headline2!.color!,
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
               text,
-              style: const TextStyle(
-                color: Color(0XFF0071F0),
+              style: TextStyle(
+                color: Theme.of(context).textTheme.headline2!.color!,
               ),
             )
           ],

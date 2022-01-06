@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_lettutor_app/constants/app_theme.dart';
+// import 'package:my_lettutor_app/data/__repository.dart';
 import 'package:my_lettutor_app/providers/favorite_teachers.dart';
+import 'package:my_lettutor_app/providers/language_provider.dart';
 import 'package:my_lettutor_app/providers/teachers.dart';
+import 'package:my_lettutor_app/providers/theme_provider.dart';
+import 'package:my_lettutor_app/routes.dart';
 import 'package:provider/provider.dart';
 
-import 'package:my_lettutor_app/authentication/forgot_password.dart';
-import 'package:my_lettutor_app/authentication/login.dart';
-import 'package:my_lettutor_app/authentication/signup.dart';
-import 'package:my_lettutor_app/config/palette.dart';
-import 'package:my_lettutor_app/home/course/course_detail.dart';
-import 'package:my_lettutor_app/home/pages/profile_page.dart';
-import 'package:my_lettutor_app/home/settings/advanced_settings.dart';
-import 'package:my_lettutor_app/home/settings/booking_history.dart';
-import 'package:my_lettutor_app/home/settings/session_history.dart';
-import 'package:my_lettutor_app/home/settings/view_feedbacks.dart';
-import 'package:my_lettutor_app/home/tabs_page.dart';
-import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_detail.dart';
-
-import 'package:my_lettutor_app/models/course.dart';
-import 'package:my_lettutor_app/models/teacher.dart';
+import 'package:my_lettutor_app/ui/authentication/login.dart';
+import 'package:my_lettutor_app/ui/tabs_page.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +26,25 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int isLogin = 0;
+  ThemeProvider themeProvider = ThemeProvider();
+  LanguageProvider languageProvider = LanguageProvider();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getCurrentTheme();
+    getCurrentLanguage();
+    super.initState();
+  }
+
+  void getCurrentTheme() async {
+    themeProvider.setTheme = await themeProvider.getCurrentTheme();
+  }
+
+  void getCurrentLanguage() async {
+    languageProvider.setLanguageCode =
+        await languageProvider.getCurrentLanguageCode();
+  }
 
   void loginCallback(int _isLogin) {
     setState(() {
@@ -52,83 +65,24 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-            ChangeNotifierProvider(create: (_)=> Teachers()),
-            ChangeNotifierProvider(create: (_)=> FavoriteTeachers()),
-        ],       
-      child: MaterialApp(
-        title: 'LetTutor',
-        theme: ThemeData(
-          primarySwatch: Palette.white,
-          disabledColor: Colors.grey[50],
-          textTheme: const TextTheme(
-            headline1: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-            headline2: TextStyle(
-              color: Color(0XFF0071F0),
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-            bodyText1: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.normal,
-              fontSize: 18,
-            ),
-            subtitle1: TextStyle(
-              color: Colors.grey,
-              fontWeight: FontWeight.normal,
-              fontSize: 16,
-            ),
+          ChangeNotifierProvider(create: (_) => Teachers()),
+          ChangeNotifierProvider(create: (_) => FavoriteTeachers()),
+          ChangeNotifierProvider.value(value: themeProvider),
+          ChangeNotifierProvider.value(value: languageProvider),
+        ],
+        child: Consumer2<ThemeProvider,LanguageProvider>(
+          builder: (_, value1,value2, child) => MaterialApp(
+            title: 'LetTutor',
+            theme: themeProvider.pinkMode ? themeDataPink : themeDataLight,
+            home: displayScreen(),
+            routes: Routes.routes,
+            onGenerateRoute: (settings) => Routes.onGenerateRoutes(settings),
+            locale: Locale(languageProvider.languageCode),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            debugShowCheckedModeBanner: false,
           ),
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-              primary: const Color(0xFF0E78EF),
-            ),
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              primary: const Color(0XFF0071F0),
-              onPrimary: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-            ),
-          ),
-          textSelectionTheme: const TextSelectionThemeData(
-            cursorColor: Colors.blue,
-            selectionHandleColor: Colors.blue,
-          ),
-        ),
-        home: displayScreen(),
-        routes: {
-          ForgotPassWord.routeName: (_) => ForgotPassWord(),
-          Signup.routeName: (_) => Signup(),
-          AdvancedSettings.routeName: (_) => const AdvancedSettings(),
-          BookingHistory.routeName: (_) => const BookingHistory(),
-          SessionHistory.routeName: (_) => const SessionHistory(),
-          ViewFeedbacks.routeName: (_) => const ViewFeedbacks(),
-          ProfilePage.routeName: (_) => const ProfilePage(),
-        },
-        onGenerateRoute: (settings) {
-          if (settings.name == TeacherDetail.routeName) {
-            var teacher = settings.arguments as Teacher;
-            return MaterialPageRoute(builder: (_) {
-              return TeacherDetail(
-                teacher: teacher,
-              );
-            });
-          } else if (settings.name == CourseDetail.routeName) {
-            var course = settings.arguments as Course;
-            return MaterialPageRoute(builder: (_) {
-              return CourseDetail(course: course);
-            });
-          }
-        },
-        debugShowCheckedModeBanner: false,
-      ),
-    );
+        ));
   }
 }
 

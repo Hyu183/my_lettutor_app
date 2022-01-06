@@ -23,6 +23,7 @@ class MyBadgeList extends StatelessWidget {
           return MyBadge(
             data: myList[index],
             isSelected: readOnly,
+            
           );
         },
       ),
