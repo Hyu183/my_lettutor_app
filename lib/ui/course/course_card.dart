@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:my_lettutor_app/ui/course/course_detail.dart';
 
-import 'package:my_lettutor_app/models/course.dart';
+import 'package:my_lettutor_app/models/temp/course.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:my_lettutor_app/data/repository.dart';
 import 'package:my_lettutor_app/data/sharedpref/theme_preference.dart';
 
-class ThemeProvider with ChangeNotifier {
+class ThemeProvider extends ChangeNotifier {
 //   final Repository _repository;
   bool _pinkMode = false;
   final ThemePreference _themePreference = ThemePreference();

@@ -11,7 +11,7 @@ import 'package:my_lettutor_app/widgets/button/large_button.dart';
 import 'package:my_lettutor_app/widgets/button/row_button.dart';
 import 'package:my_lettutor_app/widgets/no_data.dart';
 
-import 'package:my_lettutor_app/models/teacher.dart';
+import 'package:my_lettutor_app/models/temp/teacher.dart';
 
 class TeacherDetailBody extends StatelessWidget {
   final Teacher teacher;

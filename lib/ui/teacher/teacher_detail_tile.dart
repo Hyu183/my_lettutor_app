@@ -57,7 +57,6 @@ class TeacherDetailTile extends StatelessWidget {
                   ],
                 ),
                 Row(
-                  
                   children: [
                     const Expanded(
                       child: Text(
@@ -67,9 +66,9 @@ class TeacherDetailTile extends StatelessWidget {
                     ),
                     IconButton(
                         onPressed: () {},
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.favorite_border,
-                          color: Colors.pink, 
+                          color: Theme.of(context).textTheme.headline2!.color!,
                           size: 30,
                         )),
                   ],

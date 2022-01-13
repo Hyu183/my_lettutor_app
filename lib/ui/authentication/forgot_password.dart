@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_lettutor_app/data/network/dio_client.dart';
 
 import 'package:my_lettutor_app/widgets/button/large_button.dart';
 import 'package:my_lettutor_app/widgets/logo_app.dart';
@@ -11,11 +12,23 @@ class ForgotPassWord extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
 
-  void _saveForm() {
+  void _saveForm(BuildContext context) async {
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
+
+    var dio = DioClient.dio;
+    print(_emailController.text);
+    try {
+      var res = await dio.post(
+        '/user/forgotPassword',
+        data: {'email': _emailController.text},
+      );
+      
+        Navigator.of(context).pop();
+
+    } catch (e) {}
   }
 
   @override
@@ -38,7 +51,7 @@ class ForgotPassWord extends StatelessWidget {
               const SizedBox(
                 height: 60,
               ),
-               Text(
+              Text(
                 AppLocalizations.of(context)!.forgetPasswordDescription,
                 textAlign: TextAlign.center,
               ),
@@ -48,6 +61,7 @@ class ForgotPassWord extends StatelessWidget {
               Form(
                 key: _formKey,
                 child: TextFormField(
+                  controller: _emailController,
                   validator: (val) {
                     if (val != null) {
                       if (val.isEmpty || !val.contains('@')) {
@@ -58,7 +72,8 @@ class ForgotPassWord extends StatelessWidget {
                     return null;
                   },
                   decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.forgetPasswordPlaceholder,
+                    hintText:
+                        AppLocalizations.of(context)!.forgetPasswordPlaceholder,
                     icon: Icon(
                       Icons.mail,
                       color: Theme.of(context).textTheme.headline2!.color!,
@@ -83,8 +98,8 @@ class ForgotPassWord extends StatelessWidget {
                 height: 80,
               ),
               LargeButton(
-                text:AppLocalizations.of(context)!.sendBtn,
-                handler: _saveForm,
+                text: AppLocalizations.of(context)!.sendBtn,
+                handler: () => _saveForm(context),
               ),
             ],
           ),

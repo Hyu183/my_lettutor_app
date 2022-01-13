@@ -31,14 +31,11 @@ class InputField extends StatelessWidget {
           height: 10,
         ),
         TextFormField(
-          onChanged: (value) {
-            print(value);
-          },
           obscureText: isPassword,
           validator: (val) => validator(val),
           controller: controller,
           decoration: InputDecoration(
-            hintText: textHolder,            
+            hintText: textHolder,
           ),
         ),
       ],

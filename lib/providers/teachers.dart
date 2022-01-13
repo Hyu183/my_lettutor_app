@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:my_lettutor_app/models/teacher.dart';
+import 'package:my_lettutor_app/models/temp/teacher.dart';
 
 class Teachers with ChangeNotifier {
   List<Teacher> _teachers = [];

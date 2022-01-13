@@ -12,13 +12,13 @@ import 'package:my_lettutor_app/ui/pages/upcoming_page.dart';
 
 import 'package:my_lettutor_app/data/data.dart' show teacherList;
 
-typedef LoginCallback = void Function(int);
+// typedef LoginCallback = void Function(int);
 
 class TabsPage extends StatefulWidget {
-  final LoginCallback callback;
+//   final LoginCallback callback;
   const TabsPage({
     Key? key,
-    required this.callback,
+    // required this.callback,
   }) : super(key: key);
 
   @override
@@ -44,7 +44,7 @@ class _TabsPageState extends State<TabsPage> {
       {
         'title': 'Settings',
         'page': SettingsPage(
-          callback: widget.callback,
+        //   callback: widget.callback,
         )
       },
     ];

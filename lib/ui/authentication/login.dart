@@ -1,34 +1,42 @@
+import 'dart:convert';
+
+// import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_lettutor_app/data/network/dio_client.dart';
+import 'package:my_lettutor_app/models/user_token.dart';
+import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:my_lettutor_app/ui/authentication/forgot_password.dart';
 import 'package:my_lettutor_app/ui/authentication/signup.dart';
 import 'package:my_lettutor_app/widgets/button/large_button.dart';
 import 'package:my_lettutor_app/widgets/button/my_icon_button.dart';
 import 'package:my_lettutor_app/widgets/input/input_field.dart';
 import 'package:my_lettutor_app/widgets/logo_app.dart';
+import 'package:provider/src/provider.dart';
 
-typedef LoginCallback = void Function(int);
+// typedef LoginCallback = void Function(int);
 
 class Login extends StatelessWidget {
   static const routeName = '/login';
-  final LoginCallback callback;
+//   final LoginCallback callback;
 
   Login({
     Key? key,
-    required this.callback,
+    // required this.callback,
   }) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController(text: 'student@lettutor.com');
+  final _passwordController = TextEditingController(text: '123456');
 
-  String? emailValidator(String? email, BuildContext context){
-    print(email);
+  String? emailValidator(String? email, BuildContext context) {
+    //print(email);
     if (email != null) {
       if (email.isEmpty) {
         return AppLocalizations.of(context)!.emptyEmailErrText;
       } else if (!email.contains('@')) {
-        return  AppLocalizations.of(context)!.emailErrText;
+        return AppLocalizations.of(context)!.emailErrText;
       }
       return null;
     }
@@ -36,7 +44,7 @@ class Login extends StatelessWidget {
   }
 
   String? passwordValidator(String? password, BuildContext context) {
-    print(password);
+    //print(password);
     if (password != null) {
       if (password.isEmpty) {
         return AppLocalizations.of(context)!.emptyPasswordErrText;
@@ -48,18 +56,38 @@ class Login extends StatelessWidget {
     return null;
   }
 
-  void _saveForm() {
-    final isValid = _formKey.currentState!.validate();
-    if (!isValid) {
-      return;
-    }
+  void _saveForm(BuildContext context) async {
+    // final isValid = _formKey.currentState!.validate();
+    // if (!isValid) {
+    //   return;
+    // }
 
-    if (_emailController.text != "admin@gmail.com" ||
-        _passwordController.text != "12345678") {
-      return;
-    }
+    // if (_emailController.text != "admin@gmail.com" ||
+    //     _passwordController.text != "12345678") {
+    //   return;
+    // }
+    var dio = DioClient.dio;
+    try {
+      var res = await dio.post(
+        '/auth/login',
+        data: {
+          'email': _emailController.text,
+          'password': _passwordController.text
+        },
+      );
+      UserToken userToken = UserToken.fromJson(res.data);
+      context.read<AuthProvider>().logIn(userToken, true);
 
-    callback(1);
+      // authProvider.setUserToken = userToken;
+      // authProvider.setIsLoggegIn = true;
+      // callback(1);
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print(e.response!.data['message']);
+      } else {
+        print("Dont know");
+      }
+    }
   }
 
   @override
@@ -88,7 +116,7 @@ class Login extends StatelessWidget {
                       textHolder: 'example@email.com',
                       isPassword: false,
                       controller: _emailController,
-                      validator:(val)=> emailValidator(val,context),
+                      validator: (val) => emailValidator(val, context),
                     ),
                     const SizedBox(
                       height: 20,
@@ -98,7 +126,7 @@ class Login extends StatelessWidget {
                       textHolder: '********',
                       isPassword: true,
                       controller: _passwordController,
-                      validator:(val)=> passwordValidator(val, context),
+                      validator: (val) => passwordValidator(val, context),
                     ),
                   ],
                 ),
@@ -114,7 +142,7 @@ class Login extends StatelessWidget {
               ),
               LargeButton(
                 text: AppLocalizations.of(context)!.loginBtn,
-                handler: _saveForm,
+                handler: () => _saveForm(context),
               ),
               const SizedBox(
                 height: 10,

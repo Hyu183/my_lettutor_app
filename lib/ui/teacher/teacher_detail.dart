@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:my_lettutor_app/ui/teacher/teacher_detail_body.dart';
 
-import 'package:my_lettutor_app/models/teacher.dart';
+import 'package:my_lettutor_app/models/temp/teacher.dart';
 
 class TeacherDetail extends StatelessWidget {
   static const routeName = '/teacher-detail';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_lettutor_app/ui/course/course_detail_body.dart';
 import 'package:my_lettutor_app/widgets/number_above_text.dart';
 
-import 'package:my_lettutor_app/models/course.dart';
+import 'package:my_lettutor_app/models/temp/course.dart';
 
 
 

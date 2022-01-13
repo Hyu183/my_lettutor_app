@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_lettutor_app/ui/teacher/teacher_detail.dart';
 import 'package:my_lettutor_app/ui/teacher/teacher_list_tile.dart';
 
-import 'package:my_lettutor_app/models/teacher.dart';
+import 'package:my_lettutor_app/models/temp/teacher.dart';
 
 class TeacherCard extends StatelessWidget {
   final Teacher teacher;

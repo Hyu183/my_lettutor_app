@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_lettutor_app/constants/app_theme.dart';
+import 'package:my_lettutor_app/providers/auth_provider.dart';
 // import 'package:my_lettutor_app/data/__repository.dart';
 import 'package:my_lettutor_app/providers/favorite_teachers.dart';
 import 'package:my_lettutor_app/providers/language_provider.dart';
@@ -25,15 +26,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int isLogin = 0;
+//   int isLogin = 0;
   ThemeProvider themeProvider = ThemeProvider();
   LanguageProvider languageProvider = LanguageProvider();
+  AuthProvider authProvider = AuthProvider();
 
   @override
   void initState() {
     // TODO: implement initState
     getCurrentTheme();
     getCurrentLanguage();
+    checkIsLoggedIn();
     super.initState();
   }
 
@@ -46,56 +49,59 @@ class _MyAppState extends State<MyApp> {
         await languageProvider.getCurrentLanguageCode();
   }
 
-  void loginCallback(int _isLogin) {
-    setState(() {
-      isLogin = _isLogin;
-    });
+  void checkIsLoggedIn() async {
+    authProvider.setIsLoggegIn = await authProvider.checkToken();
+    if (authProvider.isLoggedIn) {
+      authProvider.loadTokens();
+    }
+    // authProvider.
   }
 
-  Widget displayScreen() {
-    if (isLogin == 1) {
-      return TabsPage(callback: loginCallback);
-    } else if (isLogin == 0) {
-      return Login(callback: loginCallback);
-    }
-    return Container();
-  }
+//   void loginCallback(int _isLogin) {
+//     setState(() {
+//       isLogin = _isLogin;
+//     });
+//   }
+
+//   Widget displayScreen() {
+//     if (isLogin == 1) {
+//       return TabsPage(callback: loginCallback);
+//     } else if (isLogin == 0) {
+//       return Login(callback: loginCallback);
+//     }
+//     return Container();
+//   }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => Teachers()),
-          ChangeNotifierProvider(create: (_) => FavoriteTeachers()),
-          ChangeNotifierProvider.value(value: themeProvider),
-          ChangeNotifierProvider.value(value: languageProvider),
-        ],
-        child: Consumer2<ThemeProvider,LanguageProvider>(
-          builder: (_, value1,value2, child) => MaterialApp(
-            title: 'LetTutor',
-            theme: themeProvider.pinkMode ? themeDataPink : themeDataLight,
-            home: displayScreen(),
-            routes: Routes.routes,
-            onGenerateRoute: (settings) => Routes.onGenerateRoutes(settings),
-            locale: Locale(languageProvider.languageCode),
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            debugShowCheckedModeBanner: false,
-          ),
-        ));
+      providers: [
+        ChangeNotifierProvider(create: (_) => Teachers()),
+        ChangeNotifierProvider(create: (_) => FavoriteTeachers()),
+        // ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider.value(value: authProvider),
+        ChangeNotifierProvider.value(value: themeProvider),
+        ChangeNotifierProvider.value(value: languageProvider),
+      ],
+      builder: (context, child) {
+        final themeProvider = context.watch<ThemeProvider>();
+        final languageProvider = context.watch<LanguageProvider>();
+        final authProvider = context.watch<AuthProvider>();
+        return MaterialApp(
+          title: 'LetTutor',
+          theme: themeProvider.pinkMode ? themeDataPink : themeDataLight,
+          home:
+              authProvider.isLoggedIn ? TabsPage() : Login(), //displayScreen(),
+          routes: Routes.routes,
+          onGenerateRoute: (settings) => Routes.onGenerateRoutes(settings),
+          locale: Locale(languageProvider.languageCode),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          debugShowCheckedModeBanner: false,
+        );
+      },
+    );
   }
 }
 
 
-// milestone 2 :
-// search
-// favorite teacher
-// booking to upcoming --save local
-// teacher list favorite first then rating
-// adjust theme, language
-
-
-
-//done---------------------------------
-// logout to login page 
-// admin 123-> login

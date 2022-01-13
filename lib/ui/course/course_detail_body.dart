@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:my_lettutor_app/ui/course/course_detail_part.dart';
 import 'package:my_lettutor_app/ui/course/topic_card.dart';
 
-import 'package:my_lettutor_app/models/course.dart';
+import 'package:my_lettutor_app/models/temp/course.dart';
 
 class CourseDetailBody extends StatelessWidget {
   final Course course;

@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 import 'package:my_lettutor_app/widgets/my_rating_bar.dart';
 
-import 'package:my_lettutor_app/models/comment.dart';
+import 'package:my_lettutor_app/models/temp/comment.dart';
 
 class CommentCard extends StatelessWidget {
   final Comment comment;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_tile_right_side.dart';
 
-import 'package:my_lettutor_app/models/teacher.dart';
+import 'package:my_lettutor_app/models/temp/teacher.dart';
 import 'package:my_lettutor_app/widgets/badge/my_badge_list.dart';
 import 'package:my_lettutor_app/widgets/my_rating_bar.dart';
 

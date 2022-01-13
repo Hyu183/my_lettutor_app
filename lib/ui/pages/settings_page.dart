@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_lettutor_app/providers/auth_provider.dart';
 
 import 'package:my_lettutor_app/ui/pages/profile_page.dart';
 import 'package:my_lettutor_app/ui/settings/advanced_settings.dart';
@@ -8,21 +9,23 @@ import 'package:my_lettutor_app/ui/settings/session_history.dart';
 import 'package:my_lettutor_app/ui/settings/setting_card.dart';
 import 'package:my_lettutor_app/ui/settings/view_feedbacks.dart';
 import 'package:my_lettutor_app/widgets/button/large_button.dart';
+import 'package:provider/src/provider.dart';
 
 const String userName = 'Username';
 const String email = '18120183@student.hcmus.edu.vn';
 
-typedef LoginCallback = void Function(int);
+// typedef LoginCallback = void Function(int);
 
 class SettingsPage extends StatelessWidget {
-  final LoginCallback callback;
+//   final LoginCallback callback;
   const SettingsPage({
     Key? key,
-    required this.callback,
+    // required this.callback,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+      final authProvider = context.read<AuthProvider>();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -125,7 +128,7 @@ class SettingsPage extends StatelessWidget {
                           style: TextStyle(color: Colors.grey)),
                       LargeButton(
                         text: AppLocalizations.of(context)!.logoutBtn,
-                        handler: () => callback(0),
+                        handler: authProvider.logOut,//callback(0),
                       ),
                     ],
                   ),
