@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_lettutor_app/data/network/dio_client.dart';
 import 'package:my_lettutor_app/widgets/button/large_button.dart';
 import 'package:my_lettutor_app/widgets/button/my_icon_button.dart';
 import 'package:my_lettutor_app/widgets/input/input_field.dart';
-
-
 
 class Signup extends StatelessWidget {
   static const routeName = '/sign-up';
@@ -30,7 +30,7 @@ class Signup extends StatelessWidget {
       if (email.isEmpty) {
         return AppLocalizations.of(context)!.emptyEmailErrText;
       } else if (!email.contains('@')) {
-        return  AppLocalizations.of(context)!.emailErrText;
+        return AppLocalizations.of(context)!.emailErrText;
       }
       return null;
     }
@@ -61,11 +61,24 @@ class Signup extends StatelessWidget {
     return null;
   }
 
-  void _saveForm() {
+  void _saveForm(BuildContext context) async {
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
+    var dio = DioClient.dio;
+    dio.options.contentType = Headers.formUrlEncodedContentType;
+    try {
+      var res = await dio.post(
+        '/auth/register',
+        data: {
+          'email': _emailController.text,
+          'password': _passwordController.text
+        },
+      );
+      Navigator.of(context).pop();
+      // callback(1);
+    } catch (e) {}
   }
 
   @override
@@ -87,16 +100,16 @@ class Signup extends StatelessWidget {
                 key: _formKey,
                 child: Column(
                   children: [
-                    InputField(
-                      title: AppLocalizations.of(context)!.fullNameLabel,
-                      textHolder: AppLocalizations.of(context)!.fullNamePlaceholder,
-                      isPassword: false,
-                      controller: _nameController,
-                      validator:(val)=> nameValidator(val,context),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // InputField(
+                    //   title: AppLocalizations.of(context)!.fullNameLabel,
+                    //   textHolder: AppLocalizations.of(context)!.fullNamePlaceholder,
+                    //   isPassword: false,
+                    //   controller: _nameController,
+                    //   validator:(val)=> nameValidator(val,context),
+                    // ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                     InputField(
                       title: AppLocalizations.of(context)!.emailLabel,
                       textHolder: 'example@email.com',
@@ -122,7 +135,8 @@ class Signup extends StatelessWidget {
                       textHolder: '********',
                       isPassword: true,
                       controller: null,
-                      validator: (val) => confirmPasswordValidator(val, context),
+                      validator: (val) =>
+                          confirmPasswordValidator(val, context),
                     ),
                   ],
                 ),
@@ -132,12 +146,12 @@ class Signup extends StatelessWidget {
               ),
               LargeButton(
                 text: AppLocalizations.of(context)!.registerBtn,
-                handler: _saveForm,
+                handler: () => _saveForm(context),
               ),
               const SizedBox(
                 height: 10,
               ),
-               Text(AppLocalizations.of(context)!.orContinueWith,
+              Text(AppLocalizations.of(context)!.orContinueWith,
                   style: TextStyle(color: Colors.grey)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -153,12 +167,12 @@ class Signup extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                   Text(AppLocalizations.of(context)!.alreadyHaveAnAccount),
+                  Text(AppLocalizations.of(context)!.alreadyHaveAnAccount),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child:  Text(AppLocalizations.of(context)!.loginLink),
+                    child: Text(AppLocalizations.of(context)!.loginLink),
                   ),
                 ],
               ),

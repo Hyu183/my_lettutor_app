@@ -1,5 +1,5 @@
-import 'package:my_lettutor_app/models/comment.dart';
-import 'package:my_lettutor_app/models/course.dart';
+import 'package:my_lettutor_app/models/temp/comment.dart';
+import 'package:my_lettutor_app/models/temp/course.dart';
 
 class Teacher {
   final String id;

@@ -1,6 +1,6 @@
-import 'package:my_lettutor_app/models/comment.dart';
-import 'package:my_lettutor_app/models/course.dart';
-import 'package:my_lettutor_app/models/teacher.dart';
+import 'package:my_lettutor_app/models/temp/comment.dart';
+import 'package:my_lettutor_app/models/temp/course.dart';
+import 'package:my_lettutor_app/models/temp/teacher.dart';
 import 'package:my_lettutor_app/models/temp/message.dart';
 import 'package:my_lettutor_app/models/temp/mfeedback.dart';
 import 'package:my_lettutor_app/models/temp/session.dart';
