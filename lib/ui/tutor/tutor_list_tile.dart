@@ -1,43 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/data/network/dio_client.dart';
 
 // import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_tile_right_side.dart';
 
-import 'package:my_lettutor_app/models/temp/teacher.dart';
+import 'package:my_lettutor_app/models/tutor.dart';
+import 'package:my_lettutor_app/providers/auth_provider.dart';
+import 'package:my_lettutor_app/utils/utils.dart';
 import 'package:my_lettutor_app/widgets/badge/my_badge_list.dart';
 import 'package:my_lettutor_app/widgets/my_rating_bar.dart';
+import 'package:provider/src/provider.dart';
 
-class TeacherListTile extends StatelessWidget {
-  final Teacher teacher;
+class TutorListTile extends StatefulWidget {
+  final Tutor tutor;
   final int version;
 
-  const TeacherListTile({
+  const TutorListTile({
     Key? key,
-    required this.teacher,
+    required this.tutor,
     required this.version,
   }) : super(key: key);
 
-  void _onFavoriteHandler() {}
+  @override
+  State<TutorListTile> createState() => _TutorListTileState();
+}
+
+class _TutorListTileState extends State<TutorListTile> {
+  late bool isFavorite;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    isFavorite = widget.tutor.isFavorite!;
+  }
+
+  void _onFavoriteHandler(String accessToken) async {
+    var dio = DioClient.dio;
+    try {
+      dio.options.headers["Authorization"] = "Bearer $accessToken";
+      var res = await dio.post('/user/manageFavoriteTutor',
+          data: {"tutorId": widget.tutor.userId});
+      setState(() {
+        isFavorite = !isFavorite;
+      });
+    } catch (e) {
+      print("Something went wrong");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final accessToken =
+        context.read<AuthProvider>().userToken.tokens!.access!.token!;
     return Row(
       children: [
-        const SizedBox(
-          width: 70,
-          height: 60,
+        Container(
+          margin: const EdgeInsets.only(right: 5),
           child: CircleAvatar(
             radius: 30,
             backgroundImage: ResizeImage(
-              AssetImage(
-                'assets/images/user.png',
-              ),
-              height: 60,
-              width: 60,
+              NetworkImage(widget.tutor.user!.avatar!),
+              height: 70,
+              width: 70,
             ),
           ),
         ),
         Expanded(
-            child: version == 1
+            child: widget.version == 1
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -49,7 +78,7 @@ class TeacherListTile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                teacher.name,
+                                widget.tutor.user!.name!,
                                 style: const TextStyle(
                                   fontSize: 18,
                                 ),
@@ -58,16 +87,18 @@ class TeacherListTile extends StatelessWidget {
                                 height: 5,
                               ),
                               MyRatingBar(
-                                rating: teacher.rating,
+                                rating: widget
+                                    .tutor.avgRating!, // tutor.avgRating!,
                                 padding: 2,
                                 ignoreGestures: true,
                                 size: 20,
                               ),
                             ],
                           ),
-                          teacher.isFavorite == true
+                          isFavorite
                               ? IconButton(
-                                  onPressed: _onFavoriteHandler,
+                                  onPressed: () =>
+                                      _onFavoriteHandler(accessToken),
                                   icon: Icon(
                                     Icons.favorite,
                                     color: Theme.of(context)
@@ -77,7 +108,8 @@ class TeacherListTile extends StatelessWidget {
                                     size: 30,
                                   ))
                               : IconButton(
-                                  onPressed: _onFavoriteHandler,
+                                  onPressed: () =>
+                                      _onFavoriteHandler(accessToken),
                                   icon: Icon(
                                     Icons.favorite_border,
                                     color: Theme.of(context)
@@ -89,7 +121,8 @@ class TeacherListTile extends StatelessWidget {
                         ],
                       ),
                       MyBadgeList(
-                        myList: teacher.specialities,
+                        myList:
+                            Utils.parseSpecialties(widget.tutor.specialties!),
                         readOnly: true,
                       ),
                     ],
@@ -101,14 +134,14 @@ class TeacherListTile extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                              teacher.name,
+                              widget.tutor.user!.name!,
                               style: const TextStyle(
                                 fontSize: 18,
                               ),
                             ),
                           ),
                           Text(
-                            teacher.rating.toStringAsFixed(2),
+                            widget.tutor.avgRating!.toStringAsFixed(2),
                             style: TextStyle(
                               color: Colors.red[400],
                               fontSize: 18,
@@ -126,11 +159,12 @@ class TeacherListTile extends StatelessWidget {
                           SizedBox(
                             height: 30,
                             width: 30,
-                            child: teacher.isFavorite == true
+                            child: isFavorite
                                 ? IconButton(
                                     splashColor: null,
                                     padding: const EdgeInsets.all(0),
-                                    onPressed: _onFavoriteHandler,
+                                    onPressed: () =>
+                                        _onFavoriteHandler(accessToken),
                                     icon: Icon(
                                       Icons.favorite,
                                       color: Theme.of(context)
@@ -142,7 +176,8 @@ class TeacherListTile extends StatelessWidget {
                                 : IconButton(
                                     splashColor: null,
                                     padding: const EdgeInsets.all(0),
-                                    onPressed: _onFavoriteHandler,
+                                    onPressed: () =>
+                                        _onFavoriteHandler(accessToken),
                                     icon: Icon(
                                       Icons.favorite_border,
                                       color: Theme.of(context)
@@ -158,7 +193,8 @@ class TeacherListTile extends StatelessWidget {
                         height: 5,
                       ),
                       MyBadgeList(
-                        myList: teacher.specialities,
+                        myList:
+                            Utils.parseSpecialties(widget.tutor.specialties!),
                         readOnly: true,
                       ),
                     ],

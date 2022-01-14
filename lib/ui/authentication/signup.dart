@@ -41,7 +41,7 @@ class Signup extends StatelessWidget {
     if (password != null) {
       if (password.isEmpty) {
         return AppLocalizations.of(context)!.emptyPasswordErrText;
-      } else if (password.length < 8) {
+      } else if (password.length < 6) {
         return AppLocalizations.of(context)!.passwordErrText;
       }
       return null;

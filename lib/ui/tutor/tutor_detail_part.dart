@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class TeacherDetailPart extends StatelessWidget {
+class TutorDetailPart extends StatelessWidget {
   final String title;
   final Widget child;
   final bool hasPadding;
-  const TeacherDetailPart({
+  const TutorDetailPart({
     Key? key,
     required this.title,
     required this.child,
@@ -14,6 +14,7 @@ class TeacherDetailPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -4,7 +4,7 @@ import 'package:my_lettutor_app/models/user.dart';
 part 'feedback.g.dart';
 
 @JsonSerializable()
-class Feedback {
+class MFeedback {
   String? id;
   String? bookingId;
   String? firstId;
@@ -15,7 +15,7 @@ class Feedback {
   DateTime? updatedAt;
   User? firstInfo;
 
-  Feedback(
+  MFeedback(
       this.id,
       this.bookingId,
       this.firstId,
@@ -26,6 +26,6 @@ class Feedback {
       this.updatedAt,
       this.firstInfo);
 
-    factory Feedback.fromJson(Map<String, dynamic> json) => _$FeedbackFromJson(json);
-  Map<String, dynamic> toJson() => _$FeedbackToJson(this);
+    factory MFeedback.fromJson(Map<String, dynamic> json) => _$MFeedbackFromJson(json);
+  Map<String, dynamic> toJson() => _$MFeedbackToJson(this);
 }

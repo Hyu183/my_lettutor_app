@@ -7,7 +7,7 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class User {
-     String? id;
+  String? id;
   String? email;
   String? name;
   String? avatar;
@@ -15,7 +15,7 @@ class User {
   String? phone;
   List<String>? roles;
   String? language;
-  DateTime? birthday;
+  String? birthday;
   bool? isActivated;
   WalletInfo? walletInfo;
   //List<Null>? courses;
@@ -25,7 +25,8 @@ class User {
 //   List<Null>? testPreparations;
   bool? isPhoneActivated;
   int? timezone;
-
+  Tutor? tutorInfo;
+  List<MFeedback>? feedbacks;
   User(
       this.id,
       this.email,
@@ -38,13 +39,14 @@ class User {
       this.birthday,
       this.isActivated,
       this.walletInfo,
-    //   this.courses,
+      //   this.courses,
       this.requireNote,
       this.level,
-    //   this.learnTopics,
-    //   this.testPreparations,
+      //   this.learnTopics,
+      //   this.testPreparations,
       this.isPhoneActivated,
-      this.timezone);
+      this.timezone,
+      this.tutorInfo,this.feedbacks);
 //   String? id;
 //   String? email;
 //   String? name;

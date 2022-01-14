@@ -3,13 +3,14 @@ import 'package:intl/intl.dart';
 
 import 'package:my_lettutor_app/widgets/my_rating_bar.dart';
 
-import 'package:my_lettutor_app/models/temp/comment.dart';
+// import 'package:my_lettutor_app/models/temp/comment.dart';
+import 'package:my_lettutor_app/models/feedback.dart';
 
-class CommentCard extends StatelessWidget {
-  final Comment comment;
-  const CommentCard({
+class FeedbackCard extends StatelessWidget {
+  final MFeedback feedback;
+  const FeedbackCard({
     Key? key,
-    required this.comment,
+    required this.feedback,
   }) : super(key: key);
 
   @override
@@ -32,11 +33,12 @@ class CommentCard extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 30,
-                    child: Image.asset(
-                      'assets/images/user.png',
-                      cacheHeight: 60,
-                      cacheWidth: 60,
-                      fit: BoxFit.cover,
+                    backgroundImage: ResizeImage(
+                      NetworkImage(
+                        feedback.firstInfo!.avatar!,
+                      ),
+                      height: 60,
+                      width: 60,
                     ),
                   ),
                   const SizedBox(
@@ -51,14 +53,14 @@ class CommentCard extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                comment.username,
+                                feedback.firstInfo!.name!,
                                 style: const TextStyle(
                                   fontSize: 18,
                                 ),
                               ),
                             ),
                             MyRatingBar(
-                              rating: comment.rating,
+                              rating: feedback.rating!.toDouble(),
                               padding: 0,
                               ignoreGestures: true,
                               size: 15,
@@ -68,7 +70,7 @@ class CommentCard extends StatelessWidget {
                         const SizedBox(
                           height: 5,
                         ),
-                        Text(comment.content),
+                        Text(feedback.content!),
                       ],
                     ),
                   ),
@@ -78,7 +80,7 @@ class CommentCard extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                DateFormat('HH:mm:ss, dd/MM/yyyy').format(comment.date),
+                DateFormat('HH:mm:ss, dd/MM/yyyy').format(feedback.createdAt!),
                 style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 12,

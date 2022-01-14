@@ -86,12 +86,21 @@
     "emptyEmailErrText": "Email cannot be empty",
     "emailErrText": "Please enter a valid email",
     "emptyPasswordErrText": "Password cannot be empty",
-    "passwordErrText": "Password must be at least 8 characters",
+    "passwordErrText": "Password must be at least 6 characters",
     "emptyFullNameErrText": "FullName cannot be empty",
     "emptyConfirmPasswordErrText": "Confirm password cannot be empty",
-    "confirmPasswordErrText": "Confirm password does not match"
-
-
+    "confirmPasswordErrText": "Confirm password does not match",
+    "totalTime":"Total lesson time is\n {hour} hours {minute} minutes",
+    "@totalTime":{
+            "placeholders":{
+                "hour":{
+                    "type": "int"
+                },
+                 "minute":{
+                    "type": "int"
+                }
+            }
+        }
 
 
 

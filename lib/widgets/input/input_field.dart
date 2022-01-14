@@ -31,6 +31,7 @@ class InputField extends StatelessWidget {
           height: 10,
         ),
         TextFormField(
+          style: const TextStyle(color: Colors.black),
           obscureText: isPassword,
           validator: (val) => validator(val),
           controller: controller,

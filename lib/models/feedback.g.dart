@@ -6,7 +6,7 @@ part of 'feedback.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Feedback _$FeedbackFromJson(Map<String, dynamic> json) => Feedback(
+MFeedback _$MFeedbackFromJson(Map<String, dynamic> json) => MFeedback(
       json['id'] as String?,
       json['bookingId'] as String?,
       json['firstId'] as String?,
@@ -24,7 +24,7 @@ Feedback _$FeedbackFromJson(Map<String, dynamic> json) => Feedback(
           : User.fromJson(json['firstInfo'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$FeedbackToJson(Feedback instance) => <String, dynamic>{
+Map<String, dynamic> _$MFeedbackToJson(MFeedback instance) => <String, dynamic>{
       'id': instance.id,
       'bookingId': instance.bookingId,
       'firstId': instance.firstId,

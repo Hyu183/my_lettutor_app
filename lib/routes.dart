@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:my_lettutor_app/models/temp/course.dart';
 import 'package:my_lettutor_app/models/temp/teacher.dart';
+import 'package:my_lettutor_app/models/tutor.dart';
 import 'package:my_lettutor_app/ui/authentication/forgot_password.dart';
 import 'package:my_lettutor_app/ui/authentication/signup.dart';
 import 'package:my_lettutor_app/ui/course/course_detail.dart';
@@ -10,7 +11,7 @@ import 'package:my_lettutor_app/ui/settings/advanced_settings.dart';
 import 'package:my_lettutor_app/ui/settings/booking_history.dart';
 import 'package:my_lettutor_app/ui/settings/session_history.dart';
 import 'package:my_lettutor_app/ui/settings/view_feedbacks.dart';
-import 'package:my_lettutor_app/ui/teacher/teacher_detail.dart';
+import 'package:my_lettutor_app/ui/tutor/tutor_detail.dart';
 
 class Routes {
   Routes._();
@@ -26,11 +27,11 @@ class Routes {
   };
 
   static Route<dynamic>? onGenerateRoutes(settings) {
-    if (settings.name == TeacherDetail.routeName) {
-      var teacher = settings.arguments as Teacher;
+    if (settings.name == TutorDetail.routeName) {
+      var tutor = settings.arguments as Tutor;
       return MaterialPageRoute(builder: (_) {
-        return TeacherDetail(
-          teacher: teacher,
+        return TutorDetail(
+          tutor: tutor,
         );
       });
     } else if (settings.name == CourseDetail.routeName) {

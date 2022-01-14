@@ -26,8 +26,9 @@ class MyRatingBar extends StatelessWidget {
       itemCount: 5,
       itemPadding: EdgeInsets.only(right: padding),
       itemBuilder: (ctx, _) {
-        return const Icon(Icons.star, color: Colors.orangeAccent);
+        return Icon(Icons.star, color: Colors.yellow.shade600);
       },
+      unratedColor: Colors.grey.shade300,
       onRatingUpdate: (rating) {},
     );
   }

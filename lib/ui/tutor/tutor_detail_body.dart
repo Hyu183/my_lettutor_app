@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_lettutor_app/models/tutor.dart';
 
 import 'package:my_lettutor_app/ui/course/course_card_list.dart';
 import 'package:my_lettutor_app/ui/booking/booking_modal.dart';
+import 'package:my_lettutor_app/utils/utils.dart';
+import 'package:my_lettutor_app/widgets/button/icon_text_button.dart';
 import 'package:my_lettutor_app/widgets/comment_card.dart';
-import 'package:my_lettutor_app/ui/teacher/teacher_detail_part.dart';
-import 'package:my_lettutor_app/ui/teacher/teacher_detail_tile.dart';
+import 'package:my_lettutor_app/ui/tutor/tutor_detail_part.dart';
+import 'package:my_lettutor_app/ui/tutor/tutor_detail_tile.dart';
 import 'package:my_lettutor_app/widgets/badge/my_badge_list.dart';
 import 'package:my_lettutor_app/widgets/button/large_button.dart';
 import 'package:my_lettutor_app/widgets/button/row_button.dart';
 import 'package:my_lettutor_app/widgets/no_data.dart';
 
-import 'package:my_lettutor_app/models/temp/teacher.dart';
+// import 'package:my_lettutor_app/models/temp/tutor.dart';
 
-class TeacherDetailBody extends StatelessWidget {
-  final Teacher teacher;
-  const TeacherDetailBody({
+class TutorDetailBody extends StatelessWidget {
+  final Tutor tutor;
+  const TutorDetailBody({
     Key? key,
-    required this.teacher,
+    required this.tutor,
   }) : super(key: key);
 
   void _startBooking(BuildContext ctx) {
@@ -36,92 +39,93 @@ class TeacherDetailBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translator = AppLocalizations.of(context)!;
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.only(bottom: 10),
-          child: TeacherDetailTile(
-            name: teacher.name,
-            rating: teacher.rating,
-            country: teacher.country,
-          ),
-        ),
         LargeButton(
-            text: AppLocalizations.of(context)!.bookingBtn,
-            handler: () => _startBooking(context)),
+            text: translator.bookingBtn, handler: () => _startBooking(context)),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
-          child: const RowButton(),
+          child: IconTextButton(
+            icon: Icons.report,
+            text: translator.reportTextBtn,
+            handler: () {},
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          height: 250,
+          color: Colors.blue,
         ),
         Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
           child: Text(
-            teacher.description,
+            tutor.bio!,
             style: Theme.of(context).textTheme.bodyText1,
           ),
         ),
-        TeacherDetailPart(
-          title: AppLocalizations.of(context)!.languagesText,
+        TutorDetailPart(
+          title: translator.languagesText,
           child: MyBadgeList(
-            myList: teacher.languages,
+            myList: Utils.parseLanguages(tutor.languages!),
             readOnly: true,
           ),
           hasPadding: true,
         ),
-        TeacherDetailPart(
-          title: AppLocalizations.of(context)!.educationText,
+        TutorDetailPart(
+          title: translator.educationText,
           child: Text(
-            teacher.education,
+            tutor.education!,
             style: Theme.of(context).textTheme.subtitle1,
           ),
           hasPadding: true,
         ),
-        TeacherDetailPart(
-          title: AppLocalizations.of(context)!.experienceText,
+        TutorDetailPart(
+          title: translator.experienceText,
           child: Text(
-            teacher.experience,
+            tutor.experience!,
             style: Theme.of(context).textTheme.subtitle1,
           ),
           hasPadding: true,
         ),
-        TeacherDetailPart(
-          title: AppLocalizations.of(context)!.interestsText,
+        TutorDetailPart(
+          title: translator.interestsText,
           child: Text(
-            teacher.interests,
+            tutor.interests!,
             style: Theme.of(context).textTheme.subtitle1,
           ),
           hasPadding: true,
         ),
-        TeacherDetailPart(
-          title: AppLocalizations.of(context)!.professionText,
+        TutorDetailPart(
+          title: translator.professionText,
           child: Text(
-            teacher.profession,
+            tutor.profession!,
             style: Theme.of(context).textTheme.subtitle1,
           ),
           hasPadding: true,
         ),
-        TeacherDetailPart(
-          title: AppLocalizations.of(context)!.specialitiesText,
+        TutorDetailPart(
+          title: translator.specialitiesText,
           child: MyBadgeList(
-            myList: teacher.specialities,
+            myList: Utils.parseSpecialties(tutor.specialties!),
             readOnly: true,
           ),
           hasPadding: true,
         ),
-        TeacherDetailPart(
-          title: AppLocalizations.of(context)!.courseText,
-          child: teacher.courses != null
-              ? CourseCardList(courses: teacher.courses!)
-              : const NoData(),
-          hasPadding: false,
-        ),
-        TeacherDetailPart(
+        // TutorDetailPart(
+        //   title: translator.courseText,
+        //   child: tutor.courses != null
+        //       ? CourseCardList(courses: tutor.courses!)
+        //       : const NoData(),
+        //   hasPadding: false,
+        // ),
+        TutorDetailPart(
           title:
-              '${AppLocalizations.of(context)!.ratingAndCommentText} (${teacher.comments == null ? 0 : teacher.comments!.length})',
-          child: teacher.comments != null
+              '${translator.ratingAndCommentText} (${tutor.user!.feedbacks == null ? 0 : tutor.user!.feedbacks!.length})',
+          child: tutor.user!.feedbacks != null
               ? Column(
-                  children: teacher.comments!
-                      .map((comment) => CommentCard(comment: comment))
+                  children: tutor.user!.feedbacks!
+                      .map((feedback) => FeedbackCard(feedback: feedback))
                       .toList(),
                 )
               : Container(),

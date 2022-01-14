@@ -8,6 +8,8 @@ part of 'tutor.dart';
 
 Tutor _$TutorFromJson(Map<String, dynamic> json) => Tutor(
       json['id'] as String?,
+      json['name'] as String?,
+      json['avatar'] as String?,
       json['userId'] as String?,
       json['video'] as String?,
       json['bio'] as String?,
@@ -22,15 +24,11 @@ Tutor _$TutorFromJson(Map<String, dynamic> json) => Tutor(
       json['resume'] as String?,
       json['isActivated'] as bool?,
       json['isNative'] as bool?,
-      json['createdAt'] == null
+      json['createdAt'] as String?,
+      json['updatedAt'] as String?,
+      json['User'] == null
           ? null
-          : DateTime.parse(json['createdAt'] as String),
-      json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
-      json['user'] == null
-          ? null
-          : User.fromJson(json['user'] as Map<String, dynamic>),
+          : User.fromJson(json['User'] as Map<String, dynamic>),
       json['isFavorite'] as bool?,
       (json['avgRating'] as num?)?.toDouble(),
       json['price'] as int?,
@@ -38,6 +36,8 @@ Tutor _$TutorFromJson(Map<String, dynamic> json) => Tutor(
 
 Map<String, dynamic> _$TutorToJson(Tutor instance) => <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
+      'avatar': instance.avatar,
       'userId': instance.userId,
       'video': instance.video,
       'bio': instance.bio,
@@ -52,8 +52,8 @@ Map<String, dynamic> _$TutorToJson(Tutor instance) => <String, dynamic>{
       'resume': instance.resume,
       'isActivated': instance.isActivated,
       'isNative': instance.isNative,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
       'user': instance.user,
       'isFavorite': instance.isFavorite,
       'avgRating': instance.avgRating,

@@ -115,6 +115,7 @@ final ThemeData themeDataPink = ThemeData(
     contentPadding: const EdgeInsets.symmetric(
       horizontal: 15,
     ),
+    
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(50),
     ),

@@ -15,9 +15,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       json['phone'] as String?,
       (json['roles'] as List<dynamic>?)?.map((e) => e as String).toList(),
       json['language'] as String?,
-      json['birthday'] == null
-          ? null
-          : DateTime.parse(json['birthday'] as String),
+      json['birthday'] as String?,
       json['isActivated'] as bool?,
       json['walletInfo'] == null
           ? null
@@ -26,6 +24,12 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       json['level'] as String?,
       json['isPhoneActivated'] as bool?,
       json['timezone'] as int?,
+      json['tutorInfo'] == null
+          ? null
+          : Tutor.fromJson(json['tutorInfo'] as Map<String, dynamic>),
+      (json['feedbacks'] as List<dynamic>?)
+          ?.map((e) => MFeedback.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -37,11 +41,13 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'phone': instance.phone,
       'roles': instance.roles,
       'language': instance.language,
-      'birthday': instance.birthday?.toIso8601String(),
+      'birthday': instance.birthday,
       'isActivated': instance.isActivated,
       'walletInfo': instance.walletInfo,
       'requireNote': instance.requireNote,
       'level': instance.level,
       'isPhoneActivated': instance.isPhoneActivated,
       'timezone': instance.timezone,
+      'tutorInfo': instance.tutorInfo,
+      'feedbacks': instance.feedbacks,
     };

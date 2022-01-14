@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-// import 'package:dio/dio.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -15,23 +14,18 @@ import 'package:my_lettutor_app/widgets/input/input_field.dart';
 import 'package:my_lettutor_app/widgets/logo_app.dart';
 import 'package:provider/src/provider.dart';
 
-// typedef LoginCallback = void Function(int);
-
 class Login extends StatelessWidget {
   static const routeName = '/login';
-//   final LoginCallback callback;
 
   Login({
     Key? key,
-    // required this.callback,
   }) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController(text: 'student@lettutor.com');
+  final _emailController = TextEditingController(text: 'neyzik123@gmail.com');
   final _passwordController = TextEditingController(text: '123456');
 
   String? emailValidator(String? email, BuildContext context) {
-    //print(email);
     if (email != null) {
       if (email.isEmpty) {
         return AppLocalizations.of(context)!.emptyEmailErrText;
@@ -48,7 +42,7 @@ class Login extends StatelessWidget {
     if (password != null) {
       if (password.isEmpty) {
         return AppLocalizations.of(context)!.emptyPasswordErrText;
-      } else if (password.length < 8) {
+      } else if (password.length < 6) {
         return AppLocalizations.of(context)!.passwordErrText;
       }
       return null;
@@ -57,15 +51,11 @@ class Login extends StatelessWidget {
   }
 
   void _saveForm(BuildContext context) async {
-    // final isValid = _formKey.currentState!.validate();
-    // if (!isValid) {
-    //   return;
-    // }
+    final isValid = _formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
 
-    // if (_emailController.text != "admin@gmail.com" ||
-    //     _passwordController.text != "12345678") {
-    //   return;
-    // }
     var dio = DioClient.dio;
     try {
       var res = await dio.post(
@@ -77,10 +67,6 @@ class Login extends StatelessWidget {
       );
       UserToken userToken = UserToken.fromJson(res.data);
       context.read<AuthProvider>().logIn(userToken, true);
-
-      // authProvider.setUserToken = userToken;
-      // authProvider.setIsLoggegIn = true;
-      // callback(1);
     } on DioError catch (e) {
       if (e.response != null) {
         print(e.response!.data['message']);
@@ -92,11 +78,12 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final translator = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          AppLocalizations.of(context)!.signIn,
+          translator.signIn,
           style: Theme.of(context).textTheme.headline1,
         ),
       ),
@@ -112,7 +99,7 @@ class Login extends StatelessWidget {
                 child: Column(
                   children: [
                     InputField(
-                      title: AppLocalizations.of(context)!.emailLabel,
+                      title: translator.emailLabel,
                       textHolder: 'example@email.com',
                       isPassword: false,
                       controller: _emailController,
@@ -122,7 +109,7 @@ class Login extends StatelessWidget {
                       height: 20,
                     ),
                     InputField(
-                      title: AppLocalizations.of(context)!.passwordLabel,
+                      title: translator.passwordLabel,
                       textHolder: '********',
                       isPassword: true,
                       controller: _passwordController,
@@ -134,21 +121,21 @@ class Login extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomRight,
                 child: TextButton(
-                  child: Text(AppLocalizations.of(context)!.forgotPasswordLink),
+                  child: Text(translator.forgotPasswordLink),
                   onPressed: () {
                     Navigator.of(context).pushNamed(ForgotPassWord.routeName);
                   },
                 ),
               ),
               LargeButton(
-                text: AppLocalizations.of(context)!.loginBtn,
+                text: translator.loginBtn,
                 handler: () => _saveForm(context),
               ),
               const SizedBox(
                 height: 10,
               ),
-              Text(AppLocalizations.of(context)!.orContinueWith,
-                  style: TextStyle(color: Colors.grey)),
+              Text(translator.orContinueWith,
+                  style: const TextStyle(color: Colors.grey)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -163,12 +150,12 @@ class Login extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(AppLocalizations.of(context)!.dontHaveAccount),
+                  Text(translator.dontHaveAccount),
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pushNamed(Signup.routeName);
                     },
-                    child: Text(AppLocalizations.of(context)!.signUp),
+                    child: Text(translator.signUp),
                   ),
                 ],
               ),
