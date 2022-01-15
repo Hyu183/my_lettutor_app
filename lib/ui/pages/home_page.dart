@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           tutorList = tutorRes;
           isLoadingTotalTime = false;
           isLoadingTutorList = false;
-          totalTime = Utils.getTotalTime(1859); //totalTimeRes
+          totalTime = Utils.getTotalTime(totalTimeRes);
         });
       } on DioError catch (e) {
         print(e);
@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     child: Text(translator.recommendedTutors,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                         )),
                   ),
@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: [
                         Text(translator.seeAllLink),
-                        Icon(Icons.arrow_forward_ios_rounded),
+                        const Icon(Icons.arrow_forward_ios_rounded),
                       ],
                     ),
                   ),
@@ -221,8 +221,8 @@ class _HomePageState extends State<HomePage> {
             ),
             isLoadingTutorList
                 ? CircularProgressIndicator(
-                    backgroundColor:
-                        Theme.of(context).textTheme.headline2!.color,
+                    color: Theme.of(context).textTheme.headline2!.color,
+                    backgroundColor: Colors.white,
                   )
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+
 import 'package:my_lettutor_app/models/tutor.dart';
 
 import 'package:my_lettutor_app/ui/course/course_card_list.dart';
@@ -42,21 +44,23 @@ class TutorDetailBody extends StatelessWidget {
     final translator = AppLocalizations.of(context)!;
     return Column(
       children: [
-        LargeButton(
-            text: translator.bookingBtn, handler: () => _startBooking(context)),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          child: IconTextButton(
-            icon: Icons.report,
-            text: translator.reportTextBtn,
-            handler: () {},
-          ),
+        Row(
+          children: [
+            Expanded(
+              child: LargeButton(
+                  text: translator.bookingBtn,
+                  handler: () => _startBooking(context)),
+            ),
+            Container(
+              child: IconTextButton(
+                icon: Icons.report,
+                text: translator.reportTextBtn,
+                handler: () {},
+              ),
+            ),
+          ],
         ),
-        Container(
-          width: double.infinity,
-          height: 250,
-          color: Colors.blue,
-        ),
+
         Container(
           margin: const EdgeInsets.symmetric(vertical: 10),
           child: Text(

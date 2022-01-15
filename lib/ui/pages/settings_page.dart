@@ -25,13 +25,15 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      final authProvider = context.read<AuthProvider>();
+    final authProvider = context.read<AuthProvider>();
+    final user = authProvider.userToken.user;
+    final translator = AppLocalizations.of(context)!;
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         title: Text(
-          AppLocalizations.of(context)!.settingsTitle,
-          style: TextStyle(
+          translator.settingsTitle,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -43,30 +45,39 @@ class SettingsPage extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed(ProfilePage.routeName);
               },
-              child: const ListTile(
+              child: ListTile(
                 leading: SizedBox(
                   width: 70,
                   height: 60,
                   child: CircleAvatar(
                     radius: 30,
-                    backgroundImage: ResizeImage(
-                      AssetImage(
-                        'assets/images/user.png',
-                      ),
-                      height: 60,
-                      width: 60,
-                    ),
+                    backgroundImage: user!.avatar! !=
+                            "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+                        ? ResizeImage(
+                            NetworkImage(
+                              user.avatar!,
+                            ),
+                            height: 60,
+                            width: 60,
+                          )
+                        : const ResizeImage(
+                            AssetImage(
+                              'assets/images/user.png',
+                            ),
+                            height: 60,
+                            width: 60,
+                          ),
                   ),
                 ),
                 title: Text(
-                  userName,
-                  style: TextStyle(
+                  user.name!,
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Colors.black,
                   ),
                 ),
-                subtitle: Text(email),
+                subtitle: Text(user.email!),
               ),
             ),
             Container(
@@ -80,27 +91,27 @@ class SettingsPage extends StatelessWidget {
                 children: [
                   SettingCard(
                     icon: Icons.approval_outlined,
-                    text: AppLocalizations.of(context)!.becomeTutorText,
+                    text: translator.becomeTutorText,
                     routeName: ViewFeedbacks.routeName,
                   ),
                   SettingCard(
                     icon: Icons.person_outline_rounded,
-                    text: AppLocalizations.of(context)!.viewFeedbackText,
+                    text: translator.viewFeedbackText,
                     routeName: ViewFeedbacks.routeName,
                   ),
                   SettingCard(
                     icon: Icons.list_outlined,
-                    text: AppLocalizations.of(context)!.bookingHistoryText,
+                    text: translator.bookingHistoryText,
                     routeName: BookingHistory.routeName,
                   ),
                   SettingCard(
                     icon: Icons.history_outlined,
-                    text: AppLocalizations.of(context)!.sessionHistoryText,
+                    text: translator.sessionHistoryText,
                     routeName: SessionHistory.routeName,
                   ),
                   SettingCard(
                     icon: Icons.settings_outlined,
-                    text: AppLocalizations.of(context)!.advancedSettingsText,
+                    text: translator.advancedSettingsText,
                     routeName: AdvancedSettings.routeName,
                   ),
                   const SizedBox(
@@ -108,7 +119,7 @@ class SettingsPage extends StatelessWidget {
                   ),
                   SettingCard(
                     icon: Icons.language_outlined,
-                    text: AppLocalizations.of(context)!.ourWebsiteText,
+                    text: translator.ourWebsiteText,
                     routeName: '',
                     url: 'https://app.lettutor.com/',
                   ),
@@ -124,11 +135,11 @@ class SettingsPage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(AppLocalizations.of(context)!.versionText('1.0.0'),
-                          style: TextStyle(color: Colors.grey)),
+                      Text(translator.versionText('1.0.0'),
+                          style: const TextStyle(color: Colors.grey)),
                       LargeButton(
-                        text: AppLocalizations.of(context)!.logoutBtn,
-                        handler: authProvider.logOut,//callback(0),
+                        text: translator.logoutBtn,
+                        handler: authProvider.logOut, //callback(0),
                       ),
                     ],
                   ),

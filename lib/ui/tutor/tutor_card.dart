@@ -7,7 +7,7 @@ import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:my_lettutor_app/ui/tutor/tutor_detail.dart';
 import 'package:my_lettutor_app/ui/tutor/tutor_list_tile.dart';
 
-import 'package:my_lettutor_app/models/temp/teacher.dart';
+
 import 'package:provider/src/provider.dart';
 
 class TutorCard extends StatelessWidget {

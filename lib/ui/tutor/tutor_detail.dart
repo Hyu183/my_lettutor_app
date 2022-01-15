@@ -4,16 +4,18 @@ import 'package:my_lettutor_app/models/tutor.dart';
 import 'package:my_lettutor_app/ui/tutor/tutor_detail_body.dart';
 import 'package:my_lettutor_app/ui/tutor/tutor_detail_tile.dart';
 
-// import 'package:my_lettutor_app/models/temp/teacher.dart';
+import 'package:my_lettutor_app/widgets/video/video_player.dart';
+
 
 class TutorDetail extends StatelessWidget {
-  static const routeName = '/teacher-detail';
+  static const routeName = '/tutor-detail';
   final Tutor tutor;
   const TutorDetail({
     Key? key,
     required this.tutor,
   }) : super(key: key);
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +48,7 @@ class TutorDetail extends StatelessWidget {
                     isFavorite: tutor.isFavorite!,
                   ),
                 ),
+                MyVideoPlayer(videoUrl: tutor.video!),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 20,
