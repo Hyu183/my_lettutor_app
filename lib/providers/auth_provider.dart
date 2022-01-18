@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_lettutor_app/data/sharedpref/token_preference.dart';
 import 'package:my_lettutor_app/models/token.dart';
 import 'package:my_lettutor_app/models/tokens.dart';
+import 'package:my_lettutor_app/models/user.dart';
 import 'package:my_lettutor_app/models/user_token.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -21,6 +22,11 @@ class AuthProvider extends ChangeNotifier {
     _isLoggedIn = value;
     notifyListeners();
   }
+
+//   set user(User value) {
+//     _userToken.user = value;
+//     notifyListeners();
+//   }
 
   Future<bool> checkToken() async {
     var accessToken = await _tokenPreference.accessToken;

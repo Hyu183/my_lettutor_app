@@ -3,6 +3,7 @@ import 'package:my_lettutor_app/models/course.dart';
 
 import 'package:my_lettutor_app/ui/course/course_detail_part.dart';
 import 'package:my_lettutor_app/ui/course/topic_card.dart';
+import 'package:my_lettutor_app/utils/utils.dart';
 
 // import 'package:my_lettutor_app/models/temp/course.dart';
 
@@ -82,7 +83,7 @@ class CourseDetailBody extends StatelessWidget {
         CourseDetailPart(
           title: 'Experience Level',
           child: Text(
-            course.level!,
+            Utils.getLevelString(course.level!),
             style: Theme.of(context).textTheme.subtitle1,
           ),
           hasPadding: false,

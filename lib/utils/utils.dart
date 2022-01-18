@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:my_lettutor_app/constants/variables.dart';
 
 class Utils {
@@ -28,5 +30,9 @@ class Utils {
     var timeStart = DateTime.fromMillisecondsSinceEpoch(startTimeStamp);
 
     return DateTime.now().difference(timeStart).abs().inMinutes > 120;
+  }
+
+  static String getLevelString(String lvl) {
+    return levelMap[lvl]!;
   }
 }

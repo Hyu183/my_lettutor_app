@@ -6,6 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:my_lettutor_app/data/network/dio_client.dart';
+import 'package:my_lettutor_app/models/user.dart';
 import 'package:my_lettutor_app/models/user_token.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:my_lettutor_app/ui/authentication/forgot_password.dart';
@@ -73,18 +74,24 @@ class Login extends StatelessWidget {
     var dio = DioClient.dio;
 
     try {
-      var res = await dio.post(
+      var response = await dio.post(
         '/auth/login',
         data: {
           'email': _emailController.text,
           'password': _passwordController.text
         },
       );
-      UserToken userToken = UserToken.fromJson(res.data);
+      UserToken userToken = UserToken.fromJson(response.data);
+      dio.options.headers['Authorization'] = "Bearer ${userToken.tokens!.access!.token!}"; 
+      var userInfoResponse = await dio.get('/user/info');
+
+      userToken.user = User.fromJson(userInfoResponse.data['user']);
+
       context.read<AuthProvider>().logIn(userToken, true);
       EasyLoading.dismiss();
     } on DioError catch (e) {
       EasyLoading.dismiss();
+      print(e);
       if (e.response != null) {
         _showSnackBar(AppLocalizations.of(context)!.wrongLogInInfo);
       } else {

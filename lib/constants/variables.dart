@@ -18,3 +18,16 @@ Map<String, String> languagesMap = {
   "ja": "Japanese",
   "vi": "Vietnamese"
 };
+
+
+Map<String, String> levelMap = {
+  "0": "Any Level",
+  "1": "Beginner",
+  "2": "Upper-Beginner",
+  "3": "Pre-Intermediate",
+  "4": "Intermediate",
+  "5": "Upper-Intermediate",
+  "6": "Pre-Advanced",
+  "7": "Advanced",
+  "8": "Upper-Advanced",  
+};
