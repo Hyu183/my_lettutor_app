@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:my_lettutor_app/data/network/dio_client.dart';
 import 'package:my_lettutor_app/models/user_token.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
@@ -22,6 +24,7 @@ class Login extends StatelessWidget {
   }) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
+  //'neyzik123@gmail.com'
   final _emailController = TextEditingController(text: 'neyzik123@gmail.com');
   final _passwordController = TextEditingController(text: '123456');
 
@@ -50,13 +53,26 @@ class Login extends StatelessWidget {
     return null;
   }
 
+  void _showSnackBar(String text) {
+    Get.snackbar(
+      text,
+      '',
+      colorText: Colors.white,
+      backgroundColor: Colors.red,
+      duration: const Duration(seconds: 1),
+      leftBarIndicatorColor: Colors.white,
+      borderRadius: 10,
+    );
+  }
+
   void _saveForm(BuildContext context) async {
     final isValid = _formKey.currentState!.validate();
     if (!isValid) {
       return;
     }
-
+    EasyLoading.show();
     var dio = DioClient.dio;
+    
     try {
       var res = await dio.post(
         '/auth/login',
@@ -67,9 +83,11 @@ class Login extends StatelessWidget {
       );
       UserToken userToken = UserToken.fromJson(res.data);
       context.read<AuthProvider>().logIn(userToken, true);
+      EasyLoading.dismiss();
     } on DioError catch (e) {
+      EasyLoading.dismiss();
       if (e.response != null) {
-        print(e.response!.data['message']);
+        _showSnackBar(AppLocalizations.of(context)!.wrongLogInInfo);
       } else {
         print("Dont know");
       }

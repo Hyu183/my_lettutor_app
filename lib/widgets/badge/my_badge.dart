@@ -4,18 +4,19 @@ class MyBadge extends StatelessWidget {
   final String data;
   final bool isSelected;
   final int? index;
-  final Function(int)? onTapHandler;
+  final VoidCallback? onTapHandler;
   const MyBadge({
     Key? key,
     required this.data,
     required this.isSelected,
-    this.onTapHandler, this.index,
+    this.onTapHandler,
+    this.index,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap:index!=null? ()=> onTapHandler!(index!) :null,
+      onTap: onTapHandler,
       child: Container(
         height: 20,
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

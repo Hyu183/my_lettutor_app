@@ -8,7 +8,7 @@ import 'package:my_lettutor_app/ui/pages/home_page.dart';
 import 'package:my_lettutor_app/ui/pages/messages_page.dart';
 import 'package:my_lettutor_app/ui/pages/settings_page.dart';
 import 'package:my_lettutor_app/ui/pages/tutors_page.dart';
-import 'package:my_lettutor_app/ui/pages/upcoming_page.dart';
+import 'package:my_lettutor_app/ui/pages/schedule_page.dart';
 
 import 'package:my_lettutor_app/data/data.dart' show teacherList;
 
@@ -39,7 +39,7 @@ class _TabsPageState extends State<TabsPage> {
         )
       },
       {'title': 'Chats', 'page': MessagesPage()},
-      {'title': 'Upcoming', 'page': UpcomingPage()},
+      {'title': 'Upcoming', 'page': SchedulePage()},
       {'title': 'Tutors', 'page': TutorsPage()},
       {
         'title': 'Settings',

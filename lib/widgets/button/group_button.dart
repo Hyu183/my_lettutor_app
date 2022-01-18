@@ -17,8 +17,8 @@ class GroupButton extends StatelessWidget {
     required this.colorBackgroudLeft,
     required this.colorTextLeft,
     required this.handlerLeft,
-    required this.handlerRight, required this.colorTopBorder,
-
+    required this.handlerRight,
+    required this.colorTopBorder,
   }) : super(key: key);
 
   @override

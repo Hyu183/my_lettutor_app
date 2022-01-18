@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:my_lettutor_app/models/temp/course.dart';
 import 'package:my_lettutor_app/models/temp/teacher.dart';
 import 'package:my_lettutor_app/models/tutor.dart';
+import 'package:my_lettutor_app/models/user_schedule.dart';
 import 'package:my_lettutor_app/ui/authentication/forgot_password.dart';
 import 'package:my_lettutor_app/ui/authentication/signup.dart';
 import 'package:my_lettutor_app/ui/course/course_detail.dart';
+import 'package:my_lettutor_app/ui/meetings/meeting.dart';
 import 'package:my_lettutor_app/ui/pages/profile_page.dart';
 import 'package:my_lettutor_app/ui/settings/advanced_settings.dart';
 import 'package:my_lettutor_app/ui/settings/booking_history.dart';
@@ -28,16 +30,21 @@ class Routes {
 
   static Route<dynamic>? onGenerateRoutes(settings) {
     if (settings.name == TutorDetail.routeName) {
-      var tutor = settings.arguments as Tutor;
+      var tutorId = settings.arguments as String;
       return MaterialPageRoute(builder: (_) {
         return TutorDetail(
-          tutor: tutor,
+          tutorId: tutorId,
         );
       });
     } else if (settings.name == CourseDetail.routeName) {
       var course = settings.arguments as Course;
       return MaterialPageRoute(builder: (_) {
         return CourseDetail(course: course);
+      });
+    } else if (settings.name == Meeting.routeName) {
+      var userSchedule = settings.arguments as UserSchedule;
+      return MaterialPageRoute(builder: (_) {
+        return Meeting(userSchedule: userSchedule);
       });
     }
   }

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TimeBadge extends StatelessWidget {
-  final String time;
+  final int hour;
+  final int minute;
   final Color textColor;
   final Color backgroundColor;
   const TimeBadge({
     Key? key,
-    required this.time,
+    required this.hour,
+    required this.minute,
     required this.textColor,
     required this.backgroundColor,
   }) : super(key: key);
@@ -21,7 +23,7 @@ class TimeBadge extends StatelessWidget {
         border: Border.all(color: textColor),
       ),
       child: Text(
-        time,
+        "${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}",
         style: TextStyle(
           color: textColor,
           fontSize: 10,

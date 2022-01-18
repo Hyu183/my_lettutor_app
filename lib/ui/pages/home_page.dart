@@ -7,14 +7,11 @@ import 'package:my_lettutor_app/data/network/dio_client.dart';
 import 'package:my_lettutor_app/models/tutor.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:my_lettutor_app/utils/utils.dart';
-// import 'package:my_lettutor_app/providers/favorite_teachers.dart';
+
 import 'package:provider/provider.dart';
 
 import 'package:my_lettutor_app/ui/pages/profile_page.dart';
 import 'package:my_lettutor_app/ui/tutor/tutor_card.dart';
-import 'package:my_lettutor_app/providers/teachers.dart';
-
-// import 'package:my_lettutor_app/data/data.dart';
 
 class HomePage extends StatefulWidget {
   final void Function(int) navigatorFunc;
@@ -35,8 +32,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
-    getData();
     super.initState();
+    getData();
   }
 
   void getData() {
@@ -51,6 +48,7 @@ class _HomePageState extends State<HomePage> {
         var totalTimeRes = await getTotalTime(dio);
         var tutorRes = await getTutorList(dio);
 
+        if(!mounted ) return;
         setState(() {
           tutorList = tutorRes;
           isLoadingTotalTime = false;
@@ -85,10 +83,14 @@ class _HomePageState extends State<HomePage> {
     return result;
   }
 
-  void reloadTutorList(Dio dio, String accessToken) async {
+  void reloadTutorList() async {
     setState(() {
       isLoadingTutorList = true;
     });
+    var dio = DioClient.dio;
+    var accessToken = 
+          context.read<AuthProvider>().userToken.tokens!.access!.token!;
+    
     dio.options.headers["Authorization"] = "Bearer $accessToken";
     var queryParams = {'perPage': 9, 'page': 1};
 
@@ -145,6 +147,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SingleChildScrollView(
+     
         child: Column(
           children: [
             Container(
@@ -163,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                     isLoadingTotalTime
                         ? translator.welcomeText
                         : translator.totalTime(totalTime[0], totalTime[1]),
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   ElevatedButton(
                     onPressed: () {

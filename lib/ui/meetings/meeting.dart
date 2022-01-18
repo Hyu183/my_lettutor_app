@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/models/user_schedule.dart';
 
 import 'package:my_lettutor_app/ui/meetings/timer_clock.dart';
 
-class Meetings extends StatelessWidget {
-  const Meetings({Key? key}) : super(key: key);
+class Meeting extends StatelessWidget {
+    static const  routeName = '/meeting';
+  final UserSchedule userSchedule;
+  const Meeting({Key? key, required this.userSchedule}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class Meetings extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 18,
                       ),
-                    ),            
+                    ),
                     TimerClock(remainderInSeconds: 3605),
                   ],
                 ),
