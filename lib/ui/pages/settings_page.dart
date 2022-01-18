@@ -26,8 +26,9 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = context.read<AuthProvider>();
-    final user = authProvider.userToken.user;
+    final user = authProvider.userToken.user!;
     final translator = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -51,7 +52,7 @@ class SettingsPage extends StatelessWidget {
                   height: 60,
                   child: CircleAvatar(
                     radius: 30,
-                    backgroundImage: user!.avatar! !=
+                    backgroundImage: user.avatar! !=
                             "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
                         ? ResizeImage(
                             NetworkImage(
@@ -89,16 +90,17 @@ class SettingsPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  SettingCard(
-                    icon: Icons.approval_outlined,
-                    text: translator.becomeTutorText,
-                    routeName: ViewFeedbacks.routeName,
-                  ),
-                  SettingCard(
-                    icon: Icons.person_outline_rounded,
-                    text: translator.viewFeedbackText,
-                    routeName: ViewFeedbacks.routeName,
-                  ),
+                  user.roles!.contains("tutor")
+                      ? SettingCard(
+                          icon: Icons.person_outline_rounded,
+                          text: translator.viewFeedbackText,
+                          routeName: ViewFeedbacks.routeName,
+                        )
+                      : SettingCard(
+                          icon: Icons.approval_outlined,
+                          text: translator.becomeTutorText,
+                          routeName: ViewFeedbacks.routeName,
+                        ),
                   SettingCard(
                     icon: Icons.list_outlined,
                     text: translator.bookingHistoryText,

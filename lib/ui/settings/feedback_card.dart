@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:my_lettutor_app/models/temp/mfeedback.dart';
+import 'package:my_lettutor_app/models/feedback.dart';
 
 class FeedbackCard extends StatelessWidget {
-  final MFeedback data;
+  final MFeedback feedback;
   const FeedbackCard({
     Key? key,
-    required this.data,
+    required this.feedback,
   }) : super(key: key);
 
   @override
@@ -20,30 +20,39 @@ class FeedbackCard extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              leading: const SizedBox(
+              leading: SizedBox(
                 width: 70,
                 height: 60,
                 child: CircleAvatar(
                   radius: 30,
-                  backgroundImage: ResizeImage(
-                    AssetImage(
-                      'assets/images/user.png',
-                    ),
-                    height: 60,
-                    width: 60,
-                  ),
+                  backgroundImage: feedback.firstInfo!.avatar! !=
+                          "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+                      ? ResizeImage(
+                          NetworkImage(
+                            feedback.firstInfo!.avatar!,
+                          ),
+                          height: 60,
+                          width: 60,
+                        )
+                      : const ResizeImage(
+                          AssetImage(
+                            'assets/images/user.png',
+                          ),
+                          height: 60,
+                          width: 60,
+                        ),
                 ),
               ),
-              title: Text(data.name),
+              title: Text(feedback.firstInfo!.name!),
               subtitle: Text(
-                DateFormat('HH:mm:ss, dd/MM/yyyy').format(data.date),
+                DateFormat('HH:mm:ss, dd/MM/yyyy').format(feedback.updatedAt!),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${data.rating}',
+                  '${feedback.rating}',
                   style: const TextStyle(
                     color: Colors.redAccent,
                     fontWeight: FontWeight.bold,
@@ -70,7 +79,7 @@ class FeedbackCard extends StatelessWidget {
                 elevation: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(data.content),
+                  child: Text(feedback.content!),
                 ),
               ),
             ),
