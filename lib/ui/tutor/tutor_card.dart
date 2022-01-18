@@ -1,31 +1,25 @@
-import 'package:dio/src/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:my_lettutor_app/data/network/dio_client.dart';
+
 import 'package:my_lettutor_app/models/tutor.dart';
-import 'package:my_lettutor_app/providers/auth_provider.dart';
 
 import 'package:my_lettutor_app/ui/tutor/tutor_detail.dart';
 import 'package:my_lettutor_app/ui/tutor/tutor_list_tile.dart';
-
-import 'package:provider/src/provider.dart';
 
 class TutorCard extends StatelessWidget {
   final Tutor tutor;
   final int version;
   final VoidCallback reloadTutorList;
-  const TutorCard({
-    Key? key,
-    required this.tutor,
-    required this.version,
-    required this.reloadTutorList,
-  }) : super(key: key);
+  Function(String)? toggleFavorite;
+  TutorCard(
+      {Key? key,
+      required this.tutor,
+      required this.version,
+      required this.reloadTutorList,
+      this.toggleFavorite})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final accessToken =
-        context.read<AuthProvider>().userToken.tokens!.access!.token!;
-    final dio = DioClient.dio;
-
     return SizedBox(
       height: 200,
       child: Card(
@@ -48,6 +42,7 @@ class TutorCard extends StatelessWidget {
                 TutorListTile(
                   tutor: tutor,
                   version: version,
+                  toggleFavorite: toggleFavorite,
                 ),
                 SizedBox(
                   height: version == 1 ? 5 : 15,

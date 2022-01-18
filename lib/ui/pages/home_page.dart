@@ -7,6 +7,7 @@ import 'package:my_lettutor_app/data/network/dio_client.dart';
 import 'package:my_lettutor_app/models/tutor.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:my_lettutor_app/utils/utils.dart';
+import 'package:my_lettutor_app/widgets/no_data.dart';
 
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
         var totalTimeRes = await getTotalTime(dio);
         var tutorRes = await getTutorList(dio);
 
-        if(!mounted ) return;
+        if (!mounted) return;
         setState(() {
           tutorList = tutorRes;
           isLoadingTotalTime = false;
@@ -73,10 +74,10 @@ class _HomePageState extends State<HomePage> {
 
     var res = await dio.get('/tutor/more', queryParameters: queryParams);
 
-    Iterable rawTutors = res.data["tutors"]["rows"];
+    Iterable rawTutors = res.data["favoriteTutor"];
 
     var result = await Future.wait(rawTutors.map((tutor) async {
-      var tutorRes = await dio.get('/tutor/${tutor['userId']}');
+      var tutorRes = await dio.get('/tutor/${tutor['secondId']}');
       return Tutor.fromJson(tutorRes.data);
     }));
 
@@ -88,24 +89,29 @@ class _HomePageState extends State<HomePage> {
       isLoadingTutorList = true;
     });
     var dio = DioClient.dio;
-    var accessToken = 
-          context.read<AuthProvider>().userToken.tokens!.access!.token!;
-    
+    var accessToken =
+        context.read<AuthProvider>().userToken.tokens!.access!.token!;
+
     dio.options.headers["Authorization"] = "Bearer $accessToken";
     var queryParams = {'perPage': 9, 'page': 1};
-
     var res = await dio.get('/tutor/more', queryParameters: queryParams);
-
-    Iterable rawTutors = res.data["tutors"]["rows"];
+    Iterable rawTutors = res.data["favoriteTutor"];
 
     var result = await Future.wait(rawTutors.map((tutor) async {
-      var tutorRes = await dio.get('/tutor/${tutor['userId']}');
+      var tutorRes = await dio.get('/tutor/${tutor['secondId']}');
       return Tutor.fromJson(tutorRes.data);
     }));
 
     setState(() {
       tutorList = result;
       isLoadingTutorList = false;
+    });
+  }
+
+  void toggleFavorite(String tutorId) {
+    setState(() {
+      tutorList =
+          tutorList.where((element) => element.userId != tutorId).toList();
     });
   }
 
@@ -147,7 +153,6 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SingleChildScrollView(
-     
         child: Column(
           children: [
             Container(
@@ -227,18 +232,22 @@ class _HomePageState extends State<HomePage> {
                     color: Theme.of(context).textTheme.headline2!.color,
                     backgroundColor: Colors.white,
                   )
-                : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                    child: Column(
-                      children: tutorList.map((tutor) {
-                        return TutorCard(
-                          tutor: tutor,
-                          version: 1,
-                          reloadTutorList: reloadTutorList,
-                        );
-                      }).toList(),
-                    ),
-                  ),
+                : tutorList.isEmpty
+                    ? const NoData()
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                        child: Column(
+                          children: tutorList.map((tutor) {
+                            return TutorCard(
+                                key: ValueKey(tutor.userId),
+                              tutor: tutor,
+                              version: 1,
+                              reloadTutorList: reloadTutorList,
+                            toggleFavorite: toggleFavorite,
+                            );
+                          }).toList(),
+                        ),
+                      ),
           ],
         ),
       ),

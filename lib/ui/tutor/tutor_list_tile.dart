@@ -13,11 +13,12 @@ import 'package:provider/src/provider.dart';
 class TutorListTile extends StatefulWidget {
   final Tutor tutor;
   final int version;
+  Function(String)? toggleFavorite;
 
-  const TutorListTile({
+   TutorListTile({
     Key? key,
     required this.tutor,
-    required this.version,
+    required this.version,this.toggleFavorite
   }) : super(key: key);
 
   @override
@@ -38,7 +39,7 @@ class _TutorListTileState extends State<TutorListTile> {
     var dio = DioClient.dio;
     try {
       dio.options.headers["Authorization"] = "Bearer $accessToken";
-      var res = await dio.post('/user/manageFavoriteTutor',
+      await dio.post('/user/manageFavoriteTutor',
           data: {"tutorId": widget.tutor.userId});
       setState(() {
         isFavorite = !isFavorite;
@@ -46,6 +47,10 @@ class _TutorListTileState extends State<TutorListTile> {
     } catch (e) {
       print("Something went wrong");
     }
+    if(widget.toggleFavorite != null){
+        widget.toggleFavorite!(widget.tutor.userId!);
+    }
+    
   }
 
   @override
