@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:my_lettutor_app/models/temp/course.dart';
-import 'package:my_lettutor_app/models/temp/teacher.dart';
-import 'package:my_lettutor_app/models/tutor.dart';
+import 'package:my_lettutor_app/models/course.dart';
+
 import 'package:my_lettutor_app/models/user_schedule.dart';
 import 'package:my_lettutor_app/ui/authentication/forgot_password.dart';
 import 'package:my_lettutor_app/ui/authentication/signup.dart';

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/models/course.dart';
 
 import 'package:my_lettutor_app/ui/course/course_detail_part.dart';
 import 'package:my_lettutor_app/ui/course/topic_card.dart';
 
-import 'package:my_lettutor_app/models/temp/course.dart';
+// import 'package:my_lettutor_app/models/temp/course.dart';
 
 class CourseDetailBody extends StatelessWidget {
   final Course course;
@@ -16,10 +17,16 @@ class CourseDetailBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Center(
+          child: Text(
+            course.name!,
+            style: const TextStyle(fontSize: 30),
+          ),
+        ),
         CourseDetailPart(
             title: 'About Course',
             child: Text(
-              course.description,
+              course.description!,
               style: Theme.of(context).textTheme.subtitle1,
             ),
             hasPadding: false),
@@ -43,7 +50,7 @@ class CourseDetailBody extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                course.overviews[0],
+                course.reason!,
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               const SizedBox(
@@ -65,7 +72,7 @@ class CourseDetailBody extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                course.overviews[1],
+                course.purpose!,
                 style: Theme.of(context).textTheme.subtitle1,
               ),
             ],
@@ -75,7 +82,7 @@ class CourseDetailBody extends StatelessWidget {
         CourseDetailPart(
           title: 'Experience Level',
           child: Text(
-            course.level,
+            course.level!,
             style: Theme.of(context).textTheme.subtitle1,
           ),
           hasPadding: false,
@@ -83,11 +90,11 @@ class CourseDetailBody extends StatelessWidget {
         CourseDetailPart(
           title: 'Topic',
           child: Column(
-            children: course.topics
+            children: course.topics!
                 .map(
                   (topic) => TopicCard(
-                    number: course.topics.indexOf(topic) + 1,
-                    text: topic,
+                    number: topic.orderCourse! + 1,
+                    text: topic.name!,
                   ),
                 )
                 .toList(),

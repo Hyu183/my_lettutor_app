@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
       try {
         var totalTimeRes = await getTotalTime(dio);
         var tutorRes = await getTutorList(dio);
-
+        print(tutorRes.length);
         if (!mounted) return;
         setState(() {
           tutorList = tutorRes;
@@ -80,6 +80,9 @@ class _HomePageState extends State<HomePage> {
       var tutorRes = await dio.get('/tutor/${tutor['secondId']}');
       return Tutor.fromJson(tutorRes.data);
     }));
+
+    print(rawTutors.length);
+    print(result.length);
 
     return result;
   }
@@ -238,12 +241,13 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.symmetric(horizontal: 15.0),
                         child: Column(
                           children: tutorList.map((tutor) {
+                            tutor.ToString();
                             return TutorCard(
-                                key: ValueKey(tutor.userId),
+                              key: ValueKey(tutor.userId),
                               tutor: tutor,
                               version: 1,
                               reloadTutorList: reloadTutorList,
-                            toggleFavorite: toggleFavorite,
+                              toggleFavorite: toggleFavorite,
                             );
                           }).toList(),
                         ),

@@ -231,8 +231,11 @@ class _TutorsPageState extends State<TutorsPage> {
             ),
             Expanded(
               child: isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(),
+                  ?  Center(
+                      child: CircularProgressIndicator(
+                        color: Theme.of(context).textTheme.headline2!.color,
+                        backgroundColor: Colors.white,
+                      ),
                     )
                   : tutors.isEmpty
                       ? const NoData()

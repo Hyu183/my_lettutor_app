@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => Teachers()),
         ChangeNotifierProvider(create: (_) => FavoriteTeachers()),
-        // ChangeNotifierProvider(create: (_) => AuthProvider()),
+       
         ChangeNotifierProvider.value(value: authProvider),
         ChangeNotifierProvider.value(value: themeProvider),
         ChangeNotifierProvider.value(value: languageProvider),
@@ -99,7 +99,7 @@ class _MyAppState extends State<MyApp> {
           builder: EasyLoading.init(),
           routes: Routes.routes,
           onGenerateRoute: (settings) => Routes.onGenerateRoutes(settings),
-          locale: Locale(languageProvider.languageCode),
+          locale: languageProvider.getLocale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           debugShowCheckedModeBanner: false,

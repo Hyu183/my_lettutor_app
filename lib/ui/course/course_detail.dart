@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/models/course.dart';
 
 import 'package:my_lettutor_app/ui/course/course_detail_body.dart';
 import 'package:my_lettutor_app/widgets/number_above_text.dart';
 
-import 'package:my_lettutor_app/models/temp/course.dart';
-
-
-
+// import 'package:my_lettutor_app/models/temp/course.dart';
 
 class CourseDetail extends StatelessWidget {
   static const routeName = '/course-detail';
@@ -18,6 +16,7 @@ class CourseDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    course.topics!.sort((a, b) => a.orderCourse!.compareTo(b.orderCourse!));
     return Scaffold(
       body: Container(
         margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
@@ -31,7 +30,12 @@ class CourseDetail extends StatelessWidget {
                   children: [
                     Container(
                       height: 250,
-                      color: Colors.blue,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(course.imageUrl!),
+                        ),
+                      ),
                     ),
                     Positioned.fill(
                       child: Align(
@@ -54,7 +58,7 @@ class CourseDetail extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   NumberAboveText(
-                                    number: course.topics.length,
+                                    number: course.topics!.length,
                                     text: 'topics',
                                     color: Colors.blue,
                                   ),

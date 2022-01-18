@@ -56,7 +56,7 @@ class _SchedulePageState extends State<SchedulePage> {
         List<UserSchedule> result = rawRes
             .map((userSchedule) => UserSchedule.fromJson(userSchedule))
             .toList();
-         if (!mounted) return;
+        if (!mounted) return;
         setState(() {
           userSchedules = result;
           isLoading = false;
@@ -101,7 +101,12 @@ class _SchedulePageState extends State<SchedulePage> {
           horizontal: 20,
         ),
         child: isLoading
-            ? const Center(child: CircularProgressIndicator())
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: Theme.of(context).textTheme.headline2!.color,
+                  backgroundColor: Colors.white,
+                ),
+              )
             : userSchedules.isEmpty
                 ? const Center(child: NoData())
                 : ListView.builder(
@@ -109,9 +114,10 @@ class _SchedulePageState extends State<SchedulePage> {
                     itemCount: userSchedules.length,
                     itemBuilder: (_, i) {
                       return ScheduleCard(
-                          key: ValueKey(userSchedules[i].id),
-                          userSchedule: userSchedules[i],
-                          onCancel: onCancelScheduleHandler,);
+                        key: ValueKey(userSchedules[i].id),
+                        userSchedule: userSchedules[i],
+                        onCancel: onCancelScheduleHandler,
+                      );
                     },
                   ),
       ),

@@ -12,7 +12,7 @@ class AdvancedSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);
     final lang = Provider.of<LanguageProvider>(context);
-
+    print(lang.languageCode);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -37,7 +37,8 @@ class AdvancedSettings extends StatelessWidget {
                   AppLocalizations.of(context)!.languageSettingText,
                   style: const TextStyle(color: Colors.black),
                 ),
-                subtitle: Text(lang.languageCode == 'vi'?'Tiếng Việt': 'English'),
+                subtitle:
+                    Text(lang.languageCode == 'vi' ? 'Tiếng Việt' : 'English'),
               ),
               itemBuilder: (context) => [
                 PopupMenuItem(

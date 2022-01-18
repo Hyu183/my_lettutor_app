@@ -5,7 +5,7 @@ import 'package:my_lettutor_app/providers/teachers.dart';
 import 'package:provider/provider.dart';
 
 import 'package:my_lettutor_app/ui/pages/home_page.dart';
-import 'package:my_lettutor_app/ui/pages/messages_page.dart';
+import 'package:my_lettutor_app/ui/pages/courses_page.dart';
 import 'package:my_lettutor_app/ui/pages/settings_page.dart';
 import 'package:my_lettutor_app/ui/pages/tutors_page.dart';
 import 'package:my_lettutor_app/ui/pages/schedule_page.dart';
@@ -38,14 +38,14 @@ class _TabsPageState extends State<TabsPage> {
           navigatorFunc: _changeTab,
         )
       },
-      {'title': 'Chats', 'page': MessagesPage()},
+      {'title': 'Courses', 'page': CoursePage()},
       {'title': 'Upcoming', 'page': SchedulePage()},
       {'title': 'Tutors', 'page': TutorsPage()},
       {
         'title': 'Settings',
         'page': SettingsPage(
-        //   callback: widget.callback,
-        )
+            //   callback: widget.callback,
+            )
       },
     ];
 
@@ -60,8 +60,9 @@ class _TabsPageState extends State<TabsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final translator = AppLocalizations.of(context)!;
     //set data for teacher list;
-    Provider.of<Teachers>(context, listen: false).setTeachers(teacherList);
+
     return Scaffold(
       body: _pages[_selectedIndex]['page'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
@@ -70,36 +71,36 @@ class _TabsPageState extends State<TabsPage> {
         unselectedItemColor: Colors.grey,
         type: BottomNavigationBarType.fixed,
         onTap: (index) => _changeTab(index),
-        items:  [
+        items: [
           BottomNavigationBarItem(
             icon: const Icon(
               Icons.home,
             ),
-            label: AppLocalizations.of(context)!.homeTabLabel,
+            label: translator.homeTabLabel,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
               Icons.question_answer,
             ),
-            label: AppLocalizations.of(context)!.messageTabLabel,
+            label: translator.coursesTabLabel,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
               Icons.schedule,
             ),
-            label: AppLocalizations.of(context)!.upcomingTabLabel,
+            label: translator.upcomingTabLabel,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
               Icons.groups,
             ),
-            label: AppLocalizations.of(context)!.tutorsTabLabel,
+            label: translator.tutorsTabLabel,
           ),
           BottomNavigationBarItem(
             icon: const Icon(
               Icons.settings,
             ),
-            label: AppLocalizations.of(context)!.settingsTabLabel,
+            label: translator.settingsTabLabel,
           ),
         ],
       ),

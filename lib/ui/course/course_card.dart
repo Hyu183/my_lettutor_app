@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/models/course.dart';
 
 import 'package:my_lettutor_app/ui/course/course_detail.dart';
 
-import 'package:my_lettutor_app/models/temp/course.dart';
+// import 'package:my_lettutor_app/models/temp/course.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;
@@ -24,14 +25,13 @@ class CourseCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
+            height: 150,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(course.imageUrl!),
               ),
-              color: Colors.yellow,
             ),
-            height: 120,
           ),
           Expanded(
             child: Column(
@@ -46,7 +46,7 @@ class CourseCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        course.title,
+                        course.name!,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
@@ -58,7 +58,7 @@ class CourseCard extends StatelessWidget {
                         height: 8,
                       ),
                       Text(
-                        course.description,
+                        course.description!,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -76,7 +76,7 @@ class CourseCard extends StatelessWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Text(course.level),
+                          Text(course.level!),
                         ],
                       ),
                     ],
