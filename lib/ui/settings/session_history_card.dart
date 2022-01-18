@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_lettutor_app/models/user_schedule.dart';
 
 import 'package:my_lettutor_app/ui/settings/session_tile.dart';
 import 'package:my_lettutor_app/widgets/button/group_button.dart';
 
-import 'package:my_lettutor_app/models/temp/session.dart';
+// import 'package:my_lettutor_app/models/temp/session.dart';
 
 class SessionHistoryCard extends StatelessWidget {
-  final Session session;
+  final UserSchedule session;
   const SessionHistoryCard({
     Key? key,
     required this.session,
@@ -37,6 +38,7 @@ class SessionHistoryCard extends StatelessWidget {
             //   child: SessionTile(session: session),
             // ),
             // const SizedBox(height: 10),
+            
             Flexible(
               flex: 1,
               child: GroupButton(
