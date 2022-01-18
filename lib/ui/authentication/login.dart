@@ -41,7 +41,6 @@ class Login extends StatelessWidget {
   }
 
   String? passwordValidator(String? password, BuildContext context) {
-    //print(password);
     if (password != null) {
       if (password.isEmpty) {
         return AppLocalizations.of(context)!.emptyPasswordErrText;
@@ -72,7 +71,7 @@ class Login extends StatelessWidget {
     }
     EasyLoading.show();
     var dio = DioClient.dio;
-    
+
     try {
       var res = await dio.post(
         '/auth/login',

@@ -106,6 +106,7 @@
     "noCancelContentTextDialog": "Không",
     "yesCancelContentTextDialog": "Có",
     "cancelClassSnackBar":"Huỷ lớp thành công",
+     "cancelClassSnackBarFail":"Bạn chỉ có thể huỷ lớp trước 2 tiếng",
     "wrongLogInInfo": "Sai email hoặc mật khẩu",
     "registerSnackBarTitle":"Đăng ký thành công",
     "registerSnackBarMessage":"Email xác nhận đã được gửi đến {email}.",

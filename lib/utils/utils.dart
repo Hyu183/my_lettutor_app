@@ -23,4 +23,10 @@ class Utils {
         languages.split(',').map((lang) => languagesMap[lang] ?? lang).toList();
     return result;
   }
+
+  static bool checkValidCancelClass(int startTimeStamp) {
+    var timeStart = DateTime.fromMillisecondsSinceEpoch(startTimeStamp);
+
+    return DateTime.now().difference(timeStart).abs().inMinutes > 120;
+  }
 }

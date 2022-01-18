@@ -106,6 +106,7 @@
     "noCancelContentTextDialog": "No",
     "yesCancelContentTextDialog": "Yes",
     "cancelClassSnackBar":"Cancel class successfully",
+    "cancelClassSnackBarFail":"You only can cancel class before 2 hours",
     "wrongLogInInfo": "Incorrect email or password",
     "registerSnackBarTitle":"Register successfully",
         "registerSnackBarMessage":"Confirm Email was sent to {email}.",

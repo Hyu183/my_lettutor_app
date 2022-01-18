@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:my_lettutor_app/constants/variables.dart';
 import 'package:my_lettutor_app/data/network/dio_client.dart';
 import 'package:my_lettutor_app/models/tutor.dart';
@@ -62,16 +63,28 @@ class _TutorsPageState extends State<TutorsPage> {
     if (_scrollController.position.pixels ==
             _scrollController.position.maxScrollExtent &&
         isLoadingMore == false) {
-      print("OK");
-
       if (tutors.length < countTotal) {
         setState(() {
           isLoadingMore = true;
         });
         currentPage += 1;
         getTutorList();
+      } else {
+        showSnackbarNoMoreData();
       }
     }
+  }
+
+  void showSnackbarNoMoreData() {
+    Get.closeAllSnackbars();
+    Get.snackbar(
+      AppLocalizations.of(context)!.noMoreData, '',
+      colorText: Colors.black,
+      animationDuration: const Duration(milliseconds: 200),
+      // backgroundColor: Colors.red,
+      duration: const Duration(milliseconds: 600),
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 
   void _onTapSpecialityHandler(String slug) {
@@ -112,8 +125,6 @@ class _TutorsPageState extends State<TutorsPage> {
           'search': _searchTextController.value.text
         };
 
-        print(data);
-
         var response = await dio.post('/tutor/search', data: data);
 
         Iterable rawTutors = response.data["rows"];
@@ -149,7 +160,7 @@ class _TutorsPageState extends State<TutorsPage> {
   void reloadFavoriteTutorList() async {
     setState(() {
       isLoading = true;
-    });   
+    });
     var dio = DioClient.dio;
     var accessToken =
         context.read<AuthProvider>().userToken.tokens!.access!.token!;
@@ -159,7 +170,7 @@ class _TutorsPageState extends State<TutorsPage> {
     var res = await dio.get('/tutor/more', queryParameters: queryParams);
 
     Iterable rawTutors = res.data["favoriteTutor"];
-    
+
     var favoritedTutorId = rawTutors.map((e) => e['secondId']);
     var tempTutorList = tutors.toList();
 
@@ -169,7 +180,7 @@ class _TutorsPageState extends State<TutorsPage> {
       } else {
         tempTutorList[i].isFavorite = false;
       }
-    } 
+    }
 
     setState(() {
       tutors = tempTutorList;
@@ -231,7 +242,7 @@ class _TutorsPageState extends State<TutorsPage> {
             ),
             Expanded(
               child: isLoading
-                  ?  Center(
+                  ? Center(
                       child: CircularProgressIndicator(
                         color: Theme.of(context).textTheme.headline2!.color,
                         backgroundColor: Colors.white,
@@ -241,30 +252,34 @@ class _TutorsPageState extends State<TutorsPage> {
                       ? const NoData()
                       : RefreshIndicator(
                           onRefresh: _onRefresh,
+                          color: Theme.of(context).textTheme.headline2!.color,
+                          backgroundColor: Colors.white,
                           child: ListView.builder(
                             controller: _scrollController,
                             clipBehavior: Clip.hardEdge,
-                            //   physics: const BouncingScrollPhysics(
-                            //       parent: AlwaysScrollableScrollPhysics()),
-                            //   dragStartBehavior: DragStartBehavior.start,
-                            //   primary: false,
+                            physics: const BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics()),
+                           
                             itemCount: tutors.length + 1,
                             itemBuilder: (_, index) {
                               if (index == tutors.length) {
                                 return isLoadingMore
-                                    ? const Center(
+                                    ? Center(
                                         child: SizedBox(
                                           width: 20,
                                           height: 20,
                                           child: CircularProgressIndicator(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .headline2!
+                                                .color,
+                                            backgroundColor: Colors.white,
                                             strokeWidth: 2,
                                           ),
                                         ),
                                       )
                                     : Container();
-                                //   Center(
-                                //       child: Text(translator.noMoreData),
-                                //     );
+                              
                               }
                               return Padding(
                                 padding:

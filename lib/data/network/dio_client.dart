@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 class DioClient {
   static final  Dio dio = Dio(BaseOptions(
         baseUrl: 'https://sandbox.api.lettutor.com',
-        connectTimeout: 5000,
-        receiveTimeout: 3000,
+        connectTimeout: 10000,
+        receiveTimeout: 10000,
         contentType: Headers.jsonContentType,
         responseType: ResponseType.json));
 

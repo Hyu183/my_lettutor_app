@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:my_lettutor_app/models/user.dart';
+import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:my_lettutor_app/widgets/input/birthday_input.dart';
 import 'package:my_lettutor_app/widgets/input/drop_down_input.dart';
 import 'package:my_lettutor_app/widgets/input/phone_input.dart';
@@ -7,9 +9,10 @@ import 'package:my_lettutor_app/ui/profile/profile_avatar.dart';
 import 'package:my_lettutor_app/widgets/button/large_button.dart';
 
 import 'package:my_lettutor_app/data/data.dart';
-import 'package:my_lettutor_app/models/temp/user.dart';
+// import 'package:my_lettutor_app/models/temp/user.dart';
+import 'package:provider/src/provider.dart';
 
-final User user = User(name: 'Huy', email: 'Email@gmail.com');
+// final User user = User(name: 'Huy', email: 'Email@gmail.com');
 
 class ProfilePage extends StatefulWidget {
   static const routeName = '/profile';
@@ -20,13 +23,22 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late User user;
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController(text: user.name);
+  final _nameController = TextEditingController();
 
   var _selectedDate = DateTime.now();
   var _selectedCountry = 'Vietnam';
   var _selectedLevel = 'Beginner';
   var _selectedWannaLearn = 'TOEIC';
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    user = context.read<AuthProvider>().userToken.user!;
+    _nameController.text = user.name!;
+  }
 
   void _startDatePicker(BuildContext ctx) {
     showDatePicker(
@@ -64,12 +76,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final translator = AppLocalizations.of(context)!;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title:  Text(
-          AppLocalizations.of(context)!.profileTitle,
-          style: TextStyle(
+        title: Text(
+          translator.profileTitle,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -89,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const ProfileAvatar(),
+                    ProfileAvatar(userAvatarUrl: user.avatar!),
                     Theme(
                       data: ThemeData(),
                       child: TextFormField(
@@ -106,7 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     Text(
-                      user.email,
+                      user.email!,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 21,
@@ -125,24 +139,24 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   const PhoneInput(),
                   DropdownInput(
-                    title: AppLocalizations.of(context)!.countryLabel,
+                    title: translator.countryLabel,
                     list: countryList,
                     selectedValue: _selectedCountry,
                     callback: setDropdownCountry,
                   ),
                   DropdownInput(
-                    title: AppLocalizations.of(context)!.myLevelLabel,
+                    title: translator.myLevelLabel,
                     list: ['Beginner', 'Intermediate', 'Advanced'],
                     selectedValue: _selectedLevel,
                     callback: setDropdownLevel,
                   ),
                   DropdownInput(
-                    title: AppLocalizations.of(context)!.wantToLearnLabel,
+                    title: translator.wantToLearnLabel,
                     list: specialities,
                     selectedValue: _selectedWannaLearn,
                     callback: setDropdownWannaLearn,
                   ),
-                  LargeButton(text: AppLocalizations.of(context)!.saveBtn, handler: () {}),
+                  LargeButton(text: translator.saveBtn, handler: () {}),
                 ],
               ),
             ],

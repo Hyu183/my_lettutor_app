@@ -7,7 +7,7 @@ import 'package:my_lettutor_app/models/user_schedule.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:my_lettutor_app/ui/schedule/schedule_card.dart';
 
-import 'package:my_lettutor_app/data/data.dart';
+
 import 'package:my_lettutor_app/widgets/no_data.dart';
 import 'package:provider/src/provider.dart';
 
@@ -19,18 +19,56 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-  ScrollController _scrollController = ScrollController();
+  final _scrollController = ScrollController();
   List<UserSchedule> userSchedules = [];
   bool isLoading = true;
-  bool isCancelling = false;
+  bool isLoadingMore = false;
   int currentPage = 1;
   final int perPage = 10;
+  int countTotal = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _scrollController.addListener(scrollListener);
     getUserSchedules();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void scrollListener() {
+    if (_scrollController.position.pixels ==
+            _scrollController.position.maxScrollExtent &&
+        isLoadingMore == false) {
+      if (userSchedules.length < countTotal) {
+        setState(() {
+          isLoadingMore = true;
+        });
+        currentPage += 1;
+        getUserSchedules();
+      } else {
+        showSnackbarNoMoreData();
+      }
+    }
+  }
+
+  void showSnackbarNoMoreData() {
+    Get.closeAllSnackbars();
+    Get.snackbar(
+      AppLocalizations.of(context)!.noMoreData, '',
+      colorText: Colors.black,
+      animationDuration: const Duration(milliseconds: 200),
+      // backgroundColor: Colors.red,
+      duration: const Duration(milliseconds: 600),
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 
   void getUserSchedules() {
@@ -60,6 +98,7 @@ class _SchedulePageState extends State<SchedulePage> {
         setState(() {
           userSchedules = result;
           isLoading = false;
+          countTotal = res.data["data"]['count'];
         });
       } on DioError catch (e) {
         print(e.response!.data);
@@ -67,10 +106,13 @@ class _SchedulePageState extends State<SchedulePage> {
     });
   }
 
-  void triggerLoadingCancelling() {
+  Future _onRefresh() {
     setState(() {
-      isCancelling = !isCancelling;
+      currentPage = 1;
+      isLoading = true;
+      userSchedules = [];
     });
+    return Future.delayed(Duration.zero, getUserSchedules);
   }
 
   void onCancelScheduleHandler(String scheduleDetailId) {
@@ -109,16 +151,42 @@ class _SchedulePageState extends State<SchedulePage> {
               )
             : userSchedules.isEmpty
                 ? const Center(child: NoData())
-                : ListView.builder(
-                    // controller: _scrollController,
-                    itemCount: userSchedules.length,
-                    itemBuilder: (_, i) {
-                      return ScheduleCard(
-                        key: ValueKey(userSchedules[i].id),
-                        userSchedule: userSchedules[i],
-                        onCancel: onCancelScheduleHandler,
-                      );
-                    },
+                : RefreshIndicator(
+                    onRefresh: _onRefresh,
+                    color: Theme.of(context).textTheme.headline2!.color,
+                    backgroundColor: Colors.white,
+                    child: ListView.builder(
+                      controller: _scrollController,
+                      clipBehavior: Clip.hardEdge,
+                      physics: const BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics()),
+                      itemCount: userSchedules.length + 1,
+                      itemBuilder: (_, i) {
+                        if (i == userSchedules.length) {
+                          return isLoadingMore
+                              ? Center(
+                                  child: SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .headline2!
+                                          .color,
+                                      backgroundColor: Colors.white,
+                                      strokeWidth: 2,
+                                    ),
+                                  ),
+                                )
+                              : Container();
+                        }
+                        return ScheduleCard(
+                          key: ValueKey(userSchedules[i].id),
+                          userSchedule: userSchedules[i],
+                          onCancel: onCancelScheduleHandler,
+                        );
+                      },
+                    ),
                   ),
       ),
     );

@@ -5,7 +5,6 @@ import 'package:my_lettutor_app/models/user_schedule_detail_info.dart';
 import 'package:my_lettutor_app/widgets/badge/time_badge.dart';
 
 class ScheduleTile extends StatelessWidget {
-
   final UserScheduleDetailInfo scheduleDetailInfo;
   const ScheduleTile({
     Key? key,
@@ -42,7 +41,6 @@ class ScheduleTile extends StatelessWidget {
             Text(
               scheduleDetailInfo.scheduleInfo!.tutorInfo!.name!,
               style: const TextStyle(
-                fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
@@ -54,7 +52,6 @@ class ScheduleTile extends StatelessWidget {
                 Text(
                   DateFormat('EEE, dd-MM-yyyy').format(startTime),
                   style: const TextStyle(
-                    fontWeight: FontWeight.bold,
                     fontSize: 15,
                   ),
                 ),

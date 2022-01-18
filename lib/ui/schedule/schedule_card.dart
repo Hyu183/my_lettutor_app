@@ -9,6 +9,7 @@ import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:my_lettutor_app/ui/meetings/meeting.dart';
 
 import 'package:my_lettutor_app/ui/schedule/schedule_tile.dart';
+import 'package:my_lettutor_app/utils/utils.dart';
 import 'package:my_lettutor_app/widgets/button/group_button.dart';
 import 'package:provider/src/provider.dart';
 
@@ -25,11 +26,25 @@ class ScheduleCard extends StatelessWidget {
   }) : super(key: key);
 
   void showSnackBarCancelClassSuccess(BuildContext context) {
+    Get.closeAllSnackbars();
     Get.snackbar(
       AppLocalizations.of(context)!.cancelClassSnackBar,
       '',
       colorText: Colors.white,
       backgroundColor: Colors.green,
+      duration: const Duration(seconds: 1),
+      leftBarIndicatorColor: Colors.white,
+      borderRadius: 10,
+    );
+  }
+
+  void showSnackBarCancelClassFail(BuildContext context) {
+    Get.closeAllSnackbars();
+    Get.snackbar(
+      AppLocalizations.of(context)!.cancelClassSnackBarFail,
+      '',
+      colorText: Colors.white,
+      backgroundColor: Colors.red,
       duration: const Duration(seconds: 1),
       leftBarIndicatorColor: Colors.white,
       borderRadius: 10,
@@ -58,6 +73,7 @@ class ScheduleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translator = AppLocalizations.of(context)!;
+   
     return Container(
       width: double.infinity,
       height: 150,
@@ -85,26 +101,31 @@ class ScheduleCard extends StatelessWidget {
                 colorTextLeft: Colors.grey,
                 colorTopBorder: Colors.grey,
                 handlerLeft: () {
-                  showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                            content: Text(translator.cancelContentTextDialog),
-                            actions: [
-                              TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text(
-                                      translator.noCancelContentTextDialog)),
-                              TextButton(
-                                  onPressed: () {
-                                    confirmCancelHandler(context);
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text(
-                                      translator.yesCancelContentTextDialog)),
-                            ],
-                          ));
+                  if (Utils.checkValidCancelClass(
+                      userSchedule.scheduleDetailInfo!.startPeriodTimestamp!)) {
+                    showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                              content: Text(translator.cancelContentTextDialog),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                        translator.noCancelContentTextDialog)),
+                                TextButton(
+                                    onPressed: () {
+                                      confirmCancelHandler(context);
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Text(
+                                        translator.yesCancelContentTextDialog)),
+                              ],
+                            ));
+                  } else {
+                    showSnackBarCancelClassFail(context);
+                  }
                 },
                 handlerRight: () {
                   Navigator.of(context)
