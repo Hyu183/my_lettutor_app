@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.my_lettutor_app">
+    package="com.example.my_lettutor_app" xmlns:tools="http://schemas.android.com/tools">
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
@@ -16,6 +16,7 @@
     </queries>
     <uses-permission android:name="android.permission.INTERNET" />
    <application
+   tools:replace="android:label"
         android:label="Let Tutor"
         android:icon="@mipmap/ic_launcher">
         <activity

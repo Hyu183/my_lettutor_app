@@ -141,7 +141,7 @@ class _TutorListTileState extends State<TutorListTile> {
                             ),
                           ),
                           Text(
-                            widget.tutor.avgRating!.toStringAsFixed(2),
+                            widget.tutor.avgRating!.toStringAsFixed(1),
                             style: TextStyle(
                               color: Colors.red[400],
                               fontSize: 18,

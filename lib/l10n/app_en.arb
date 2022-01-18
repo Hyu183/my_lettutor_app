@@ -20,7 +20,7 @@
     "confirmPasswordLabel": "Confirm password",
     "homeTabLabel": "Home",
     "messageTabLabel": "Message",
-    "upcomingTabLabel": "Upcoming",
+    "upcomingTabLabel": "Schedules",
     "tutorsTabLabel": "Tutors",
     "settingsTabLabel": "Settings",
     "bookLessonBtn": "Book a lesson",
@@ -40,7 +40,7 @@
     "ratingAndCommentText": "Rating and Comment",
     "noDataText":"No data" ,
     "homeTitle": "Home",
-    "upcomingTitle": "Upcoming",
+    "upcomingTitle": "Schedules",
     "tutorsTitle": "Tutors",
     "settingsTitle": "Settings",
     "feedbackTitle": "Feedbacks",
@@ -100,8 +100,20 @@
                     "type": "int"
                 }
             }
-        }
-
-
-
+        },
+    "cancelContentTextDialog": "Do you want to cancel this class?",
+    "noCancelContentTextDialog": "No",
+    "yesCancelContentTextDialog": "Yes",
+    "cancelClassSnackBar":"Cancel class successfully",
+    "wrongLogInInfo": "Incorrect email or password",
+    "registerSnackBarTitle":"Register successfully",
+        "registerSnackBarMessage":"Confirm Email was sent to {email}.",
+    "@registerSnackBarMessage":{
+        "placeholders":{
+                "email":{
+                    "type": "String"
+                }                 
+            }
+    },
+     "noMoreData":"No more data to load"
 }

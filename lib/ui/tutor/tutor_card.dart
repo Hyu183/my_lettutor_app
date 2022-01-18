@@ -7,13 +7,12 @@ import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:my_lettutor_app/ui/tutor/tutor_detail.dart';
 import 'package:my_lettutor_app/ui/tutor/tutor_list_tile.dart';
 
-
 import 'package:provider/src/provider.dart';
 
 class TutorCard extends StatelessWidget {
   final Tutor tutor;
   final int version;
-  final Function(Dio, String) reloadTutorList;
+  final VoidCallback reloadTutorList;
   const TutorCard({
     Key? key,
     required this.tutor,
@@ -26,6 +25,7 @@ class TutorCard extends StatelessWidget {
     final accessToken =
         context.read<AuthProvider>().userToken.tokens!.access!.token!;
     final dio = DioClient.dio;
+
     return SizedBox(
       height: 200,
       child: Card(
@@ -36,9 +36,9 @@ class TutorCard extends StatelessWidget {
             Navigator.of(context)
                 .pushNamed(
                   TutorDetail.routeName,
-                  arguments: tutor,
+                  arguments: tutor.userId!,
                 )
-                .whenComplete(() => reloadTutorList(dio, accessToken));
+                .whenComplete(reloadTutorList);
           },
           splashColor: Theme.of(context).splashColor,
           child: Padding(

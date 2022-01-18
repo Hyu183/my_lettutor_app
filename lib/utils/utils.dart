@@ -1,4 +1,4 @@
-import 'package:my_lettutor_app/utils/string.dart';
+import 'package:my_lettutor_app/constants/variables.dart';
 
 class Utils {
   static List<int> getTotalTime(int time) {

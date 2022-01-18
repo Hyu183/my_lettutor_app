@@ -59,8 +59,7 @@ class SettingCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     text,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16),
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
                 const Icon(

@@ -1,5 +1,5 @@
 Map<String, String> specialtiesMap = {
-  "all": "All",
+  "": "All",
   "english-for-kids": 'English for kids',
   "business-english": 'English for Business',
   "conversational-english": 'Conversational',

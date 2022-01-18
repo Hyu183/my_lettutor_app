@@ -44,6 +44,8 @@ dependencies:
   dio: ^4.0.4
   video_player: ^2.2.11
   get: ^4.6.1
+  jitsi_meet: ^4.0.0
+  flutter_easyloading: ^3.0.3
 
 dev_dependencies:
   flutter_test:

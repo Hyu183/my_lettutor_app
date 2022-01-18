@@ -55,6 +55,33 @@ class Tutor {
       this.avgRating,
       this.price);
 
+  
+  void  ToString() {
+    print("id: $id");
+    print("name $name");
+
+    print("ava $avatar");
+    print("userid $userId");
+    print("video $video");
+    print("bio $bio");
+    print("edu $education");
+    print("experi $experience");
+    print("profess $profession");
+    print("accent $accent");
+    print("target $targetStudent");
+    print("interest $interests");
+    print("lang $languages");
+    print("spec $specialties");
+    print("resume $resume");
+    print("isactive $isActivated");
+    print("isNative $isNative");
+    print("createdAt $createdAt");
+    print("updatedAt $updatedAt");
+    print("user $user");
+    print(" isFavorite $isFavorite");
+    print("avgRating $avgRating");
+    print("price $price");
+  }
 //   String? id;
 //   String? userId;
 //   String? video;

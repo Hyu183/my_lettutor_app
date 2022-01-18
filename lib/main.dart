@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:my_lettutor_app/constants/app_theme.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 // import 'package:my_lettutor_app/data/__repository.dart';
 import 'package:my_lettutor_app/providers/favorite_teachers.dart';
 import 'package:my_lettutor_app/providers/language_provider.dart';
@@ -16,6 +18,24 @@ import 'package:my_lettutor_app/ui/tabs_page.dart';
 
 void main() {
   runApp(const MyApp());
+  configLoading();
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..maskType = EasyLoadingMaskType.black
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.white
+    ..backgroundColor = Colors.black
+    ..indicatorColor = Colors.white
+    ..textColor = Colors.white
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = false
+    ..dismissOnTap = false;
 }
 
 class MyApp extends StatefulWidget {
@@ -54,23 +74,7 @@ class _MyAppState extends State<MyApp> {
     if (authProvider.isLoggedIn) {
       authProvider.loadTokens();
     }
-    // authProvider.
   }
-
-//   void loginCallback(int _isLogin) {
-//     setState(() {
-//       isLogin = _isLogin;
-//     });
-//   }
-
-//   Widget displayScreen() {
-//     if (isLogin == 1) {
-//       return TabsPage(callback: loginCallback);
-//     } else if (isLogin == 0) {
-//       return Login(callback: loginCallback);
-//     }
-//     return Container();
-//   }
 
   @override
   Widget build(BuildContext context) {
@@ -87,11 +91,12 @@ class _MyAppState extends State<MyApp> {
         final themeProvider = context.watch<ThemeProvider>();
         final languageProvider = context.watch<LanguageProvider>();
         final authProvider = context.watch<AuthProvider>();
-        return MaterialApp(
+        return GetMaterialApp(
           title: 'LetTutor',
           theme: themeProvider.pinkMode ? themeDataPink : themeDataLight,
           home:
               authProvider.isLoggedIn ? TabsPage() : Login(), //displayScreen(),
+          builder: EasyLoading.init(),
           routes: Routes.routes,
           onGenerateRoute: (settings) => Routes.onGenerateRoutes(settings),
           locale: Locale(languageProvider.languageCode),
@@ -103,5 +108,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-

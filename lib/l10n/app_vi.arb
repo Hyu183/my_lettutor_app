@@ -20,7 +20,7 @@
     "confirmPasswordLabel": "Xác nhận mật khẩu",
     "homeTabLabel": "Trang chủ",
     "messageTabLabel": "Tin nhắn",
-    "upcomingTabLabel": "Sắp diễn ra",
+    "upcomingTabLabel": "Lịch học",
     "tutorsTabLabel": "Gia sư",
     "settingsTabLabel": "Cài đặt",
     "bookLessonBtn": "Đặt lịch",
@@ -40,7 +40,7 @@
     "ratingAndCommentText": "Đánh giá và bình luận",
     "noDataText":"Không có dữ liệu" ,
     "homeTitle": "Trang chủ",
-    "upcomingTitle": "Sắp diễn ra",
+    "upcomingTitle": "Lịch học",
     "tutorsTitle": "Danh sách gia sư",
     "settingsTitle": "Cài đặt",
     "feedbackTitle": "Danh sách đánh giá",
@@ -100,8 +100,22 @@
                     "type": "int"
                 }
             }
-        }
-
+        },
+        "cancelContentTextDialog": "Bạn có muốn huỷ lớp này không?",
+    "noCancelContentTextDialog": "Không",
+    "yesCancelContentTextDialog": "Có",
+    "cancelClassSnackBar":"Huỷ lớp thành công",
+    "wrongLogInInfo": "Sai email hoặc mật khẩu",
+    "registerSnackBarTitle":"Đăng ký thành công",
+    "registerSnackBarMessage":"Email xác nhận đã được gửi đến {email}.",
+    "@registerSnackBarMessage":{
+        "placeholders":{
+                "email":{
+                    "type": "String"
+                }                 
+            }
+    },
+    "noMoreData":"Không còn dữ liệu để tải"
 
 
 
