@@ -35,7 +35,7 @@ class TutorDetailBody extends StatelessWidget {
           ),
         ),
         builder: (_) {
-          return BookingModal();
+          return BookingModal(tutorId: tutor.userId!,);
         });
   }
 

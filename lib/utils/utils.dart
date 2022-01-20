@@ -35,4 +35,30 @@ class Utils {
   static String getLevelString(String lvl) {
     return levelMap[lvl]!;
   }
+
+  static bool checkScheduleWithin7Days(int startTimeStamp, DateTime now) {
+    var timeStart = DateTime.fromMillisecondsSinceEpoch(startTimeStamp);
+    DateTime timeStartDay =
+        DateTime(timeStart.year, timeStart.month, timeStart.day);
+    DateTime nowDay = DateTime(now.year, now.month, now.day);
+    var diff = timeStartDay.difference(nowDay).inDays;
+    return diff >= 0 && diff <= 6;
+  }
+
+  static int testCheckScheduleWithin7Days(int startTimeStamp, DateTime now) {
+    var timeStart = DateTime.fromMillisecondsSinceEpoch(startTimeStamp);
+    DateTime timeStartDay =
+        DateTime(timeStart.year, timeStart.month, timeStart.day);
+    DateTime nowDay = DateTime(now.year, now.month, now.day);
+    var diff = timeStartDay.difference(nowDay).inDays;
+    return diff;
+  }
+
+  static DateTime getDate(int startTimeStamp) {
+    var fulltime = DateTime.fromMillisecondsSinceEpoch(startTimeStamp);
+    DateTime dateTime =
+        DateTime(fulltime.year, fulltime.month, fulltime.day);
+   
+    return dateTime;
+  }
 }

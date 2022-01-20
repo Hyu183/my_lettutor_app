@@ -26,7 +26,7 @@ class Login extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
   //'neyzik123@gmail.com'
-  final _emailController = TextEditingController(text: 'neyzik123@gmail.com');
+  final _emailController = TextEditingController(text: 'student@lettutor.com');
   final _passwordController = TextEditingController(text: '123456');
 
   String? emailValidator(String? email, BuildContext context) {
@@ -82,7 +82,8 @@ class Login extends StatelessWidget {
         },
       );
       UserToken userToken = UserToken.fromJson(response.data);
-      dio.options.headers['Authorization'] = "Bearer ${userToken.tokens!.access!.token!}"; 
+      dio.options.headers['Authorization'] =
+          "Bearer ${userToken.tokens!.access!.token!}";
       var userInfoResponse = await dio.get('/user/info');
 
       userToken.user = User.fromJson(userInfoResponse.data['user']);
@@ -91,11 +92,11 @@ class Login extends StatelessWidget {
       EasyLoading.dismiss();
     } on DioError catch (e) {
       EasyLoading.dismiss();
-      print(e);
+
       if (e.response != null) {
         _showSnackBar(AppLocalizations.of(context)!.wrongLogInInfo);
       } else {
-        print("Dont know");
+        _showSnackBar("Connection Timeout");
       }
     }
   }

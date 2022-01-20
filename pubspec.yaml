@@ -47,6 +47,7 @@ dependencies:
   jitsi_meet: ^4.0.0
   flutter_easyloading: ^3.0.3
   syncfusion_flutter_pdfviewer: ^19.4.43-beta
+  collection: ^1.15.0
   # advance_pdf_viewer: ^2.0.0
   # path_provider: ^2.0.8
   # numberpicker: ^2.1.1

@@ -14,6 +14,7 @@ import 'package:my_lettutor_app/widgets/no_data.dart';
 
 import 'package:my_lettutor_app/data/data.dart';
 import 'package:provider/src/provider.dart';
+import 'package:woozy_search/woozy_search.dart';
 
 class CoursePage extends StatefulWidget {
 //   final List<Message>Course = '';
@@ -24,6 +25,7 @@ class CoursePage extends StatefulWidget {
 }
 
 class _CoursePageState extends State<CoursePage> {
+  final woozy = Woozy();
   bool isLoading = true;
   bool isLoadingMore = false;
   List<Course> courses = [];
@@ -104,14 +106,29 @@ class _CoursePageState extends State<CoursePage> {
     });
   }
 
-//   void _searchCourseHandler() {
-//        setState(() {
-//       isLoading = true;
-//       courses = [];
-//       currentPage = 1;
-//     });
-//     getCourses();
-//   }
+  void _searchCourseHandler() {
+    if (_searchTextController.text.isEmpty) {
+      setState(() {
+        isLoading = true;
+      });
+      getCourses();
+      return;
+    }
+
+    woozy.setEntries(courses.map((e) => e.name!).toList());
+
+    final output = woozy
+        .search(_searchTextController.text)
+        .where((e) => e.score > 0.5)
+        .map((e) => e.text);
+
+    final resultCourse =
+        courses.where((e) => output.contains(e.name!)).toList();
+
+    setState(() {
+      courses = resultCourse;
+    });
+  }
 
   Future _onRefresh() {
     setState(() {
@@ -144,11 +161,11 @@ class _CoursePageState extends State<CoursePage> {
             Container(
               margin: const EdgeInsets.only(top: 8),
               child: CupertinoSearchTextField(
-                placeholder: translator.searchCoursePlaceholder,
-                backgroundColor: Colors.grey[200],
-                // onChanged: (_) => stopTypingChecker.run(_searchCourseHandler),
-                controller: _searchTextController,
-              ),
+                  placeholder: translator.searchCoursePlaceholder,
+                  backgroundColor: Colors.grey[200],
+                  controller: _searchTextController,
+                  onChanged: (_) =>
+                      stopTypingChecker.run(_searchCourseHandler)),
             ),
             Expanded(
               child: messages.isNotEmpty
@@ -189,7 +206,7 @@ class _CoursePageState extends State<CoursePage> {
                                     : Container();
                               }
                               return CourseCard(
-                                  key: ValueKey(courses[i].id),
+                                  key: ValueKey(courses[i].imageUrl!),
                                   course: courses[i]);
                             },
                           ),

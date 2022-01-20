@@ -96,8 +96,9 @@ class _SchedulePageState extends State<SchedulePage> {
             .toList();
         if (!mounted) return;
         setState(() {
-          userSchedules = result;
+          userSchedules =isLoadingMore? (userSchedules..addAll(result)) : result;
           isLoading = false;
+          isLoadingMore = false;
           countTotal = res.data["data"]['count'];
         });
       } on DioError catch (e) {

@@ -9,7 +9,7 @@ class MFeedback {
   String? bookingId;
   String? firstId;
   String? secondId;
-  int? rating;
+  num? rating;
   String? content;
   DateTime? createdAt;
   DateTime? updatedAt;

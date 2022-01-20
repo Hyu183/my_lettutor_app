@@ -11,7 +11,7 @@ MFeedback _$MFeedbackFromJson(Map<String, dynamic> json) => MFeedback(
       json['bookingId'] as String?,
       json['firstId'] as String?,
       json['secondId'] as String?,
-      json['rating'] as int?,
+      json['rating'] as num?,
       json['content'] as String?,
       json['createdAt'] == null
           ? null

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/models/schedule.dart';
 
 import 'package:my_lettutor_app/ui/booking/time_slot.dart';
 
-import 'package:my_lettutor_app/data/data.dart';
+
+
 class TimeGrid extends StatelessWidget {
-  TimeGrid({Key? key}) : super(key: key);
-  
+  final List<Schedule> schedules;
+  const TimeGrid({Key? key, required this.schedules}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    schedules.sort((a, b) => a.startTimestamp!.compareTo(b.startTimestamp!));
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 15.0,
@@ -18,11 +22,10 @@ class TimeGrid extends StatelessWidget {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
         childAspectRatio: 5 / 1.5,
-        children: timeList.map((timeItem) {
+        children: schedules.map((schedule) {
           return TimeSlot(
-            isReserved: timeItem['isReserved'] as bool,
-            startTime: timeItem['startTime'] as String,
-            endTime: timeItem['endTime'] as String,
+              key: ValueKey(schedule.createdAt),
+            schedule: schedule,
           );
         }).toList(),
       ),
