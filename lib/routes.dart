@@ -6,6 +6,7 @@ import 'package:my_lettutor_app/models/user_schedule.dart';
 import 'package:my_lettutor_app/ui/authentication/forgot_password.dart';
 import 'package:my_lettutor_app/ui/authentication/signup.dart';
 import 'package:my_lettutor_app/ui/course/course_detail.dart';
+import 'package:my_lettutor_app/ui/course/topic_pdf_view.dart';
 import 'package:my_lettutor_app/ui/meetings/meeting.dart';
 import 'package:my_lettutor_app/ui/pages/profile_page.dart';
 import 'package:my_lettutor_app/ui/settings/advanced_settings.dart';
@@ -44,6 +45,11 @@ class Routes {
       var userSchedule = settings.arguments as UserSchedule;
       return MaterialPageRoute(builder: (_) {
         return Meeting(userSchedule: userSchedule);
+      });
+    } else if (settings.name == TopicPDFView.routeName) {
+      var data = settings.arguments as List<String>;
+      return MaterialPageRoute(builder: (_) {
+        return TopicPDFView(topicName: data[0], fileUrl: data[1]);
       });
     }
   }

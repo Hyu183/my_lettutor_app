@@ -100,6 +100,7 @@ class _TutorListTileState extends State<TutorListTile> {
                               ),
                             ],
                           ),
+                         
                           isFavorite
                               ? IconButton(
                                   onPressed: () =>
@@ -122,7 +123,7 @@ class _TutorListTileState extends State<TutorListTile> {
                                         .headline2!
                                         .color!,
                                     size: 30,
-                                  )),
+                                  ),),
                         ],
                       ),
                       MyBadgeList(

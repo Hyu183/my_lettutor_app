@@ -74,6 +74,13 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  void _saveForm()async{
+      final isValid = _formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final translator = AppLocalizations.of(context)!;

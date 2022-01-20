@@ -39,7 +39,7 @@ class CourseCard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Flexible(flex: 2, child: Image.network(course.imageUrl!)),
+                Flexible(flex: 2, child: Image.network(course.imageUrl!,cacheHeight: 188, cacheWidth: 250,)),
                 Text(
                   course.name!,
                   style: const TextStyle(

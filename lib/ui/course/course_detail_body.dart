@@ -94,8 +94,7 @@ class CourseDetailBody extends StatelessWidget {
             children: course.topics!
                 .map(
                   (topic) => TopicCard(
-                    number: topic.orderCourse! + 1,
-                    text: topic.name!,
+                   topic: topic
                   ),
                 )
                 .toList(),

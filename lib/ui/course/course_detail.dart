@@ -33,7 +33,11 @@ class CourseDetail extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(course.imageUrl!),
+                          image: ResizeImage(
+                            NetworkImage(course.imageUrl!),
+                            width: 360,
+                            height: 250,
+                          ),
                         ),
                       ),
                     ),

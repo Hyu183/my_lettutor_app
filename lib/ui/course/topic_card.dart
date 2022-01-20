@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/models/topic.dart';
 
 import 'package:my_lettutor_app/ui/course/topic_pdf_view.dart';
 
 class TopicCard extends StatelessWidget {
-  final int number;
-  final String text;
+  final Topic topic;
   const TopicCard({
     Key? key,
-    required this.number,
-    required this.text,
+    required this.topic,
   }) : super(key: key);
 
   @override
@@ -19,13 +18,13 @@ class TopicCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
-           onTap: () {
-        // Navigator.of(context)
-        //     .pushNamed(TopicPDFView.routeName, arguments: text);
-      },
-      customBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
+        onTap: () {
+          Navigator.of(context).pushNamed(TopicPDFView.routeName,
+              arguments: [topic.name!, topic.nameFile!]);
+        },
+        customBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
@@ -42,7 +41,7 @@ class TopicCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '$number',
+                    '${topic.orderCourse! + 1}',
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -56,7 +55,7 @@ class TopicCard extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  text,
+                  topic.name!,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,

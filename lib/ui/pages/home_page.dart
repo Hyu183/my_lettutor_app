@@ -122,6 +122,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final translator = AppLocalizations.of(context)!;
     final userAvatarUrl = context.read<AuthProvider>().userToken.user!.avatar;
+
+    tutorList.sort((a, b) => b.avgRating!.compareTo(a.avgRating!));
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
