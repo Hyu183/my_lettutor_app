@@ -117,5 +117,17 @@
                 }                 
             }
     },
-     "noMoreData":"No more data to load"
+     "noMoreData":"No more data to load",
+     "enterClass": "Enter Class",
+     "upcomingLesson": "Upcoming lesson",
+     "pickYourTime":"Pick your time!",
+     "confirmBook": "Confirm to book this class",
+     "time": "Time",
+    "bookSuccess":  "Booking successfully",
+     "bookExist": "Booking has already exists",
+    "noMoney": "Not enough money",
+    "error" :"Error",
+    "lessonWillStart": "Lesson will be started after",
+    "favoriteTutor":"Favorite successfully",
+    "unfavoriteTutor": "Unfavorite successfully"
 }

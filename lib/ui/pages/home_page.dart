@@ -3,9 +3,12 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 import 'package:my_lettutor_app/data/network/dio_client.dart';
 import 'package:my_lettutor_app/models/tutor.dart';
+import 'package:my_lettutor_app/models/user_schedule.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
+import 'package:my_lettutor_app/ui/meetings/meeting.dart';
 import 'package:my_lettutor_app/utils/utils.dart';
 import 'package:my_lettutor_app/widgets/no_data.dart';
 
@@ -30,6 +33,8 @@ class _HomePageState extends State<HomePage> {
   bool isLoadingTutorList = true;
   List<Tutor> tutorList = [];
   List<int> totalTime = [];
+  UserSchedule? nextSchedule;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -37,31 +42,36 @@ class _HomePageState extends State<HomePage> {
     getData();
   }
 
-  void getData() {
+  void getData() async {
     var dio = DioClient.dio;
-    var accessToken = "";
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      accessToken =
-          context.read<AuthProvider>().userToken.tokens!.access!.token!;
-      //   print(accessToken);
-      dio.options.headers["Authorization"] = "Bearer $accessToken";
-      try {
-        var totalTimeRes = await getTotalTime(dio);
-        var tutorRes = await getTutorList(dio);
-        print(tutorRes.length);
-        if (!mounted) return;
-        setState(() {
-          tutorList = tutorRes;
-          isLoadingTotalTime = false;
-          isLoadingTutorList = false;
-          totalTime = Utils.getTotalTime(totalTimeRes);
-        });
-      } on DioError catch (e) {
-        print(e);
-        print(e.response!.data['message']);
-        print(e.requestOptions.headers["Authorization"]);
-      }
-    });
+    var accessToken =
+        context.read<AuthProvider>().userToken.tokens!.access!.token!;
+    //   print(accessToken);
+    dio.options.headers["Authorization"] = "Bearer $accessToken";
+    try {
+      var result = await Future.wait([
+        getTotalTime(dio),
+        getTutorList(dio),
+        getNextSchedule(dio),
+      ]);
+
+      var totalTimeRes = result[0] as int;
+      var tutorRes = result[1] as List<Tutor>;
+      var nextSchedulRes = result[2] as UserSchedule?;
+
+      if (!mounted) return;
+      setState(() {
+        tutorList = tutorRes;
+        isLoadingTotalTime = false;
+        isLoadingTutorList = false;
+        nextSchedule = nextSchedulRes;
+        totalTime = Utils.getTotalTime(totalTimeRes);
+      });
+    } on DioError catch (e) {
+      print(e);
+      print(e.response!.data['message']);
+      print(e.requestOptions.headers["Authorization"]);
+    }
   }
 
   Future<int> getTotalTime(Dio dio) async {
@@ -71,20 +81,42 @@ class _HomePageState extends State<HomePage> {
 
   Future<List<Tutor>> getTutorList(Dio dio) async {
     var queryParams = {'perPage': 9, 'page': 1};
-
     var res = await dio.get('/tutor/more', queryParameters: queryParams);
 
     Iterable rawTutors = res.data["favoriteTutor"];
+    print(rawTutors.length);
 
     var result = await Future.wait(rawTutors.map((tutor) async {
       var tutorRes = await dio.get('/tutor/${tutor['secondId']}');
       return Tutor.fromJson(tutorRes.data);
     }));
 
-    print(rawTutors.length);
-    print(result.length);
+    // print(rawTutors.length);
+    // print(result.length);
 
     return result;
+  }
+
+  Future<UserSchedule?> getNextSchedule(Dio dio) async {
+    var query = {
+      'page': 1,
+      'perPage': 1,
+      'dateTimeGte': DateTime.now().millisecondsSinceEpoch,
+      'orderBy': 'meeting',
+      'sortBy': 'asc'
+    };
+    try {
+      var res = await dio.get('/booking/list/student', queryParameters: query);
+
+      Iterable rawRes = res.data["data"]["rows"];
+
+      UserSchedule? result =
+          rawRes.isEmpty ? null : UserSchedule.fromJson(rawRes.toList()[0]);
+
+      return result;
+    } on DioError catch (e) {
+      print(e.response!.data);
+    }
   }
 
   void reloadTutorList() async {
@@ -123,7 +155,7 @@ class _HomePageState extends State<HomePage> {
     final translator = AppLocalizations.of(context)!;
     final userAvatarUrl = context.read<AuthProvider>().userToken.user!.avatar;
 
-    tutorList.sort((a, b) => b.avgRating!.compareTo(a.avgRating!));
+    // tutorList.sort((a, b) => b.avgRating!.compareTo(a.avgRating!));
 
     return Scaffold(
       appBar: AppBar(
@@ -134,28 +166,29 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(ProfilePage.routeName);
-              },
-              icon: CircleAvatar(
-                radius: 60,
-                backgroundImage: userAvatarUrl !=
-                        "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
-                    ? ResizeImage(
-                        NetworkImage(
-                          userAvatarUrl!,
-                        ),
-                        height: 60,
-                        width: 60,
-                      )
-                    : const ResizeImage(
-                        AssetImage(
-                          'assets/images/user.png',
-                        ),
-                        height: 60,
-                        width: 60,
+            onPressed: () {
+              Navigator.of(context).pushNamed(ProfilePage.routeName);
+            },
+            icon: CircleAvatar(
+              radius: 60,
+              backgroundImage: userAvatarUrl !=
+                      "https://www.alliancerehabmed.com/wp-content/uploads/icon-avatar-default.png"
+                  ? ResizeImage(
+                      NetworkImage(
+                        userAvatarUrl!,
                       ),
-              )),
+                      height: 60,
+                      width: 60,
+                    )
+                  : const ResizeImage(
+                      AssetImage(
+                        'assets/images/user.png',
+                      ),
+                      height: 60,
+                      width: 60,
+                    ),
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -179,6 +212,57 @@ class _HomePageState extends State<HomePage> {
                         : translator.totalTime(totalTime[0], totalTime[1]),
                     style: const TextStyle(color: Colors.white, fontSize: 20),
                   ),
+                  nextSchedule != null
+                      ? Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              translator.upcomingLesson,
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  DateFormat('EEE, dd MMM HH:mm').format(
+                                    DateTime.fromMillisecondsSinceEpoch(
+                                            nextSchedule!.scheduleDetailInfo!
+                                                .startPeriodTimestamp!)
+                                        .toLocal(),
+                                  ),
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(
+                                        Meeting.routeName,
+                                        arguments: nextSchedule);
+                                  },
+                                  child: Text(translator.enterClass,
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .headline2!
+                                              .color!)),
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style!
+                                      .copyWith(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.white)),
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      : Container(),
                   ElevatedButton(
                     onPressed: () {
                       widget

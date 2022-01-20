@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_lettutor_app/data/network/dio_client.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 // import 'package:my_lettutor_app/home/teacher_list/teacher/teacher_tile_right_side.dart';
 
 import 'package:my_lettutor_app/models/tutor.dart';
@@ -15,11 +16,12 @@ class TutorListTile extends StatefulWidget {
   final int version;
   Function(String)? toggleFavorite;
 
-   TutorListTile({
-    Key? key,
-    required this.tutor,
-    required this.version,this.toggleFavorite
-  }) : super(key: key);
+  TutorListTile(
+      {Key? key,
+      required this.tutor,
+      required this.version,
+      this.toggleFavorite})
+      : super(key: key);
 
   @override
   State<TutorListTile> createState() => _TutorListTileState();
@@ -35,8 +37,21 @@ class _TutorListTileState extends State<TutorListTile> {
     isFavorite = widget.tutor.isFavorite!;
   }
 
-  void _onFavoriteHandler(String accessToken) async {
+  void _showSnackBar(String text, Color color) {
+    Get.snackbar(
+      text,
+      '',
+      colorText: Colors.white,
+      backgroundColor: color,
+      duration: const Duration(seconds: 1),
+      leftBarIndicatorColor: Colors.white,
+      borderRadius: 10,
+    );
+  }
+
+  void _onFavoriteHandler(String accessToken, BuildContext context) async {
     var dio = DioClient.dio;
+    final translator = AppLocalizations.of(context)!;
     try {
       dio.options.headers["Authorization"] = "Bearer $accessToken";
       await dio.post('/user/manageFavoriteTutor',
@@ -44,13 +59,14 @@ class _TutorListTileState extends State<TutorListTile> {
       setState(() {
         isFavorite = !isFavorite;
       });
+      if (isFavorite){ _showSnackBar(translator.favoriteTutor, Colors.green);}
+            else {_showSnackBar(translator.unfavoriteTutor, Colors.green);}
     } catch (e) {
-      print("Something went wrong");
+      _showSnackBar(translator.error, Colors.red);
     }
-    if(widget.toggleFavorite != null){
-        widget.toggleFavorite!(widget.tutor.userId!);
+    if (widget.toggleFavorite != null) {
+      widget.toggleFavorite!(widget.tutor.userId!);
     }
-    
   }
 
   @override
@@ -100,11 +116,10 @@ class _TutorListTileState extends State<TutorListTile> {
                               ),
                             ],
                           ),
-                         
                           isFavorite
                               ? IconButton(
                                   onPressed: () =>
-                                      _onFavoriteHandler(accessToken),
+                                      _onFavoriteHandler(accessToken,context),
                                   icon: Icon(
                                     Icons.favorite,
                                     color: Theme.of(context)
@@ -115,7 +130,7 @@ class _TutorListTileState extends State<TutorListTile> {
                                   ))
                               : IconButton(
                                   onPressed: () =>
-                                      _onFavoriteHandler(accessToken),
+                                      _onFavoriteHandler(accessToken,context),
                                   icon: Icon(
                                     Icons.favorite_border,
                                     color: Theme.of(context)
@@ -123,7 +138,8 @@ class _TutorListTileState extends State<TutorListTile> {
                                         .headline2!
                                         .color!,
                                     size: 30,
-                                  ),),
+                                  ),
+                                ),
                         ],
                       ),
                       MyBadgeList(
@@ -170,7 +186,7 @@ class _TutorListTileState extends State<TutorListTile> {
                                     splashColor: null,
                                     padding: const EdgeInsets.all(0),
                                     onPressed: () =>
-                                        _onFavoriteHandler(accessToken),
+                                        _onFavoriteHandler(accessToken,context),
                                     icon: Icon(
                                       Icons.favorite,
                                       color: Theme.of(context)
@@ -183,7 +199,7 @@ class _TutorListTileState extends State<TutorListTile> {
                                     splashColor: null,
                                     padding: const EdgeInsets.all(0),
                                     onPressed: () =>
-                                        _onFavoriteHandler(accessToken),
+                                        _onFavoriteHandler(accessToken,context),
                                     icon: Icon(
                                       Icons.favorite_border,
                                       color: Theme.of(context)

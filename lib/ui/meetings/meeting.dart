@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_lettutor_app/models/user_schedule.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_lettutor_app/ui/meetings/timer_clock_decrease.dart';
 import 'package:my_lettutor_app/ui/meetings/timer_clock_increase.dart';
 
@@ -17,6 +17,8 @@ class Meeting extends StatelessWidget {
         .difference(DateTime.now())
         .inSeconds;
     remainTime = remainTime > 0 ? remainTime : 0;
+
+     final translator = AppLocalizations.of(context)!;
 
     return Scaffold(
       body: Stack(
@@ -51,9 +53,9 @@ class Meeting extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const Text(
-                          'Lesson will be started after',
-                          style: TextStyle(
+                         Text(
+                          translator.lessonWillStart,
+                          style:const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
                           ),

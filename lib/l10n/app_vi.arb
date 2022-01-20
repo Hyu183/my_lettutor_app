@@ -117,9 +117,22 @@
                 }                 
             }
     },
-    "noMoreData":"Không còn dữ liệu để tải"
+    "noMoreData":"Không còn dữ liệu để tải",
+    
+     "enterClass": "Vào lớp",
+     "upcomingLesson": "Buổi học sắp tới",
+          "pickYourTime":"Chọn thời gian!",
+          "confirmBook": "Xác nhận đặt lớp này"
 
-
+,
+"time": "Thời gian",
+"bookSuccess":  "Đặt lịch thành công",
+     "bookExist": "Lịch đã được người khác đặt",
+    "noMoney": "Không đủ tiền",
+    "error" :"Lỗi",
+    "lessonWillStart": "Lớp học sẽ bắt đầu sau",
+    "favoriteTutor": "Yêu thích thành công",
+    "unfavoriteTutor": "Huỷ yêu thích thành công"
 
 
 }

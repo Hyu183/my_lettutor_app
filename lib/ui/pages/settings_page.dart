@@ -101,11 +101,11 @@ class SettingsPage extends StatelessWidget {
                           text: translator.becomeTutorText,
                           routeName: ViewFeedbacks.routeName,
                         ),
-                  SettingCard(
-                    icon: Icons.list_outlined,
-                    text: translator.bookingHistoryText,
-                    routeName: BookingHistory.routeName,
-                  ),
+                  //   SettingCard(
+                  //     icon: Icons.list_outlined,
+                  //     text: translator.bookingHistoryText,
+                  //     routeName: BookingHistory.routeName,
+                  //   ),
                   SettingCard(
                     icon: Icons.history_outlined,
                     text: translator.sessionHistoryText,

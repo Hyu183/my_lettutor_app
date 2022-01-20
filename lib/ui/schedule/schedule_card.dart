@@ -73,7 +73,7 @@ class ScheduleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final translator = AppLocalizations.of(context)!;
-   
+
     return Container(
       width: double.infinity,
       height: 150,
@@ -98,8 +98,8 @@ class ScheduleCard extends StatelessWidget {
                 textLeft: translator.cancelBtn,
                 textRight: translator.goToMeetingBtn,
                 colorBackgroudLeft: Colors.white,
-                colorTextLeft: Colors.grey,
-                colorTopBorder: Colors.grey,
+                colorTextLeft: Theme.of(context).textTheme.headline2!.color!,
+                colorTopBorder: Theme.of(context).textTheme.headline2!.color!,
                 handlerLeft: () {
                   if (Utils.checkValidCancelClass(
                       userSchedule.scheduleDetailInfo!.startPeriodTimestamp!)) {

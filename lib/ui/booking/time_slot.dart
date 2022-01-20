@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -28,6 +29,7 @@ class _TimeSlotState extends State<TimeSlot> {
       BuildContext context, String startTime, String endTime) {
     // Get.dialog(Container(child: Text('hehehe'))
     // );
+    final translator = AppLocalizations.of(context)!;
     showDialog(
         context: context,
         builder: (ctx) {
@@ -39,12 +41,12 @@ class _TimeSlotState extends State<TimeSlot> {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Confirm to book this class ',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(translator.confirmBook,
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
                     const SizedBox(
                       height: 20,
                     ),
-                    Text('Time: $startTime - $endTime'),
+                    Text('${translator.time}: $startTime - $endTime'),
                     const SizedBox(
                       height: 25,
                     ),
@@ -56,13 +58,13 @@ class _TimeSlotState extends State<TimeSlot> {
                             onPressed: () {
                               Navigator.of(ctx).pop();
                             },
-                            child: Text('No')),
+                            child: Text(translator.noCancelContentTextDialog)),
                         TextButton(
                             onPressed: () {
                               bookClass(ctx);
                               Navigator.of(ctx).pop();
                             },
-                            child: Text('Yes')),
+                            child: Text(translator.yesCancelContentTextDialog)),
                       ],
                     )
                   ],
@@ -75,7 +77,7 @@ class _TimeSlotState extends State<TimeSlot> {
 
   void bookClass(BuildContext context) async {
     EasyLoading.show();
-
+    final translator = AppLocalizations.of(context)!;
     var dio = DioClient.dio;
     var accessToken =
         context.read<AuthProvider>().userToken.tokens!.access!.token!;
@@ -86,7 +88,7 @@ class _TimeSlotState extends State<TimeSlot> {
     };
     try {
       await dio.post('/booking', data: data);
-      _showSnackBar('Booking successfully', Colors.green);
+      _showSnackBar(translator.bookSuccess, Colors.green);
       setState(() {
         bookSuccess = true;
       });
@@ -95,11 +97,11 @@ class _TimeSlotState extends State<TimeSlot> {
       var statusCode = e.response!.data['statusCode'];
 
       if (statusCode == 11) {
-        _showSnackBar('Booking has already exists', Colors.red);
+        _showSnackBar(translator.bookExist, Colors.red);
       } else if (statusCode == 15) {
-        _showSnackBar('Not enough money', Colors.red);
+        _showSnackBar(translator.noMoney, Colors.red);
       } else {
-        _showSnackBar('Error', Colors.red);
+        _showSnackBar(translator.error, Colors.red);
       }
       EasyLoading.dismiss();
     }

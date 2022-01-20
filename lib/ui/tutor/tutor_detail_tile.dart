@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_lettutor_app/data/network/dio_client.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:my_lettutor_app/widgets/my_rating_bar.dart';
 import 'package:provider/src/provider.dart';
 
@@ -35,8 +36,21 @@ class _TutorDetailTileState extends State<TutorDetailTile> {
     isFavorite = widget.isFavorite;
   }
 
+  void _showSnackBar(String text, Color color) {
+    Get.snackbar(
+      text,
+      '',
+      colorText: Colors.white,
+      backgroundColor: color,
+      duration: const Duration(seconds: 1),
+      leftBarIndicatorColor: Colors.white,
+      borderRadius: 10,
+    );
+  }
+
   void _onFavoriteHandler(String accessToken) async {
     var dio = DioClient.dio;
+    final translator = AppLocalizations.of(context)!;
     try {
       dio.options.headers["Authorization"] = "Bearer $accessToken";
       var res = await dio
@@ -44,8 +58,13 @@ class _TutorDetailTileState extends State<TutorDetailTile> {
       setState(() {
         isFavorite = !isFavorite;
       });
+      if (isFavorite) {
+        _showSnackBar(translator.favoriteTutor, Colors.green);
+      } else {
+        _showSnackBar(translator.unfavoriteTutor, Colors.green);
+      }
     } catch (e) {
-      print("Something went wrong");
+      _showSnackBar(translator.error, Colors.red);
     }
   }
 
