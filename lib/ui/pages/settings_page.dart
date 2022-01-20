@@ -25,7 +25,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = context.read<AuthProvider>();
+    final authProvider = context.watch<AuthProvider>();
     final user = authProvider.userToken.user!;
     final translator = AppLocalizations.of(context)!;
 

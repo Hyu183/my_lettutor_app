@@ -1,7 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:my_lettutor_app/constants/variables.dart';
+import 'package:my_lettutor_app/data/network/dio_client.dart';
 import 'package:my_lettutor_app/models/user.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
+import 'package:my_lettutor_app/utils/utils.dart';
 import 'package:my_lettutor_app/widgets/input/birthday_input.dart';
 import 'package:my_lettutor_app/widgets/input/drop_down_input.dart';
 import 'package:my_lettutor_app/widgets/input/phone_input.dart';
@@ -27,10 +34,11 @@ class _ProfilePageState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
 
-  var _selectedDate = DateTime.now();
-  var _selectedCountry = 'Vietnam';
-  var _selectedLevel = 'Beginner';
-  var _selectedWannaLearn = 'TOEIC';
+  late DateTime _selectedDate;
+  late String _selectedCountry;
+  final _phoneController = TextEditingController();
+//   var _selectedLevel = 'Beginner';
+//   var _selectedWannaLearn = 'TOEIC';
 
   @override
   void initState() {
@@ -38,8 +46,21 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     user = context.read<AuthProvider>().userToken.user!;
     _nameController.text = user.name!;
+    _phoneController.text = user.phone!;
+    _selectedCountry =
+        codeToCountryMap[user.country!] == null ? 'VN' : user.country!;
+    _selectedDate = Utils.getBirthDay(user.birthday!);
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _nameController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+ 
   void _startDatePicker(BuildContext ctx) {
     showDatePicker(
             context: ctx,
@@ -62,24 +83,58 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  void setDropdownLevel(String? newVal) {
-    setState(() {
-      _selectedLevel = newVal!;
-    });
+  void _showSnackBar(String text, Color color) {
+    Get.snackbar(
+      text,
+      '',
+      colorText: Colors.white,
+      backgroundColor: color,
+      duration: const Duration(seconds: 1),
+      leftBarIndicatorColor: Colors.white,
+      borderRadius: 10,
+    );
   }
 
-  void setDropdownWannaLearn(String? newVal) {
-    setState(() {
-      _selectedWannaLearn = newVal!;
-    });
-  }
+  void _saveForm(BuildContext context) async {
+    EasyLoading.show();
+    var dio = DioClient.dio;
+    var accessToken =
+        context.read<AuthProvider>().userToken.tokens!.access!.token!;
+    dio.options.headers['Authorization'] = "Bearer ${accessToken}";
+    try {
+      var response = await dio.put(
+        '/user/info',
+        data: {
+          "name": _nameController.text,
+          "country": _selectedCountry,
+          "phone": _phoneController.text,
+          "birthday": DateFormat('yyyy-MM-dd').format(_selectedDate),
+        },
+      );
+      User use = User.fromJson(response.data['user']);
 
-  void _saveForm()async{
-      final isValid = _formKey.currentState!.validate();
-    if (!isValid) {
-      return;
+      context.read<AuthProvider>().user = use;
+      _showSnackBar(AppLocalizations.of(context)!.updateProfile, Colors.green);
+      EasyLoading.dismiss();
+      Navigator.of(context).pop();
+    } on DioError catch (e) {
+      EasyLoading.dismiss();
+      print(e);
+      _showSnackBar(AppLocalizations.of(context)!.error, Colors.red);
     }
   }
+
+//   void setDropdownLevel(String? newVal) {
+//     setState(() {
+//       _selectedLevel = newVal!;
+//     });
+//   }
+
+//   void setDropdownWannaLearn(String? newVal) {
+//     setState(() {
+//       _selectedWannaLearn = newVal!;
+//     });
+//   }
 
   @override
   Widget build(BuildContext context) {
@@ -144,26 +199,30 @@ class _ProfilePageState extends State<ProfilePage> {
                     startDatePicker: _startDatePicker,
                     datetime: _selectedDate,
                   ),
-                  const PhoneInput(),
+                  PhoneInput(controller: _phoneController),
                   DropdownInput(
                     title: translator.countryLabel,
-                    list: countryList,
+                    list: codeToCountryMap.keys.toList(),
                     selectedValue: _selectedCountry,
                     callback: setDropdownCountry,
                   ),
-                  DropdownInput(
-                    title: translator.myLevelLabel,
-                    list: ['Beginner', 'Intermediate', 'Advanced'],
-                    selectedValue: _selectedLevel,
-                    callback: setDropdownLevel,
-                  ),
-                  DropdownInput(
-                    title: translator.wantToLearnLabel,
-                    list: specialities,
-                    selectedValue: _selectedWannaLearn,
-                    callback: setDropdownWannaLearn,
-                  ),
-                  LargeButton(text: translator.saveBtn, handler: () {}),
+                  //   DropdownInput(
+                  //     title: translator.myLevelLabel,
+                  //     list: ['Beginner', 'Intermediate', 'Advanced'],
+                  //     selectedValue: _selectedLevel,
+                  //     callback: setDropdownLevel,
+                  //   ),
+                  //   DropdownInput(
+                  //     title: translator.wantToLearnLabel,
+                  //     list: specialities,
+                  //     selectedValue: _selectedWannaLearn,
+                  //     callback: setDropdownWannaLearn,
+                  //   ),
+                  LargeButton(
+                      text: translator.saveBtn,
+                      handler: () {
+                        _saveForm(context);
+                      }),
                 ],
               ),
             ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_lettutor_app/constants/variables.dart';
 
 class DropdownInput extends StatelessWidget {
   final String title;
@@ -50,8 +51,8 @@ class DropdownInput extends StatelessWidget {
               items: list
                   .map<DropdownMenuItem<String>>(
                       (String e) => DropdownMenuItem<String>(
-                            value: e,
-                            child: Text(e),
+                            value:  e,
+                            child: Text(codeToCountryMap[e]!),
                           ))
                   .toList(),
             ),

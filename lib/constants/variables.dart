@@ -19,6 +19,15 @@ Map<String, String> languagesMap = {
   "vi": "Vietnamese"
 };
 
+Map<String, String> countryToCodeMap = {
+  "United States of America (the)": "US",
+
+  "Vietnam": "VN"
+};
+Map<String, String> codeToCountryMap = {
+  "US": "United States of America (the)",
+  "VN": "Vietnam",
+};
 
 Map<String, String> levelMap = {
   "0": "Any Level",
@@ -29,5 +38,5 @@ Map<String, String> levelMap = {
   "5": "Upper-Intermediate",
   "6": "Pre-Advanced",
   "7": "Advanced",
-  "8": "Upper-Advanced",  
+  "8": "Upper-Advanced",
 };

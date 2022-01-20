@@ -23,10 +23,10 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-//   set user(User value) {
-//     _userToken.user = value;
-//     notifyListeners();
-//   }
+  set user(User value) {
+    _userToken.user = value;
+    notifyListeners();
+  }
 
   Future<bool> checkToken() async {
     var accessToken = await _tokenPreference.accessToken;

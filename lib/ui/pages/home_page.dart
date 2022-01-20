@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
     final translator = AppLocalizations.of(context)!;
     final userAvatarUrl = context.read<AuthProvider>().userToken.user!.avatar;
 
-    // tutorList.sort((a, b) => b.avgRating!.compareTo(a.avgRating!));
+    tutorList.sort((a, b) => b.avgRating!.compareTo(a.avgRating!));
 
     return Scaffold(
       appBar: AppBar(

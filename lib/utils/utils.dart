@@ -56,9 +56,14 @@ class Utils {
 
   static DateTime getDate(int startTimeStamp) {
     var fulltime = DateTime.fromMillisecondsSinceEpoch(startTimeStamp);
-    DateTime dateTime =
-        DateTime(fulltime.year, fulltime.month, fulltime.day);
-   
+    DateTime dateTime = DateTime(fulltime.year, fulltime.month, fulltime.day);
+
     return dateTime;
+  }
+
+  static DateTime getBirthDay(String timeString) {
+    var times = timeString.split('-').map((e) => int.parse(e)).toList();
+    DateTime day = DateTime(times[0], times[1], times[2]);
+    return day;
   }
 }

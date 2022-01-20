@@ -3,8 +3,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class PhoneInput extends StatelessWidget {
-//   final TextEditingController controller;
-  const PhoneInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const PhoneInput({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +36,7 @@ class PhoneInput extends StatelessWidget {
           child: Theme(
             data: ThemeData(),
             child: TextFormField(
+                controller:controller,
               decoration:  InputDecoration(
                 contentPadding: EdgeInsets.all(0),
                 hintText: AppLocalizations.of(context)!.phoneNumberPlaceholder,

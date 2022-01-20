@@ -129,5 +129,6 @@
     "error" :"Error",
     "lessonWillStart": "Lesson will be started after",
     "favoriteTutor":"Favorite successfully",
-    "unfavoriteTutor": "Unfavorite successfully"
+    "unfavoriteTutor": "Unfavorite successfully",
+    "updateProfile": "Update profile successfully"
 }

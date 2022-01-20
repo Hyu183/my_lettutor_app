@@ -132,7 +132,8 @@
     "error" :"Lỗi",
     "lessonWillStart": "Lớp học sẽ bắt đầu sau",
     "favoriteTutor": "Yêu thích thành công",
-    "unfavoriteTutor": "Huỷ yêu thích thành công"
+    "unfavoriteTutor": "Huỷ yêu thích thành công",
+     "updateProfile": "Cập nhật thông tin thành công"
 
 
 }
