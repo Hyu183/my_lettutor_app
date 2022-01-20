@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:my_lettutor_app/providers/teachers.dart';
+
 import 'package:provider/provider.dart';
 
 import 'package:my_lettutor_app/ui/pages/home_page.dart';

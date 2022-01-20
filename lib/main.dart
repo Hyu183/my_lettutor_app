@@ -4,17 +4,16 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:my_lettutor_app/constants/app_theme.dart';
 import 'package:my_lettutor_app/providers/auth_provider.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-// import 'package:my_lettutor_app/data/__repository.dart';
-import 'package:my_lettutor_app/providers/favorite_teachers.dart';
+
 import 'package:my_lettutor_app/providers/language_provider.dart';
-import 'package:my_lettutor_app/providers/teachers.dart';
+
 import 'package:my_lettutor_app/providers/theme_provider.dart';
 import 'package:my_lettutor_app/routes.dart';
 import 'package:provider/provider.dart';
 
 import 'package:my_lettutor_app/ui/authentication/login.dart';
 import 'package:my_lettutor_app/ui/tabs_page.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -79,10 +78,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => Teachers()),
-        ChangeNotifierProvider(create: (_) => FavoriteTeachers()),
-       
+      providers: [       
         ChangeNotifierProvider.value(value: authProvider),
         ChangeNotifierProvider.value(value: themeProvider),
         ChangeNotifierProvider.value(value: languageProvider),
